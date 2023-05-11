@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F1C5C8F29DC9701000CE7D8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0F1C5C8E29DC9701000CE7D8 /* FirebaseFirestore */; };
+		0F1C5C9129DC9701000CE7D8 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F1C5C9029DC9701000CE7D8 /* FirebaseFirestoreSwift */; };
+		0F1C5C9329DC9701000CE7D8 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0F1C5C9229DC9701000CE7D8 /* FirebaseStorage */; };
+		0F1C5C9529DC9E29000CE7D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F1C5C9429DC9E29000CE7D8 /* GoogleService-Info.plist */; };
+		0F1C5C9729DD9064000CE7D8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */; };
+		0F60CDA52A094AC70073F50F /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F60CDA42A094AC70073F50F /* MainCoordinatorView.swift */; };
+		0FBAB05229D41BA0008C3937 /* Jost-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA167429D4182F00DE95A2 /* Jost-VariableFont_wght.ttf */; };
+		0FE4E93B29F9864900775DD7 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4E93A29F9864900775DD7 /* GalleryView.swift */; };
+		0FEA165129D2E2FF00DE95A2 /* TripsmoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */; };
+		0FEA165529D2E30100DE95A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA165429D2E30100DE95A2 /* Assets.xcassets */; };
+		0FEA165829D2E30100DE95A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA165729D2E30100DE95A2 /* Preview Assets.xcassets */; };
+		0FEA166129D3386F00DE95A2 /* TripListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA166029D3386F00DE95A2 /* TripListView.swift */; };
+		0FEA166329D3389300DE95A2 /* TripListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA166229D3389300DE95A2 /* TripListViewModel.swift */; };
+		0FEA166729D338D800DE95A2 /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA166629D338D800DE95A2 /* AddTripView.swift */; };
+		0FEA166929D338E200DE95A2 /* AddTripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA166829D338E200DE95A2 /* AddTripViewModel.swift */; };
+		0FEA166C29D3390A00DE95A2 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA166B29D3390A00DE95A2 /* TripDetailView.swift */; };
+		0FEA166E29D3391700DE95A2 /* TripDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA166D29D3391700DE95A2 /* TripDetailViewModel.swift */; };
+		0FEA167129D3393000DE95A2 /* EditTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA167029D3393000DE95A2 /* EditTripView.swift */; };
+		0FEA167329D3393B00DE95A2 /* EditTripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA167229D3393B00DE95A2 /* EditTripViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0F1C5C9429DC9E29000CE7D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0F60CDA42A094AC70073F50F /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
+		0FE4E93A29F9864900775DD7 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		0FEA164D29D2E2FF00DE95A2 /* Tripsmory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tripsmory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsmoryApp.swift; sourceTree = "<group>"; };
+		0FEA165429D2E30100DE95A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0FEA165729D2E30100DE95A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0FEA166029D3386F00DE95A2 /* TripListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListView.swift; sourceTree = "<group>"; };
+		0FEA166229D3389300DE95A2 /* TripListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListViewModel.swift; sourceTree = "<group>"; };
+		0FEA166629D338D800DE95A2 /* AddTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripView.swift; sourceTree = "<group>"; };
+		0FEA166829D338E200DE95A2 /* AddTripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewModel.swift; sourceTree = "<group>"; };
+		0FEA166B29D3390A00DE95A2 /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
+		0FEA166D29D3391700DE95A2 /* TripDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewModel.swift; sourceTree = "<group>"; };
+		0FEA167029D3393000DE95A2 /* EditTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripView.swift; sourceTree = "<group>"; };
+		0FEA167229D3393B00DE95A2 /* EditTripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripViewModel.swift; sourceTree = "<group>"; };
+		0FEA167429D4182F00DE95A2 /* Jost-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		0FEA167629D418D700DE95A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0FEA164A29D2E2FF00DE95A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F1C5C8F29DC9701000CE7D8 /* FirebaseFirestore in Frameworks */,
+				0F1C5C9129DC9701000CE7D8 /* FirebaseFirestoreSwift in Frameworks */,
+				0F1C5C9329DC9701000CE7D8 /* FirebaseStorage in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F60CDA32A094A710073F50F /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				0F60CDA42A094AC70073F50F /* MainCoordinatorView.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		0FEA164429D2E2FF00DE95A2 = {
+			isa = PBXGroup;
+			children = (
+				0FEA164F29D2E2FF00DE95A2 /* Tripsmory */,
+				0FEA164E29D2E2FF00DE95A2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0FEA164E29D2E2FF00DE95A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0FEA164D29D2E2FF00DE95A2 /* Tripsmory.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0FEA164F29D2E2FF00DE95A2 /* Tripsmory */ = {
+			isa = PBXGroup;
+			children = (
+				0F1C5C9429DC9E29000CE7D8 /* GoogleService-Info.plist */,
+				0FEA167629D418D700DE95A2 /* Info.plist */,
+				0FEA167429D4182F00DE95A2 /* Jost-VariableFont_wght.ttf */,
+				0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */,
+				0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */,
+				0FEA165429D2E30100DE95A2 /* Assets.xcassets */,
+				0FE4E93A29F9864900775DD7 /* GalleryView.swift */,
+				0F60CDA32A094A710073F50F /* Coordinators */,
+				0FEA165E29D3382B00DE95A2 /* Scenes */,
+				0FEA165629D2E30100DE95A2 /* Preview Content */,
+			);
+			path = Tripsmory;
+			sourceTree = "<group>";
+		};
+		0FEA165629D2E30100DE95A2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				0FEA165729D2E30100DE95A2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0FEA165E29D3382B00DE95A2 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				0FEA165F29D3385000DE95A2 /* TripList */,
+				0FEA166429D338A500DE95A2 /* AddTrip */,
+				0FEA166A29D338F300DE95A2 /* TripDetail */,
+				0FEA166F29D3391D00DE95A2 /* EditTrip */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		0FEA165F29D3385000DE95A2 /* TripList */ = {
+			isa = PBXGroup;
+			children = (
+				0FEA166029D3386F00DE95A2 /* TripListView.swift */,
+				0FEA166229D3389300DE95A2 /* TripListViewModel.swift */,
+			);
+			path = TripList;
+			sourceTree = "<group>";
+		};
+		0FEA166429D338A500DE95A2 /* AddTrip */ = {
+			isa = PBXGroup;
+			children = (
+				0FEA166629D338D800DE95A2 /* AddTripView.swift */,
+				0FEA166829D338E200DE95A2 /* AddTripViewModel.swift */,
+			);
+			path = AddTrip;
+			sourceTree = "<group>";
+		};
+		0FEA166A29D338F300DE95A2 /* TripDetail */ = {
+			isa = PBXGroup;
+			children = (
+				0FEA166B29D3390A00DE95A2 /* TripDetailView.swift */,
+				0FEA166D29D3391700DE95A2 /* TripDetailViewModel.swift */,
+			);
+			path = TripDetail;
+			sourceTree = "<group>";
+		};
+		0FEA166F29D3391D00DE95A2 /* EditTrip */ = {
+			isa = PBXGroup;
+			children = (
+				0FEA167029D3393000DE95A2 /* EditTripView.swift */,
+				0FEA167229D3393B00DE95A2 /* EditTripViewModel.swift */,
+			);
+			path = EditTrip;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0FEA164C29D2E2FF00DE95A2 /* Tripsmory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FEA165B29D2E30100DE95A2 /* Build configuration list for PBXNativeTarget "Tripsmory" */;
+			buildPhases = (
+				0FEA164929D2E2FF00DE95A2 /* Sources */,
+				0FEA164A29D2E2FF00DE95A2 /* Frameworks */,
+				0FEA164B29D2E2FF00DE95A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tripsmory;
+			packageProductDependencies = (
+				0F1C5C8E29DC9701000CE7D8 /* FirebaseFirestore */,
+				0F1C5C9029DC9701000CE7D8 /* FirebaseFirestoreSwift */,
+				0F1C5C9229DC9701000CE7D8 /* FirebaseStorage */,
+			);
+			productName = Tripsmory;
+			productReference = 0FEA164D29D2E2FF00DE95A2 /* Tripsmory.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0FEA164529D2E2FF00DE95A2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					0FEA164C29D2E2FF00DE95A2 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 0FEA164829D2E2FF00DE95A2 /* Build configuration list for PBXProject "Tripsmory" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0FEA164429D2E2FF00DE95A2;
+			packageReferences = (
+				0F1C5C8D29DC9701000CE7D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = 0FEA164E29D2E2FF00DE95A2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0FEA164C29D2E2FF00DE95A2 /* Tripsmory */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0FEA164B29D2E2FF00DE95A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FEA165829D2E30100DE95A2 /* Preview Assets.xcassets in Resources */,
+				0F1C5C9529DC9E29000CE7D8 /* GoogleService-Info.plist in Resources */,
+				0FEA165529D2E30100DE95A2 /* Assets.xcassets in Resources */,
+				0FBAB05229D41BA0008C3937 /* Jost-VariableFont_wght.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0FEA164929D2E2FF00DE95A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FEA165129D2E2FF00DE95A2 /* TripsmoryApp.swift in Sources */,
+				0FEA166929D338E200DE95A2 /* AddTripViewModel.swift in Sources */,
+				0FEA167329D3393B00DE95A2 /* EditTripViewModel.swift in Sources */,
+				0FEA166C29D3390A00DE95A2 /* TripDetailView.swift in Sources */,
+				0FEA166329D3389300DE95A2 /* TripListViewModel.swift in Sources */,
+				0FE4E93B29F9864900775DD7 /* GalleryView.swift in Sources */,
+				0FEA166129D3386F00DE95A2 /* TripListView.swift in Sources */,
+				0FEA167129D3393000DE95A2 /* EditTripView.swift in Sources */,
+				0F60CDA52A094AC70073F50F /* MainCoordinatorView.swift in Sources */,
+				0F1C5C9729DD9064000CE7D8 /* ImagePicker.swift in Sources */,
+				0FEA166729D338D800DE95A2 /* AddTripView.swift in Sources */,
+				0FEA166E29D3391700DE95A2 /* TripDetailViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0FEA165929D2E30100DE95A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0FEA165A29D2E30100DE95A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0FEA165C29D2E30100DE95A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Tripsmory/Preview Content\"";
+				DEVELOPMENT_TEAM = A524LR8F6J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Tripsmory/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "I would like to access your camera.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.catmeox.Tripsmory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0FEA165D29D2E30100DE95A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Tripsmory/Preview Content\"";
+				DEVELOPMENT_TEAM = A524LR8F6J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Tripsmory/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "I would like to access your camera.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.catmeox.Tripsmory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0FEA164829D2E2FF00DE95A2 /* Build configuration list for PBXProject "Tripsmory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FEA165929D2E30100DE95A2 /* Debug */,
+				0FEA165A29D2E30100DE95A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0FEA165B29D2E30100DE95A2 /* Build configuration list for PBXNativeTarget "Tripsmory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FEA165C29D2E30100DE95A2 /* Debug */,
+				0FEA165D29D2E30100DE95A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0F1C5C8D29DC9701000CE7D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0F1C5C8E29DC9701000CE7D8 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F1C5C8D29DC9701000CE7D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		0F1C5C9029DC9701000CE7D8 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F1C5C8D29DC9701000CE7D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		0F1C5C9229DC9701000CE7D8 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F1C5C8D29DC9701000CE7D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 0FEA164529D2E2FF00DE95A2 /* Project object */;
+}
