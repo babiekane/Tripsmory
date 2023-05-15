@@ -15,7 +15,7 @@ struct TripDetailView: View {
   @State var galleryAnimationID: URL?
   @Namespace var galleryAnimationNameSpace
   
-
+  
   
   var body: some View {
     GeometryReader { geometry in
@@ -71,6 +71,7 @@ struct ShowDetailView: View {
   @Environment(\.dismiss) var dismiss
   
   @State var isEditing = false
+  
   
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
@@ -204,41 +205,245 @@ struct ShowDetailView: View {
           
           ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 7) {
-              ForEach(detail.photoURLs, id: \.self) { url in
-                Button {
-                  action(url)
-                } label: {
-                  AsyncImage(url: url) { image in
-                    image
-                      .resizable()
-                      .aspectRatio(contentMode: .fill)
-                      .frame(width: 70, height: 70)
-                  } placeholder: {
-                    ProgressView()
-                      .tint(Color("greenDark"))
-                      .frame(width: 70, height: 70)
-                      .background(.gray.opacity(0.3))
-                      .clipShape(RoundedRectangle(cornerRadius: 20))
-                  }
-                  .matchedGeometryEffect(id: url, in: namespace)
-                  .mask {
-                    RoundedRectangle(cornerRadius: 20)
-                      .matchedGeometryEffect(id: url, in: namespace)
-                      .frame(width: 70, height: 70)
+//              ForEach(0..<5) { index in
+//                if index < 4 {
+//                  // TODO: - Normal
+//                } else {
+//                  // TODO: - Special
+//                }
+//              }
+//
+//              ForEach(detail.photoURLs, id: \.self) { url in
+//                if let index = detail.photoURLs.firstIndex(of: url) {
+//                  if index < 4 {
+//                    // TODO: - Normal
+//                  } else {
+//                    // TODO: - Special
+//                  }
+//                }
+//              }
+//
+//              ForEach(detail.photoURLs.indices, id: \.self) { index in
+//                if index < 4 {
+//                  // TODO: - Normal
+//                } else {
+//                  // TODO: - Special
+//                }
+//              }
+              
+              ForEach(0..<5) { index in
+                if index < detail.photoURLs.count {
+                  let url = detail.photoURLs[index]
+                  
+                  if index < 4 {
+                    Button {
+  //                    action(url)
+                    } label: {
+                      AsyncImage(url: url) { image in
+                        image
+                          .resizable()
+                          .aspectRatio(contentMode: .fill)
+                          .frame(width: 70, height: 70)
+                          .clipShape(RoundedRectangle(cornerRadius: 20))
+                      } placeholder: {
+                        ProgressView()
+                          .tint(Color("greenDark"))
+                          .frame(width: 70, height: 70)
+                          .background(.gray.opacity(0.3))
+                          .clipShape(RoundedRectangle(cornerRadius: 20))
+                      }
+                    }
+                  } else {
+                    Button {
+  //                    action(url)
+                    } label: {
+                      AsyncImage(url: url) { image in
+                        image
+                          .resizable()
+                          .aspectRatio(contentMode: .fill)
+                          .frame(width: 70, height: 70)
+                          .clipShape(RoundedRectangle(cornerRadius: 20))
+                      } placeholder: {
+                        ProgressView()
+                          .tint(Color("greenDark"))
+                          .frame(width: 70, height: 70)
+                          .background(.gray.opacity(0.3))
+                          .clipShape(RoundedRectangle(cornerRadius: 20))
+                      }
+                      .overlay {
+                        let remainingImage = detail.photoURLs.count - 5
+                        if remainingImage > 0 {
+                          RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.black.opacity(0.5))
+                          
+                          Text("+\(remainingImage)")
+                            .font(.custom("Jost", size: 16))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("appWhite"))
+                        }
+                      }
+                    }
                   }
                 }
               }
+              
+//              let columns = Array(repeating: GridItem(.flexible(), spacing: 67), count: 5)
+//              LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
+//                //                ForEach(0..<5) { index in
+//                //                  if index <= 4 {
+//                //                    // TODO: - Display normally
+//                //
+//                //                    ForEach(detail.photoURLs, id: \.self) { url in
+//                //                      Button {
+//                //                        action(url)
+//                //                      } label: {
+//                //                        AsyncImage(url: url) { image in
+//                //                          image
+//                //                            .resizable()
+//                //                            .aspectRatio(contentMode: .fill)
+//                //                            .frame(width: 70, height: 70)
+//                //                            .clipShape(RoundedRectangle(cornerRadius: 20))
+//                //                        } placeholder: {
+//                //                          ProgressView()
+//                //                            .tint(Color("greenDark"))
+//                //                            .frame(width: 70, height: 70)
+//                //                            .background(.gray.opacity(0.3))
+//                //                            .clipShape(RoundedRectangle(cornerRadius: 20))
+//                //                        }
+//                //                        .matchedGeometryEffect(id: url, in: namespace)
+//                ////                        .mask {
+//                ////                          RoundedRectangle(cornerRadius: 20)
+//                ////                            .matchedGeometryEffect(id: url, in: namespace)
+//                ////                            .frame(width: 70, height: 70)
+//                ////                        }
+//                //                      }
+//                //                    }
+//                //                  } else {
+//                //                    if detail.photoURLs.count < 5 {
+//                //                      // TODO: - Do nothing
+//                //                    } else if detail.photoURLs.count == 5 {
+//                //                      // TODO: - Display normally
+//                //
+//                //                      ForEach(detail.photoURLs, id: \.self) { url in
+//                //                        Button {
+//                //                          action(url)
+//                //                        } label: {
+//                //                          AsyncImage(url: url) { image in
+//                //                            image
+//                //                              .resizable()
+//                //                              .aspectRatio(contentMode: .fill)
+//                //                              .frame(width: 70, height: 70)
+//                //                              .clipShape(RoundedRectangle(cornerRadius: 20))
+//                //
+//                //                          } placeholder: {
+//                //                            ProgressView()
+//                //                              .tint(Color("greenDark"))
+//                //                              .frame(width: 70, height: 70)
+//                //                              .background(.gray.opacity(0.3))
+//                //                              .clipShape(RoundedRectangle(cornerRadius: 20))
+//                //                          }
+//                ////                          .matchedGeometryEffect(id: url, in: namespace)
+//                ////                          .mask {
+//                ////                            RoundedRectangle(cornerRadius: 20)
+//                ////                              .matchedGeometryEffect(id: url, in: namespace)
+//                ////                              .frame(width: 70, height: 70)
+//                ////                          }
+//                //                        }
+//                //                      }
+//                //                    } else {
+//                //                      // TODO: - Display photo with detail.photoURLs.count - 5
+//                //
+//                //                      ForEach(detail.photoURLs, id: \.self) { url in
+//                //                        Button {
+//                //                          action(url)
+//                //                        } label: {
+//                //                          AsyncImage(url: url) { image in
+//                //                            image
+//                //                              .resizable()
+//                //                              .aspectRatio(contentMode: .fill)
+//                //                              .frame(width: 70, height: 70)
+//                //                              .clipShape(RoundedRectangle(cornerRadius: 20))
+//                //                          } placeholder: {
+//                //                            ProgressView()
+//                //                              .tint(Color("greenDark"))
+//                //                              .frame(width: 70, height: 70)
+//                //                              .background(.gray.opacity(0.3))
+//                //                              .clipShape(RoundedRectangle(cornerRadius: 20))
+//                //
+//                //                          }
+//                //                          RoundedRectangle(cornerRadius: 20)
+//                //                            .fill(Color("blackApp").opacity(0.3))
+//                //
+//                //                          let remainingImage = detail.photoURLs.count - 5
+//                //
+//                //                          Text("+ \(remainingImage)")
+//                //                            .font(.custom("Jost", size: 14))
+//                //                            .fontWeight(.heavy)
+//                //                            .foregroundColor(Color("appWhite"))
+//                //
+//                ////                          .matchedGeometryEffect(id: url, in: namespace)
+//                ////                          .mask {
+//                ////                            RoundedRectangle(cornerRadius: 20)
+//                ////                              .matchedGeometryEffect(id: url, in: namespace)
+//                ////                              .frame(width: 70, height: 70)
+//                ////                          }
+//                //                        }
+//                //                      }
+//                //                    }
+//                //                  }
+//                //                }
+//
+//
+//
+//
+//                ForEach(0..<5) { index in
+//                if detail.photoURLs.count <= 4 {
+//                    ForEach(detail.photoURLs, id: \.self) { url in
+//                      Button {
+//                        action(url)
+//                      } label: {
+//                        AsyncImage(url: url) { image in
+//                          image
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fill)
+//                            .frame(width: 70, height: 70)
+//                            .clipShape(RoundedRectangle(cornerRadius: 20))
+//                        } placeholder: {
+//                          ProgressView()
+//                            .tint(Color("greenDark"))
+//                            .frame(width: 70, height: 70)
+//                            .background(.gray.opacity(0.3))
+//                            .clipShape(RoundedRectangle(cornerRadius: 20))
+//
+//                        }
+//                      }
+//                    }
+//                  }
+//                else if detail.photoURLs.count > 5 {
+//                    RoundedRectangle(cornerRadius: 20)
+//                      .fill(Color.black.opacity(0.3))
+//
+//                    let remainingImage = detail.photoURLs.count - 5
+//
+//                    Text("+ \(remainingImage)")
+//                      .font(.custom("Jost", size: 14))
+//                      .fontWeight(.heavy)
+//                      .foregroundColor(Color("appWhite"))
+//                  }
+//
+//                } // close ForEach
+//              } // close lazyVGrid
             }
+            .padding(.horizontal, 26)
+            .padding(.bottom, 8)
+            
+            Spacer()
           }
-          .padding(.horizontal, 26)
-          .padding(.bottom, 8)
-          
-          Spacer()
         }
       }
-    }
-    .fullScreenCover(isPresented: $isEditing) {
-      EditTripView(viewModel: EditTripViewModel(detail: detail))
+      .fullScreenCover(isPresented: $isEditing) {
+        EditTripView(viewModel: EditTripViewModel(detail: detail))
+      }
     }
   }
 }

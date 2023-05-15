@@ -62,3 +62,4 @@ class TripDetailViewModel: ObservableObject {
     }
   }
 }
+
