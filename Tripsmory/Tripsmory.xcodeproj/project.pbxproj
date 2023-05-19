@@ -13,6 +13,7 @@
 		0F1C5C9529DC9E29000CE7D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F1C5C9429DC9E29000CE7D8 /* GoogleService-Info.plist */; };
 		0F1C5C9729DD9064000CE7D8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */; };
 		0F60CDA52A094AC70073F50F /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F60CDA42A094AC70073F50F /* MainCoordinatorView.swift */; };
+		0F7B96672A13745C00E5F57E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7B96662A13745C00E5F57E /* ImageView.swift */; };
 		0FBAB05229D41BA0008C3937 /* Jost-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA167429D4182F00DE95A2 /* Jost-VariableFont_wght.ttf */; };
 		0FE4E93B29F9864900775DD7 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4E93A29F9864900775DD7 /* GalleryView.swift */; };
 		0FEA165129D2E2FF00DE95A2 /* TripsmoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */; };
@@ -32,6 +33,7 @@
 		0F1C5C9429DC9E29000CE7D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0F60CDA42A094AC70073F50F /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
+		0F7B96662A13745C00E5F57E /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		0FE4E93A29F9864900775DD7 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		0FEA164D29D2E2FF00DE95A2 /* Tripsmory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tripsmory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsmoryApp.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				0FEA166B29D3390A00DE95A2 /* TripDetailView.swift */,
+				0F7B96662A13745C00E5F57E /* ImageView.swift */,
 				0FEA166D29D3391700DE95A2 /* TripDetailViewModel.swift */,
 			);
 			path = TripDetail;
@@ -243,6 +246,7 @@
 				0FEA166929D338E200DE95A2 /* AddTripViewModel.swift in Sources */,
 				0FEA167329D3393B00DE95A2 /* EditTripViewModel.swift in Sources */,
 				0FEA166C29D3390A00DE95A2 /* TripDetailView.swift in Sources */,
+				0F7B96672A13745C00E5F57E /* ImageView.swift in Sources */,
 				0FEA166329D3389300DE95A2 /* TripListViewModel.swift in Sources */,
 				0FE4E93B29F9864900775DD7 /* GalleryView.swift in Sources */,
 				0FEA166129D3386F00DE95A2 /* TripListView.swift in Sources */,
