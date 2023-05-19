@@ -10,43 +10,39 @@ import SwiftUI
 struct TripDetailView: View {
   
   @ObservedObject var viewModel: TripDetailViewModel
-  @State var isShowingPhoto = false
-  
-  @State var galleryAnimationID: URL?
-  @Namespace var galleryAnimationNameSpace
-  
-  
+  @State var isShowingImages = false
   
   var body: some View {
     GeometryReader { geometry in
       ZStack {
         if let detail = viewModel.detail {
-          ShowDetailView(detail: detail,
+          ShowDetailView(viewModel: viewModel,
+                         detail: detail,
                          screenWidth: geometry.size.width,
-                         screenHeight: geometry.size.height,
-                         namespace: galleryAnimationNameSpace,
-                         action: { url in
-            withAnimation(.easeInOut) {
-              galleryAnimationID = url
-              isShowingPhoto = true
-            }
-          })
-          .blur(radius: isShowingPhoto ? 4 : 0)
-        }
-        
-        if isShowingPhoto, let galleryAnimationID = galleryAnimationID {
-          PhotoView(id: galleryAnimationID, namespace: galleryAnimationNameSpace, action: {
-            withAnimation(.easeInOut) {
-              self.galleryAnimationID = nil
-              isShowingPhoto = false
-            }
-          })
+                         screenHeight: geometry.size.height)
         }
       }
-    }
-    .background(Color("appWhite"))
-    .onAppear {
-      viewModel.showTripDetails()
+      .background(Color("appWhite"))
+      .onAppear {
+        viewModel.showTripDetails()
+      }
+      .overlay(
+        
+        // Image viewer
+        ZStack {
+          
+          if viewModel.showImageViewer {
+            
+            Color.black
+              .opacity(viewModel.bgOpacity)
+              .ignoresSafeArea()
+            
+            ImageView()
+          }
+        }
+      )
+      // setting environment object
+      .environmentObject(viewModel)
     }
   }
 }
@@ -59,19 +55,16 @@ struct TripDetailView_Previews: PreviewProvider {
 
 struct ShowDetailView: View {
   
+  @ObservedObject var viewModel: TripDetailViewModel
+  
   let detail: TripDetail
   
   let screenWidth: Double
   let screenHeight: Double
   
-  let namespace: Namespace.ID
-  
-  let action: (URL) -> Void
-  
   @Environment(\.dismiss) var dismiss
   
   @State var isEditing = false
-  
   
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
@@ -205,234 +198,45 @@ struct ShowDetailView: View {
           
           ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 7) {
-//              ForEach(0..<5) { index in
-//                if index < 4 {
-//                  // TODO: - Normal
-//                } else {
-//                  // TODO: - Special
-//                }
-//              }
-//
-//              ForEach(detail.photoURLs, id: \.self) { url in
-//                if let index = detail.photoURLs.firstIndex(of: url) {
-//                  if index < 4 {
-//                    // TODO: - Normal
-//                  } else {
-//                    // TODO: - Special
-//                  }
-//                }
-//              }
-//
-//              ForEach(detail.photoURLs.indices, id: \.self) { index in
-//                if index < 4 {
-//                  // TODO: - Normal
-//                } else {
-//                  // TODO: - Special
-//                }
-//              }
-              
               ForEach(0..<5) { index in
                 if index < detail.photoURLs.count {
                   let url = detail.photoURLs[index]
                   
                   if index < 4 {
                     Button {
-  //                    action(url)
-                    } label: {
-                      AsyncImage(url: url) { image in
-                        image
-                          .resizable()
-                          .aspectRatio(contentMode: .fill)
-                          .frame(width: 70, height: 70)
-                          .clipShape(RoundedRectangle(cornerRadius: 20))
-                      } placeholder: {
-                        ProgressView()
-                          .tint(Color("greenDark"))
-                          .frame(width: 70, height: 70)
-                          .background(.gray.opacity(0.3))
-                          .clipShape(RoundedRectangle(cornerRadius: 20))
+                      withAnimation(.easeInOut) {
+                        // For pages tab view automatic scrolling
+                        viewModel.selectedImageURL = url
+                        viewModel.showImageViewer.toggle()
                       }
+                    } label: {
+                      GalleryImageView(url: url)
                     }
                   } else {
                     Button {
-  //                    action(url)
+                      withAnimation(.easeInOut) {
+                        // For pages tab view automatic scrolling
+                        viewModel.selectedImageURL = url
+                        viewModel.showImageViewer.toggle()
+                      }
                     } label: {
-                      AsyncImage(url: url) { image in
-                        image
-                          .resizable()
-                          .aspectRatio(contentMode: .fill)
-                          .frame(width: 70, height: 70)
-                          .clipShape(RoundedRectangle(cornerRadius: 20))
-                      } placeholder: {
-                        ProgressView()
-                          .tint(Color("greenDark"))
-                          .frame(width: 70, height: 70)
-                          .background(.gray.opacity(0.3))
-                          .clipShape(RoundedRectangle(cornerRadius: 20))
-                      }
-                      .overlay {
-                        let remainingImage = detail.photoURLs.count - 5
-                        if remainingImage > 0 {
-                          RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.black.opacity(0.5))
-                          
-                          Text("+\(remainingImage)")
-                            .font(.custom("Jost", size: 16))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color("appWhite"))
+                      GalleryImageView(url: url)
+                        .overlay {
+                          let remainingImage = detail.photoURLs.count - 5
+                          if remainingImage > 0 {
+                            RoundedRectangle(cornerRadius: 20)
+                              .fill(Color.black.opacity(0.5))
+                            
+                            Text("+\(remainingImage)")
+                              .font(.custom("Jost", size: 16))
+                              .fontWeight(.bold)
+                              .foregroundColor(Color("appWhite"))
+                          }
                         }
-                      }
                     }
                   }
                 }
               }
-              
-//              let columns = Array(repeating: GridItem(.flexible(), spacing: 67), count: 5)
-//              LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
-//                //                ForEach(0..<5) { index in
-//                //                  if index <= 4 {
-//                //                    // TODO: - Display normally
-//                //
-//                //                    ForEach(detail.photoURLs, id: \.self) { url in
-//                //                      Button {
-//                //                        action(url)
-//                //                      } label: {
-//                //                        AsyncImage(url: url) { image in
-//                //                          image
-//                //                            .resizable()
-//                //                            .aspectRatio(contentMode: .fill)
-//                //                            .frame(width: 70, height: 70)
-//                //                            .clipShape(RoundedRectangle(cornerRadius: 20))
-//                //                        } placeholder: {
-//                //                          ProgressView()
-//                //                            .tint(Color("greenDark"))
-//                //                            .frame(width: 70, height: 70)
-//                //                            .background(.gray.opacity(0.3))
-//                //                            .clipShape(RoundedRectangle(cornerRadius: 20))
-//                //                        }
-//                //                        .matchedGeometryEffect(id: url, in: namespace)
-//                ////                        .mask {
-//                ////                          RoundedRectangle(cornerRadius: 20)
-//                ////                            .matchedGeometryEffect(id: url, in: namespace)
-//                ////                            .frame(width: 70, height: 70)
-//                ////                        }
-//                //                      }
-//                //                    }
-//                //                  } else {
-//                //                    if detail.photoURLs.count < 5 {
-//                //                      // TODO: - Do nothing
-//                //                    } else if detail.photoURLs.count == 5 {
-//                //                      // TODO: - Display normally
-//                //
-//                //                      ForEach(detail.photoURLs, id: \.self) { url in
-//                //                        Button {
-//                //                          action(url)
-//                //                        } label: {
-//                //                          AsyncImage(url: url) { image in
-//                //                            image
-//                //                              .resizable()
-//                //                              .aspectRatio(contentMode: .fill)
-//                //                              .frame(width: 70, height: 70)
-//                //                              .clipShape(RoundedRectangle(cornerRadius: 20))
-//                //
-//                //                          } placeholder: {
-//                //                            ProgressView()
-//                //                              .tint(Color("greenDark"))
-//                //                              .frame(width: 70, height: 70)
-//                //                              .background(.gray.opacity(0.3))
-//                //                              .clipShape(RoundedRectangle(cornerRadius: 20))
-//                //                          }
-//                ////                          .matchedGeometryEffect(id: url, in: namespace)
-//                ////                          .mask {
-//                ////                            RoundedRectangle(cornerRadius: 20)
-//                ////                              .matchedGeometryEffect(id: url, in: namespace)
-//                ////                              .frame(width: 70, height: 70)
-//                ////                          }
-//                //                        }
-//                //                      }
-//                //                    } else {
-//                //                      // TODO: - Display photo with detail.photoURLs.count - 5
-//                //
-//                //                      ForEach(detail.photoURLs, id: \.self) { url in
-//                //                        Button {
-//                //                          action(url)
-//                //                        } label: {
-//                //                          AsyncImage(url: url) { image in
-//                //                            image
-//                //                              .resizable()
-//                //                              .aspectRatio(contentMode: .fill)
-//                //                              .frame(width: 70, height: 70)
-//                //                              .clipShape(RoundedRectangle(cornerRadius: 20))
-//                //                          } placeholder: {
-//                //                            ProgressView()
-//                //                              .tint(Color("greenDark"))
-//                //                              .frame(width: 70, height: 70)
-//                //                              .background(.gray.opacity(0.3))
-//                //                              .clipShape(RoundedRectangle(cornerRadius: 20))
-//                //
-//                //                          }
-//                //                          RoundedRectangle(cornerRadius: 20)
-//                //                            .fill(Color("blackApp").opacity(0.3))
-//                //
-//                //                          let remainingImage = detail.photoURLs.count - 5
-//                //
-//                //                          Text("+ \(remainingImage)")
-//                //                            .font(.custom("Jost", size: 14))
-//                //                            .fontWeight(.heavy)
-//                //                            .foregroundColor(Color("appWhite"))
-//                //
-//                ////                          .matchedGeometryEffect(id: url, in: namespace)
-//                ////                          .mask {
-//                ////                            RoundedRectangle(cornerRadius: 20)
-//                ////                              .matchedGeometryEffect(id: url, in: namespace)
-//                ////                              .frame(width: 70, height: 70)
-//                ////                          }
-//                //                        }
-//                //                      }
-//                //                    }
-//                //                  }
-//                //                }
-//
-//
-//
-//
-//                ForEach(0..<5) { index in
-//                if detail.photoURLs.count <= 4 {
-//                    ForEach(detail.photoURLs, id: \.self) { url in
-//                      Button {
-//                        action(url)
-//                      } label: {
-//                        AsyncImage(url: url) { image in
-//                          image
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fill)
-//                            .frame(width: 70, height: 70)
-//                            .clipShape(RoundedRectangle(cornerRadius: 20))
-//                        } placeholder: {
-//                          ProgressView()
-//                            .tint(Color("greenDark"))
-//                            .frame(width: 70, height: 70)
-//                            .background(.gray.opacity(0.3))
-//                            .clipShape(RoundedRectangle(cornerRadius: 20))
-//
-//                        }
-//                      }
-//                    }
-//                  }
-//                else if detail.photoURLs.count > 5 {
-//                    RoundedRectangle(cornerRadius: 20)
-//                      .fill(Color.black.opacity(0.3))
-//
-//                    let remainingImage = detail.photoURLs.count - 5
-//
-//                    Text("+ \(remainingImage)")
-//                      .font(.custom("Jost", size: 14))
-//                      .fontWeight(.heavy)
-//                      .foregroundColor(Color("appWhite"))
-//                  }
-//
-//                } // close ForEach
-//              } // close lazyVGrid
             }
             .padding(.horizontal, 26)
             .padding(.bottom, 8)
@@ -443,16 +247,29 @@ struct ShowDetailView: View {
       }
       .fullScreenCover(isPresented: $isEditing) {
         EditTripView(viewModel: EditTripViewModel(detail: detail))
+        
       }
     }
   }
 }
 
-// 1 photo
-// 2 name
-// 3 rating
-// 4 location
-// 5 date
-// 6 cost
-// 7 story
-// 8 photo gallery
+struct GalleryImageView: View {
+  
+  let url: URL
+  
+  var body: some View {
+    AsyncImage(url: url) { image in
+      image
+        .resizable()
+        .aspectRatio(contentMode: .fill)
+        .frame(width: 70, height: 70)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+    } placeholder: {
+      ProgressView()
+        .tint(Color("greenDark"))
+        .frame(width: 70, height: 70)
+        .background(.gray.opacity(0.3))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+    }
+  }
+}
