@@ -40,6 +40,7 @@ struct StartView: View {
         }
       }
       .ignoresSafeArea()
+      
       VStack {
         
         Spacer()
@@ -51,20 +52,27 @@ struct StartView: View {
           .font(.custom("Jost", size: 28))
           .bold()
           .foregroundColor(Color("greenMedium"))
+        
         Text("Let's create your memory".uppercased())
           .font(.custom("Jost", size: 16))
           .foregroundColor(Color("greenDark"))
           .padding(.bottom, 100)
-        Text("Get Started")
-          .font(.custom("Jost", size: 24))
-          .bold()
-          .foregroundColor(Color("whiteEgg"))
-          .frame(width: 285, height: 70)
-          .background(Color("greenMedium"))
-          .clipShape(Capsule())
-          .padding(.bottom, 120)
-          
+        
+        Button {
+          // TODO
+        } label: {
+          Text("Get Started")
+            .font(.custom("Jost", size: 24))
+            .bold()
+            .foregroundColor(Color("whiteEgg"))
+            .frame(width: 285, height: 70)
+            .background(Color("greenMedium"))
+            .clipShape(Capsule())
+            .padding(.bottom, 120)
+        }
       }
     }
+    .background(Color("appWhite"))
+    .frame(width: .infinity, height: .infinity)
   }
 }

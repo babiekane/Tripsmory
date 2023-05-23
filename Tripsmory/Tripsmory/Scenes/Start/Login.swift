@@ -69,15 +69,21 @@ struct LoginView: View {
         .padding(.bottom, 32)
         .padding(.horizontal, 40)
         
-        Text("Login")
-          .font(.custom("Jost", size: 24))
-          .bold()
-          .foregroundColor(Color("whiteEgg"))
-          .frame(width: 285, height: 70)
-          .background(Color("greenMedium"))
-          .clipShape(Capsule())
-          .padding(.bottom, 300)
+        Button {
+          // TODO
+        } label: {
+          Text("Login")
+            .font(.custom("Jost", size: 24))
+            .bold()
+            .foregroundColor(Color("whiteEgg"))
+            .frame(width: 285, height: 70)
+            .background(Color("greenMedium"))
+            .clipShape(Capsule())
+            .padding(.bottom, 300)
+        }
       }
     }
+    .background(Color("appWhite"))
+    .frame(width: .infinity, height: .infinity)
   }
 }

@@ -69,29 +69,48 @@ struct SignUpView: View {
         .padding(.bottom, 32)
         .padding(.horizontal, 40)
         
-        Text("Create Account")
-          .font(.custom("Jost", size: 24))
-          .bold()
-          .foregroundColor(Color("whiteEgg"))
-          .frame(width: 285, height: 70)
-          .background(Color("greenMedium"))
-          .clipShape(Capsule())
-          .padding(.bottom, 32)
+        Button {
+          // TODO
+        } label: {
+          Text("Create Account")
+            .font(.custom("Jost", size: 24))
+            .bold()
+            .foregroundColor(Color("whiteEgg"))
+            .frame(width: 285, height: 70)
+            .background(Color("greenMedium"))
+            .clipShape(Capsule())
+        }
+        .padding(.bottom, 32)
+        
         Text("or continue with".uppercased())
           .font(.custom("Jost", size: 16))
           .foregroundColor(Color("greenDark").opacity(0.5))
           .padding(.bottom, 12)
         
         HStack(alignment: .center, spacing: 30) {
-          Image("Facebook")
-            .resizable()
-            .frame(width: 30, height: 30)
-          Image("Gmail")
-            .resizable()
-            .frame(width: 40, height: 30)
-          Image("Twitter")
-            .resizable()
-            .frame(width: 35, height: 30)
+          Button {
+            // TODO
+          } label: {
+            Image("Facebook")
+              .resizable()
+              .frame(width: 30, height: 30)
+          }
+          
+          Button {
+            // TODO
+          } label: {
+            Image("Gmail")
+              .resizable()
+              .frame(width: 40, height: 30)
+          }
+          
+          Button {
+            // TODO
+          } label: {
+            Image("Twitter")
+              .resizable()
+              .frame(width: 35, height: 30)
+          }
         }
         .padding(.bottom, 32)
         
@@ -99,12 +118,19 @@ struct SignUpView: View {
           .font(.custom("Jost", size: 16))
           .foregroundColor(Color("greenDark").opacity(0.5))
           .padding(.bottom, 12)
-        Text("Login")
-          .font(.custom("Jost", size: 16))
-          .bold()
-          .foregroundColor(Color("greenMedium"))
-          .padding(.bottom, 96)
+        
+        Button {
+          // TODO
+        } label: {
+          Text("Login")
+            .font(.custom("Jost", size: 16))
+            .bold()
+            .foregroundColor(Color("greenMedium"))
+        }
+        .padding(.bottom, 96)
       }
     }
+    .background(Color("appWhite"))
+    .frame(width: .infinity, height: .infinity)
   }
 }
