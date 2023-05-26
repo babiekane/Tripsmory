@@ -30,6 +30,7 @@ struct TripsmoryApp: App {
 //          TripDetailView(viewModel: TripDetailViewModel(tripID: <#String#>))
 //          GalleryView()
           MainCoordinatorView()
+//          StartCoordinatorView()
         }
     }
 }

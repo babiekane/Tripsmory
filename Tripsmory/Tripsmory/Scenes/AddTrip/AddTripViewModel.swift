@@ -9,6 +9,7 @@ import Foundation
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 import UIKit
 
 class AddTripViewModel: ObservableObject {
@@ -27,6 +28,10 @@ class AddTripViewModel: ObservableObject {
   @Published var uploadedImageURLs = [URL]()
   
   func saveTrip() {
+    guard let userID = Auth.auth().currentUser?.uid else {
+      return
+    }
+    
     // Add a new document with a generated ID
     
     var uploadedImageURLStrings = [String]()
@@ -44,7 +49,8 @@ class AddTripViewModel: ObservableObject {
         "cost": textCost,
         "story": textStory,
         "coverImageURL": uploadedImageURLs[0].absoluteString,
-        "photoURLs": uploadedImageURLStrings
+        "photoURLs": uploadedImageURLStrings,
+        "userID": userID
     ]
     
     ref = db.collection("trips").addDocument(data: tripDictionary) { err in

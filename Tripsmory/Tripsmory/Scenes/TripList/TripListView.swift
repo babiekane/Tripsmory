@@ -25,6 +25,16 @@ struct TripListView: View {
                 .padding(.bottom, 8)
               
               Spacer()
+              
+              Button {
+                // TODO
+              } label: {
+                Image(systemName: "person")
+                  .resizable()
+                  .frame(width: 25, height: 25)
+                  .foregroundColor(Color("greenMedium"))
+                  .padding(.trailing, 36)
+              }
             }
             
             if viewModel.isLoading {
@@ -36,7 +46,14 @@ struct TripListView: View {
               }
             } else {
               if viewModel.trips.isEmpty {
-                Text("Add your first memory")
+                VStack {
+                  Image("Tent")
+                    .resizable()
+                    .frame(width: 300, height: 300)
+                  Text("Add your first memory")
+                    .font(.custom("Jost", size: 20))
+                    .foregroundColor(Color("greenDark"))
+                }
               } else {
                 ForEach(viewModel.trips) { trip in
                   Button {

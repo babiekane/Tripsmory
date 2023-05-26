@@ -137,6 +137,7 @@ struct ShowDetailView: View {
           }
           .padding(.horizontal, 26)
           .padding(.bottom, 8)
+          
           ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .firstTextBaseline, spacing: 24) {
               HStack(spacing: 4) {

@@ -30,15 +30,12 @@ struct MainCoordinatorView: View {
   }
 }
 
-//enum MainDestination {
-//  case detail
-//}
 struct MainDestination: Hashable {
   let tripID: String
 }
 
 struct MainCoordinatorView_Previews: PreviewProvider {
   static var previews: some View {
-    MainCoordinatorView()
+    RootsView()
   }
 }
