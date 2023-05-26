@@ -8,13 +8,40 @@
 import SwiftUI
 
 struct SettingsView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+  
+  @ObservedObject var viewModel: AuthViewModel
+  
+  @Environment(\.dismiss) var dismiss
+  
+  var body: some View {
+      VStack {
+        Text("Profile settings")
+          .font(.custom("Jost", size: 24))
+          .fontWeight(.semibold)
+          .foregroundColor(Color("greenDark"))
+        
+        Button {
+          viewModel.signOut()
+          dismiss()
+        } label: {
+          Text("Log out")
+            .font(.custom("Jost", size: 24))
+            .fontWeight(.semibold)
+            .foregroundColor(Color("greenLight"))
+            .padding(.horizontal, 24)
+            .padding(.vertical, 6)
+            .background(Color("greenDark"))
+            .clipShape(Capsule())
+        }
+      }
+    
+    .frame(width: .infinity, height: .infinity)
+    .background(Color("appWhite"))
+  }
 }
 
 struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
+  static var previews: some View {
+    SettingsView(viewModel: AuthViewModel())
+  }
 }
