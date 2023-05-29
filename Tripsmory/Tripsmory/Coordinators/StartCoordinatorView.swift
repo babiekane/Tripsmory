@@ -13,16 +13,24 @@ enum StartState {
 
 struct StartCoordinatorView: View {
     
-  var startState = StartState.start
+  @State var startState = StartState.start
+  @State var animationState = StartState.start
   
   var body: some View {
-    switch startState {
-    case .start:
-      StartView()
-    case .signUp:
-      SignUpView(viewModel: AuthViewModel())
-    case .logIn:
-      LoginView(viewModel: AuthViewModel())
+    VStack {
+      switch animationState {
+      case .start:
+        StartView(state: $startState)
+      case .signUp:
+        SignUpView(state: $startState)
+      case .logIn:
+        LoginView(state: $startState)
+      }
+    }
+    .onChange(of: startState) { newValue in
+      withAnimation {
+        animationState = newValue
+      }
     }
   }
 }

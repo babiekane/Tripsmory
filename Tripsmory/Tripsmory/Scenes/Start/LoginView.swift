@@ -9,37 +9,13 @@ import SwiftUI
 
 struct LoginView: View {
   
-  @ObservedObject var viewModel: AuthViewModel
-  
-  var body: some View {
-    
-    NavigationStack {
-      if viewModel.loggedIn {
-        MainCoordinatorView()
-      } else {
-        LoginScreen(viewModel: viewModel)
-      }
-    }
-
-    .onAppear {
-      viewModel.loggedIn = viewModel.isLoggedIn
-    }
-  }
-}
-
-struct Login_Previews: PreviewProvider {
-  static var previews: some View {
-    LoginView(viewModel: AuthViewModel())
-  }
-}
-
-struct LoginScreen: View {
+  @Binding var state: StartState
   
   @State var email: String = ""
   @State var password: String = ""
   
-  @ObservedObject var viewModel: AuthViewModel
-
+  @EnvironmentObject var viewModel: AuthViewModel
+  
   var body: some View {
     NavigationStack {
       ZStack {
@@ -86,8 +62,24 @@ struct LoginScreen: View {
           }
           .textInputAutocapitalization(.never)
           .autocorrectionDisabled()
-          .padding(.bottom, 32)
+          .padding(.bottom, 8)
           .padding(.horizontal, 40)
+          
+          HStack {
+            
+            Spacer()
+            
+            Button {
+              // TODO
+            } label : {
+              Text("Forgot password?")
+                .font(.custom("Jost", size: 16))
+                .bold()
+                .foregroundColor(Color("greenDark"))
+            }
+            .padding(.bottom, 32)
+            .padding(.trailing, 36)
+          }
           
           Button {
             
@@ -105,7 +97,22 @@ struct LoginScreen: View {
               .background(Color("greenMedium"))
               .clipShape(Capsule())
           }
-              .padding(.bottom, 300)
+          .padding(.bottom, 32)
+          
+          Text("Do not have any account?")
+            .font(.custom("Jost", size: 16))
+            .foregroundColor(Color("greenDark").opacity(0.5))
+            .padding(.bottom, 8)
+
+          Button {
+            state = .signUp
+          } label: {
+            Text("Sign up")
+              .font(.custom("Jost", size: 16))
+              .bold()
+              .foregroundColor(Color("greenMedium"))
+              .padding(.bottom, 96)
+          }
         }
       }
     }
@@ -114,3 +121,9 @@ struct LoginScreen: View {
   }
 }
 
+struct Login_Previews: PreviewProvider {
+  static var previews: some View {
+    LoginView(state: .constant(.logIn))
+      .environmentObject(AuthViewModel())
+  }
+}

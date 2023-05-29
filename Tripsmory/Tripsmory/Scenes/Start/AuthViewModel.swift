@@ -15,11 +15,17 @@ class AuthViewModel: ObservableObject {
     
   let auth = Auth.auth()
   
-  var isLoggedIn: Bool {
-    return auth.currentUser != nil
+  func start() {
+//    loggedIn = auth.currentUser != nil
+    
+    if auth.currentUser == nil {
+      loggedIn = false
+    } else {
+      loggedIn = true
+    }
   }
   
-  func  logIn(email: String, password: String) {
+  func logIn(email: String, password: String) {
     auth.signIn(withEmail: email, password: password) { [weak self] result, error in
       guard result != nil, error == nil else {
         return
@@ -33,7 +39,7 @@ class AuthViewModel: ObservableObject {
     }
   }
   
-  func  signUp(email: String, password: String) {
+  func signUp(email: String, password: String) {
     auth.createUser(withEmail: email, password: password) { [weak self] result, error in
       guard result != nil, error == nil else {
         return

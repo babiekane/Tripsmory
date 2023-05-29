@@ -22,6 +22,7 @@ struct TripsmoryApp: App {
   
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 //  @StateObject var tripListViewModel: TripListViewModel = TripListViewModel()
+  @StateObject var authViewModel: AuthViewModel = AuthViewModel()
   
     var body: some Scene {
         WindowGroup {
@@ -29,8 +30,11 @@ struct TripsmoryApp: App {
 //          TripListView(viewModel: TripListViewModel())
 //          TripDetailView(viewModel: TripDetailViewModel(tripID: <#String#>))
 //          GalleryView()
-          MainCoordinatorView()
+//          MainCoordinatorView()
 //          StartCoordinatorView()
+          
+          RootView()
+            .environmentObject(authViewModel)
         }
     }
 }

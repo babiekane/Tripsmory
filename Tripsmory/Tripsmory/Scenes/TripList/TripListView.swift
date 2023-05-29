@@ -10,86 +10,94 @@ import SwiftUI
 struct TripListView: View {
   
   @ObservedObject var viewModel: TripListViewModel
-
+  @EnvironmentObject var authViewModel: AuthViewModel
+  
+  @State var showingAlert = false
+  
   var body: some View {
-    NavigationView {
-      GeometryReader { geometry in
-        ZStack {
-          ScrollView {
-            VStack(spacing: 0) {
-              HStack(spacing: 0) {
-                Text("TRIPS")
-                  .font(.custom("Jost", size: 36))
-                  .bold()
-                  .foregroundColor(Color("greenDark"))
-                  .padding(.leading, 36)
-                  .padding(.bottom, 8)
-                
-                Spacer()
-                
-                NavigationLink {
-                  SettingsView(viewModel: AuthViewModel())
-                } label: {
-                  Image(systemName: "person")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-                    .foregroundColor(Color("greenMedium"))
-                    .padding(.trailing, 36)
+    GeometryReader { geometry in
+      ZStack {
+        ScrollView {
+          VStack(spacing: 0) {
+            HStack(spacing: 0) {
+              Text("TRIPS")
+                .font(.custom("Jost", size: 36))
+                .bold()
+                .foregroundColor(Color("greenDark"))
+                .padding(.leading, 36)
+                .padding(.bottom, 8)
+              
+              Spacer()
+              
+              Button {
+                showingAlert = true
+              } label: {
+                Image(systemName: "rectangle.portrait.and.arrow.right")
+                  .resizable()
+                  .frame(width: 30, height: 25)
+                  .foregroundColor(Color("greenLight"))
+                  .padding(.trailing, 36)
+              }
+              .alert("Are you sure to log out?", isPresented: $showingAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Log out", role: .destructive) {
+                  authViewModel.signOut()
                 }
               }
               
-              if viewModel.isLoading {
+            }
+            
+            if viewModel.isLoading {
+              VStack {
+                ProgressView("Downloading your trips")
+                  .font(.custom("Jost", size: 20))
+                  .tint(Color("blueDark"))
+                  .foregroundColor(Color("greenDark"))
+              }
+            } else {
+              if viewModel.trips.isEmpty {
                 VStack {
-                  ProgressView("Downloading your trips")
-                    .font(.custom("Jost", size: 20))
-                    .tint(Color("blueDark"))
+                  Image("Bag")
+                    .resizable()
+                    .frame(width: 300, height: 280)
+                    .padding(.top, 36)
+                  Text("Add your first memory")
+                    .font(.custom("Jost", size: 24))
                     .foregroundColor(Color("greenDark"))
                 }
               } else {
-                if viewModel.trips.isEmpty {
-                  VStack {
-                    Image("Bag")
-                      .resizable()
-                      .frame(width: 300, height: 280)
-                      .padding(.top, 36)
-                    Text("Add your first memory")
-                      .font(.custom("Jost", size: 24))
-                      .foregroundColor(Color("greenDark"))
-                  }
-                } else {
-                  ForEach(viewModel.trips) { trip in
-                    Button {
-                      viewModel.onTripSelected(trip)
-                    } label: {
-                      TripListItemView(trip: trip,
-                                       screenWidth: geometry.size.width,
-                                       screenHeight: geometry.size.height)
-                    }
+                ForEach(viewModel.trips) { trip in
+                  Button {
+                    viewModel.onTripSelected(trip)
+                  } label: {
+                    TripListItemView(trip: trip,
+                                     screenWidth: geometry.size.width,
+                                     screenHeight: geometry.size.height)
                   }
                 }
               }
             }
           }
+        }
+        
+        VStack(alignment: .leading) {
+          Spacer()
           
-          VStack(alignment: .leading) {
+          HStack {
             Spacer()
             
-            HStack {
-              Spacer()
-              
-              Button {
-                self.viewModel.isPresented = true
-              } label: {
-                Image("Plus")
-                  .resizable()
-                  .frame(width: 16, height: 16)
-                  .padding(20)
-                  .background(Color("blueDark"))
-                  .clipShape(Circle())
-                  .shadow(color: Color("blueDark"), radius: 6)
-                  .padding(.trailing, 24)
-                  .padding(.vertical, 8)
-              }
+            Button {
+              self.viewModel.isPresented = true
+            } label: {
+              Image("Plus")
+                .resizable()
+                .frame(width: 16, height: 16)
+                .padding(20)
+                .background(Color("blueDark"))
+                .clipShape(Circle())
+                .shadow(color: Color("blueDark"), radius: 6)
+                .padding(.trailing, 24)
+                .padding(.vertical, 8)
             }
           }
         }
@@ -108,6 +116,7 @@ struct TripListView: View {
 struct TripListView_Previews: PreviewProvider {
   static var previews: some View {
     TripListView(viewModel: TripListViewModel(onTripSelected: { trip in }))
+      .environmentObject(AuthViewModel())
   }
 }
 

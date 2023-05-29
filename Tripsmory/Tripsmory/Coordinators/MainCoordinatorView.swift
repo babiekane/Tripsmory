@@ -36,6 +36,6 @@ struct MainDestination: Hashable {
 
 struct MainCoordinatorView_Previews: PreviewProvider {
   static var previews: some View {
-    RootsView()
+    RootView()
   }
 }

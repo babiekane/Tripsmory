@@ -8,20 +8,8 @@
 import SwiftUI
 
 struct StartView: View {
-  var body: some View {
-    
-      WelcomeView()
-    
-  }
-}
-
-struct Start_Previews: PreviewProvider {
-  static var previews: some View {
-    StartView()
-  }
-}
-
-struct WelcomeView: View {
+  
+  @Binding var state: StartState
   
   var body: some View {
     NavigationStack {
@@ -60,8 +48,21 @@ struct WelcomeView: View {
             .foregroundColor(Color("greenDark"))
             .padding(.bottom, 100)
           
-          NavigationLink {
-            SignUpView(viewModel: AuthViewModel())
+//          NavigationLink {
+//            SignUpView()
+//          } label: {
+//            Text("Get Started")
+//              .font(.custom("Jost", size: 24))
+//              .bold()
+//              .foregroundColor(Color("whiteEgg"))
+//              .frame(width: 285, height: 70)
+//              .background(Color("greenMedium"))
+//              .clipShape(Capsule())
+//              .padding(.bottom, 120)
+//          }
+          
+          Button {
+            state = .signUp
           } label: {
             Text("Get Started")
               .font(.custom("Jost", size: 24))
@@ -77,5 +78,11 @@ struct WelcomeView: View {
     }
     .background(Color("appWhite"))
     .frame(width: .infinity, height: .infinity)
+  }
+}
+
+struct Start_Previews: PreviewProvider {
+  static var previews: some View {
+    StartView(state: .constant(.start))
   }
 }

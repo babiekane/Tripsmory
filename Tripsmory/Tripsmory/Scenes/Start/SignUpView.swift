@@ -8,34 +8,9 @@
 import SwiftUI
 
 struct SignUpView: View {
-  
-  @ObservedObject var viewModel: AuthViewModel
 
-  var body: some View {
-    NavigationStack {
-      if viewModel.loggedIn {
-        MainCoordinatorView()
-      } else {
-        SignUpScreen(viewModel: viewModel)
-      }
-    }
-    .onAppear {
-      viewModel.loggedIn = viewModel.isLoggedIn
-    }
-  }
-}
-
-struct SignUp_Previews: PreviewProvider {
-  static var previews: some View {
-    NavigationView {
-      SignUpView(viewModel: AuthViewModel())
-  }
-  }
-}
-
-struct SignUpScreen: View {
-  
-  @ObservedObject var viewModel: AuthViewModel
+  @Binding var state: StartState
+  @EnvironmentObject var viewModel: AuthViewModel
   
   @State var email: String = ""
   @State var password: String = ""
@@ -102,7 +77,7 @@ struct SignUpScreen: View {
           Text("or continue with".uppercased())
             .font(.custom("Jost", size: 16))
             .foregroundColor(Color("greenDark").opacity(0.5))
-            .padding(.bottom, 12)
+            .padding(.bottom, 8)
           
           HStack(alignment: .center, spacing: 30) {
             Button {
@@ -118,14 +93,6 @@ struct SignUpScreen: View {
             } label: {
               Image("Gmail")
                 .resizable()
-                .frame(width: 40, height: 30)
-            }
-            
-            Button {
-              // TODO
-            } label: {
-              Image("Twitter")
-                .resizable()
                 .frame(width: 35, height: 30)
             }
           }
@@ -134,21 +101,40 @@ struct SignUpScreen: View {
           Text("Already a traveler?")
             .font(.custom("Jost", size: 16))
             .foregroundColor(Color("greenDark").opacity(0.5))
-            .padding(.bottom, 12)
+            .padding(.bottom, 8)
           
-          NavigationLink {
-            LoginView(viewModel: AuthViewModel())
+//          NavigationLink {
+//            LoginView()
+//          } label: {
+//            Text("Login")
+//              .font(.custom("Jost", size: 16))
+//              .bold()
+//              .foregroundColor(Color("greenMedium"))
+//          }
+//          .padding(.bottom, 96)
+          
+          Button {
+            state = .logIn
           } label: {
             Text("Login")
               .font(.custom("Jost", size: 16))
               .bold()
               .foregroundColor(Color("greenMedium"))
+              .padding(.bottom, 96)
           }
-          .padding(.bottom, 96)
         }
       }
     }
     .background(Color("appWhite"))
     .frame(width: .infinity, height: .infinity)
+  }
+}
+
+struct SignUp_Previews: PreviewProvider {
+  static var previews: some View {
+    NavigationView {
+      SignUpView(state: .constant(.start))
+        .environmentObject(AuthViewModel())
+    }
   }
 }
