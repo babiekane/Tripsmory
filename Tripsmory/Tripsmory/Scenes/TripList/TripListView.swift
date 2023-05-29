@@ -10,7 +10,10 @@ import SwiftUI
 struct TripListView: View {
   
   @ObservedObject var viewModel: TripListViewModel
-
+  @EnvironmentObject var authViewModel: AuthViewModel
+  
+  @State var showingAlert = false
+  
   var body: some View {
     GeometryReader { geometry in
       ZStack {
@@ -25,6 +28,23 @@ struct TripListView: View {
                 .padding(.bottom, 8)
               
               Spacer()
+              
+              Button {
+                showingAlert = true
+              } label: {
+                Image(systemName: "rectangle.portrait.and.arrow.right")
+                  .resizable()
+                  .frame(width: 30, height: 25)
+                  .foregroundColor(Color("greenLight"))
+                  .padding(.trailing, 36)
+              }
+              .alert("Are you sure to log out?", isPresented: $showingAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Log out", role: .destructive) {
+                  authViewModel.signOut()
+                }
+              }
+              
             }
             
             if viewModel.isLoading {
@@ -36,7 +56,15 @@ struct TripListView: View {
               }
             } else {
               if viewModel.trips.isEmpty {
-                Text("Add your first memory")
+                VStack {
+                  Image("Bag")
+                    .resizable()
+                    .frame(width: 300, height: 280)
+                    .padding(.top, 36)
+                  Text("Add your first memory")
+                    .font(.custom("Jost", size: 24))
+                    .foregroundColor(Color("greenDark"))
+                }
               } else {
                 ForEach(viewModel.trips) { trip in
                   Button {
@@ -88,6 +116,7 @@ struct TripListView: View {
 struct TripListView_Previews: PreviewProvider {
   static var previews: some View {
     TripListView(viewModel: TripListViewModel(onTripSelected: { trip in }))
+      .environmentObject(AuthViewModel())
   }
 }
 

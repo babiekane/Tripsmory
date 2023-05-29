@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseAuth
 
 class TripListViewModel: ObservableObject {
   
@@ -25,10 +26,15 @@ class TripListViewModel: ObservableObject {
   
   
   func fetchTrips() {
-        isLoading = true
+    isLoading = true
+    
+    guard let userID = Auth.auth().currentUser?.uid else {
+      isLoading = false
+      return
+    }
   
     let db = Firestore.firestore()
-    db.collection("trips").getDocuments() { (querySnapshot, err) in
+    db.collection("trips").whereField("userID", isEqualTo: userID).getDocuments() { (querySnapshot, err) in
       if let err = err {
         print("Error getting documents: \(err)")
       } else {
