@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F1C5C9529DC9E29000CE7D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F1C5C9429DC9E29000CE7D8 /* GoogleService-Info.plist */; };
 		0F1C5C9729DD9064000CE7D8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */; };
 		0F38FE8E2A1C7089004E2D6D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F38FE8D2A1C7089004E2D6D /* StartView.swift */; };
 		0F38FE902A1C7096004E2D6D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F38FE8F2A1C7096004E2D6D /* SignUpView.swift */; };
@@ -22,6 +21,10 @@
 		0F60CDA52A094AC70073F50F /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F60CDA42A094AC70073F50F /* MainCoordinatorView.swift */; };
 		0F7B96672A13745C00E5F57E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7B96662A13745C00E5F57E /* ImageView.swift */; };
 		0FBAB05229D41BA0008C3937 /* Jost-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA167429D4182F00DE95A2 /* Jost-VariableFont_wght.ttf */; };
+		0FCEF1BB2A25F83500A9060E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FCEF1BA2A25F83500A9060E /* GoogleService-Info.plist */; };
+		0FCEF1BE2A2880C600A9060E /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0FCEF1BD2A2880C600A9060E /* FacebookCore */; };
+		0FCEF1C02A2880C600A9060E /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 0FCEF1BF2A2880C600A9060E /* FacebookLogin */; };
+		0FCEF1C22A2880C600A9060E /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 0FCEF1C12A2880C600A9060E /* FacebookShare */; };
 		0FE4E93B29F9864900775DD7 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4E93A29F9864900775DD7 /* GalleryView.swift */; };
 		0FEA165129D2E2FF00DE95A2 /* TripsmoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */; };
 		0FEA165529D2E30100DE95A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA165429D2E30100DE95A2 /* Assets.xcassets */; };
@@ -37,7 +40,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0F1C5C9429DC9E29000CE7D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0F38FE8D2A1C7089004E2D6D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		0F38FE8F2A1C7096004E2D6D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		0F38FE9A2A1F5600004E2D6D /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		0F60CDA42A094AC70073F50F /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
 		0F7B96662A13745C00E5F57E /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		0FCEF1BA2A25F83500A9060E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0FE4E93A29F9864900775DD7 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		0FEA164D29D2E2FF00DE95A2 /* Tripsmory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tripsmory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsmoryApp.swift; sourceTree = "<group>"; };
@@ -70,9 +73,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F38FEA02A1F5C09004E2D6D /* FirebaseDatabase in Frameworks */,
+				0FCEF1BE2A2880C600A9060E /* FacebookCore in Frameworks */,
+				0FCEF1C02A2880C600A9060E /* FacebookLogin in Frameworks */,
 				0F38FEA42A1F5C09004E2D6D /* FirebaseStorage in Frameworks */,
 				0F38FE9E2A1F5C09004E2D6D /* FirebaseAuth in Frameworks */,
 				0F38FEA22A1F5C09004E2D6D /* FirebaseFirestore in Frameworks */,
+				0FCEF1C22A2880C600A9060E /* FacebookShare in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,9 +132,9 @@
 		0FEA164F29D2E2FF00DE95A2 /* Tripsmory */ = {
 			isa = PBXGroup;
 			children = (
-				0F1C5C9429DC9E29000CE7D8 /* GoogleService-Info.plist */,
 				0FEA167629D418D700DE95A2 /* Info.plist */,
 				0FEA167429D4182F00DE95A2 /* Jost-VariableFont_wght.ttf */,
+				0FCEF1BA2A25F83500A9060E /* GoogleService-Info.plist */,
 				0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */,
 				0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */,
 				0FEA165429D2E30100DE95A2 /* Assets.xcassets */,
@@ -219,6 +225,9 @@
 				0F38FE9F2A1F5C09004E2D6D /* FirebaseDatabase */,
 				0F38FEA12A1F5C09004E2D6D /* FirebaseFirestore */,
 				0F38FEA32A1F5C09004E2D6D /* FirebaseStorage */,
+				0FCEF1BD2A2880C600A9060E /* FacebookCore */,
+				0FCEF1BF2A2880C600A9060E /* FacebookLogin */,
+				0FCEF1C12A2880C600A9060E /* FacebookShare */,
 			);
 			productName = Tripsmory;
 			productReference = 0FEA164D29D2E2FF00DE95A2 /* Tripsmory.app */;
@@ -250,6 +259,7 @@
 			mainGroup = 0FEA164429D2E2FF00DE95A2;
 			packageReferences = (
 				0F38FE9C2A1F5C09004E2D6D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				0FCEF1BC2A2880C600A9060E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 0FEA164E29D2E2FF00DE95A2 /* Products */;
 			projectDirPath = "";
@@ -266,7 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FEA165829D2E30100DE95A2 /* Preview Assets.xcassets in Resources */,
-				0F1C5C9529DC9E29000CE7D8 /* GoogleService-Info.plist in Resources */,
+				0FCEF1BB2A25F83500A9060E /* GoogleService-Info.plist in Resources */,
 				0FEA165529D2E30100DE95A2 /* Assets.xcassets in Resources */,
 				0FBAB05229D41BA0008C3937 /* Jost-VariableFont_wght.ttf in Resources */,
 			);
@@ -510,6 +520,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		0FCEF1BC2A2880C600A9060E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -532,6 +550,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0F38FE9C2A1F5C09004E2D6D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		0FCEF1BD2A2880C600A9060E /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0FCEF1BC2A2880C600A9060E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		0FCEF1BF2A2880C600A9060E /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0FCEF1BC2A2880C600A9060E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		0FCEF1C12A2880C600A9060E /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0FCEF1BC2A2880C600A9060E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

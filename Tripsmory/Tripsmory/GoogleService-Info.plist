@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>85061701800-oaivgcveogejcm20kfti123dq5nnusjl.apps.googleusercontent.com</string>
+	<string>1049629314403-e5dv48i056fdohbhegsmf9vu4vub85c9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.85061701800-oaivgcveogejcm20kfti123dq5nnusjl</string>
+	<string>com.googleusercontent.apps.1049629314403-e5dv48i056fdohbhegsmf9vu4vub85c9</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCjICcwaXu7V3xDWyM6Pzg_0WCo3oXyG0Q</string>
+	<string>AIzaSyC7aE0zPpZVQbYYOQxZA15lfqJ9UHzJTmM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>85061701800</string>
+	<string>1049629314403</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.catmeox.tripsmory</string>
+	<string>com.catmeox.Tripsmory</string>
 	<key>PROJECT_ID</key>
-	<string>tripsmory-9999</string>
+	<string>tripsmory</string>
 	<key>STORAGE_BUCKET</key>
-	<string>tripsmory-9999.appspot.com</string>
+	<string>tripsmory.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:85061701800:ios:2112e3fe0baa37cd56329d</string>
+	<string>1:1049629314403:ios:9aa5e8b989e6964c531756</string>
 </dict>
 </plist>

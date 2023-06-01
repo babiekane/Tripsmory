@@ -13,6 +13,7 @@ struct LoginView: View {
   
   @State var email: String = ""
   @State var password: String = ""
+  @State var showPassword: Bool = false
   
   @EnvironmentObject var viewModel: AuthViewModel
   
@@ -52,10 +53,29 @@ struct LoginView: View {
               .frame(width: 350, height: 1)
               .padding(.bottom, 26)
             
-            SecureField("Password", text: $password)
-              .font(.custom("Jost", size: 16))
-              .foregroundColor(Color("greenDark"))
-              .padding(8)
+            HStack {
+              Group {
+                if showPassword {
+                  TextField("Password", text: $password)
+                    .font(.custom("Jost", size: 16))
+                    .foregroundColor(Color("greenDark"))
+                    .padding(8)
+                } else {
+                  SecureField("Password", text: $password)
+                    .font(.custom("Jost", size: 16))
+                    .foregroundColor(Color("greenDark"))
+                    .padding(8)
+                }
+              }
+              
+              Button(action: {
+                showPassword.toggle()
+              }) {
+                Image(systemName: self.showPassword ? "eye" : "eye.slash")
+                  .accentColor(.gray)
+              }
+            }
+            
             Rectangle()
               .fill(Color("greenMedium").opacity(0.5))
               .frame(width: 350, height: 1)

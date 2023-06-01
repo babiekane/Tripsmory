@@ -35,7 +35,7 @@ struct TripListView: View {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
                   .resizable()
                   .frame(width: 30, height: 25)
-                  .foregroundColor(Color("greenLight"))
+                  .foregroundColor(Color("greenMedium"))
                   .padding(.trailing, 36)
               }
               .alert("Are you sure to log out?", isPresented: $showingAlert) {

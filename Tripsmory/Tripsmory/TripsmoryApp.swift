@@ -26,15 +26,10 @@ struct TripsmoryApp: App {
   
     var body: some Scene {
         WindowGroup {
-//          AddTripView(viewModel: AddTripViewModel())
-//          TripListView(viewModel: TripListViewModel())
-//          TripDetailView(viewModel: TripDetailViewModel(tripID: <#String#>))
-//          GalleryView()
-//          MainCoordinatorView()
-//          StartCoordinatorView()
           
           RootView()
             .environmentObject(authViewModel)
+          
         }
     }
 }

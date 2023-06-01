@@ -14,26 +14,13 @@ struct SignUpView: View {
   
   @State var email: String = ""
   @State var password: String = ""
+  @State var showPassword: Bool = false
   
   var body: some View {
     NavigationStack {
       ZStack {
-        VStack {
-          HStack {
-            Image("LoginTop")
-            
-            Spacer()
-          }
-          
-          Spacer()
-          
-          HStack {
-            Image("LoginBot")
-            
-            Spacer()
-          }
-        }
-        .ignoresSafeArea()
+        
+        Background()
         
         VStack {
           Spacer()
@@ -48,10 +35,29 @@ struct SignUpView: View {
               .frame(width: 350, height: 1)
               .padding(.bottom, 26)
             
-            SecureField("Password", text: $password)
-              .font(.custom("Jost", size: 16))
-              .foregroundColor(Color("greenDark"))
-              .padding(8)
+            HStack {
+              Group {
+                if showPassword {
+                  TextField("Password", text: $password)
+                    .font(.custom("Jost", size: 16))
+                    .foregroundColor(Color("greenDark"))
+                    .padding(8)
+                } else {
+                  SecureField("Password", text: $password)
+                    .font(.custom("Jost", size: 16))
+                    .foregroundColor(Color("greenDark"))
+                    .padding(8)
+                }
+              }
+              
+              Button(action: {
+                showPassword.toggle()
+              }) {
+                Image(systemName: self.showPassword ? "eye" : "eye.slash")
+                  .accentColor(.gray)
+              }
+            }
+            
             Rectangle()
               .fill(Color("greenMedium").opacity(0.5))
               .frame(width: 350, height: 1)
@@ -102,17 +108,7 @@ struct SignUpView: View {
             .font(.custom("Jost", size: 16))
             .foregroundColor(Color("greenDark").opacity(0.5))
             .padding(.bottom, 8)
-          
-//          NavigationLink {
-//            LoginView()
-//          } label: {
-//            Text("Login")
-//              .font(.custom("Jost", size: 16))
-//              .bold()
-//              .foregroundColor(Color("greenMedium"))
-//          }
-//          .padding(.bottom, 96)
-          
+
           Button {
             state = .logIn
           } label: {
@@ -136,5 +132,26 @@ struct SignUp_Previews: PreviewProvider {
       SignUpView(state: .constant(.start))
         .environmentObject(AuthViewModel())
     }
+  }
+}
+
+struct Background: View {
+  var body: some View {
+    VStack {
+      HStack {
+        Image("LoginTop")
+        
+        Spacer()
+      }
+      
+      Spacer()
+      
+      HStack {
+        Image("LoginBot")
+        
+        Spacer()
+      }
+    }
+    .ignoresSafeArea()
   }
 }
