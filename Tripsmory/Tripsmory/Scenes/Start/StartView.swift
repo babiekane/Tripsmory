@@ -75,9 +75,9 @@ struct StartView: View {
           }
         }
       }
+      .background(Color("appWhite"))
+      .frame(width: .infinity, height: .infinity)
     }
-    .background(Color("appWhite"))
-    .frame(width: .infinity, height: .infinity)
   }
 }
 

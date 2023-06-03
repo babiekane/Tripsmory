@@ -73,9 +73,9 @@ class AddTripViewModel: ObservableObject {
     let photoRef = storageRef.child("\(UUID().uuidString).jpg")
 
     // Upload the file to the path "images/rivers.jpg"
-    let uploadTask = photoRef.putData(data, metadata: nil) { (metadata, error) in
+    _ = photoRef.putData(data, metadata: nil) { (metadata, error) in
       guard error == nil else {
-        print(error?.localizedDescription)
+        print(error?.localizedDescription as Any)
         // An error occurred!
         return
       }
@@ -84,7 +84,7 @@ class AddTripViewModel: ObservableObject {
       // You can also access to download URL after upload.
       photoRef.downloadURL { (url, error) in
         guard let downloadURL = url else {
-          print(error?.localizedDescription)
+          print(error?.localizedDescription as Any)
           // An error occurred!
           return
         }
@@ -94,11 +94,7 @@ class AddTripViewModel: ObservableObject {
         self.uploadedImageURLs.append(downloadURL)
       }
     }
-        
-    
-    
   }
-  
 }
 
 struct TextFieldItem {

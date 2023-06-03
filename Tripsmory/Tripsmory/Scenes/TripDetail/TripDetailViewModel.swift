@@ -37,7 +37,7 @@ class TripDetailViewModel: ObservableObject {
     let db = Firestore.firestore()
     db.collection("trips").document(tripID).getDocument { document, error in
       guard let document = document, let data = document.data() else {
-        print(error?.localizedDescription)
+        print(error?.localizedDescription as Any)
         return
       }
       

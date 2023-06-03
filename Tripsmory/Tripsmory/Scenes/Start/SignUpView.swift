@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GoogleSignInSwift
+
 
 struct SignUpView: View {
 
@@ -20,7 +22,7 @@ struct SignUpView: View {
     NavigationStack {
       ZStack {
         
-        Background()
+        BackgroundSignUp()
         
         VStack {
           Spacer()
@@ -67,18 +69,27 @@ struct SignUpView: View {
           .padding(.bottom, 32)
           .padding(.horizontal, 40)
           
-          Button {
-            viewModel.signUp(email: email, password: password)
-          } label: {
-            Text("Create Account")
-              .font(.custom("Jost", size: 24))
-              .bold()
-              .foregroundColor(Color("whiteEgg"))
+          if viewModel.loading {
+            ProgressView()
+              .tint(Color("whiteEgg"))
               .frame(width: 285, height: 70)
               .background(Color("greenMedium"))
               .clipShape(Capsule())
+              .padding(.bottom, 32)
+          } else {
+            Button {
+              viewModel.signUp(email: email, password: password)
+            } label: {
+              Text("Create Account")
+                .font(.custom("Jost", size: 24))
+                .bold()
+                .foregroundColor(Color("whiteEgg"))
+                .frame(width: 285, height: 70)
+                .background(Color("greenMedium"))
+                .clipShape(Capsule())
+            }
+            .padding(.bottom, 32)
           }
-          .padding(.bottom, 32)
           
           Text("or continue with".uppercased())
             .font(.custom("Jost", size: 16))
@@ -87,7 +98,7 @@ struct SignUpView: View {
           
           HStack(alignment: .center, spacing: 30) {
             Button {
-              // TODO
+              viewModel.logInWithFacebook()
             } label: {
               Image("Facebook")
                 .resizable()
@@ -95,7 +106,7 @@ struct SignUpView: View {
             }
             
             Button {
-              // TODO
+              viewModel.logInWithGoogle()
             } label: {
               Image("Gmail")
                 .resizable()
@@ -120,9 +131,9 @@ struct SignUpView: View {
           }
         }
       }
+      .background(Color("appWhite"))
+      .frame(width: .infinity, height: .infinity)
     }
-    .background(Color("appWhite"))
-    .frame(width: .infinity, height: .infinity)
   }
 }
 
@@ -135,7 +146,7 @@ struct SignUp_Previews: PreviewProvider {
   }
 }
 
-struct Background: View {
+struct BackgroundSignUp: View {
   var body: some View {
     VStack {
       HStack {

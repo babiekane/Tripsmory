@@ -15,29 +15,16 @@ struct LoginView: View {
   @State var password: String = ""
   @State var showPassword: Bool = false
   
+  @State var isPresented = false
+
+  
   @EnvironmentObject var viewModel: AuthViewModel
   
   var body: some View {
     NavigationStack {
       ZStack {
-        VStack {
-          HStack {
-            
-            Image("LoginTop")
-            
-            Spacer()
-          }
-          
-          Spacer()
-          
-          HStack {
-            
-            Image("LoginBot")
-            
-            Spacer()
-          }
-        }
-        .ignoresSafeArea()
+        
+        BackgroundLogIn()
         
         VStack {
           
@@ -90,7 +77,7 @@ struct LoginView: View {
             Spacer()
             
             Button {
-              // TODO
+              isPresented = true
             } label : {
               Text("Forgot password?")
                 .font(.custom("Jost", size: 16))
@@ -101,24 +88,31 @@ struct LoginView: View {
             .padding(.trailing, 36)
           }
           
-          Button {
-            
-            guard !email.isEmpty, !password.isEmpty else {
-              return
-            }
-            viewModel.logIn(email: email, password: password)
-            
-          } label: {
-            Text("Login")
-              .font(.custom("Jost", size: 24))
-              .bold()
-              .foregroundColor(Color("whiteEgg"))
+          if viewModel.loading {
+            ProgressView()
+              .tint(Color("whiteEgg"))
               .frame(width: 285, height: 70)
               .background(Color("greenMedium"))
               .clipShape(Capsule())
+              .padding(.bottom, 32)
+          } else {
+            Button {
+              guard !email.isEmpty, !password.isEmpty else {
+                return
+              }
+              viewModel.logIn(email: email, password: password)
+            } label: {
+              Text("Login")
+                .font(.custom("Jost", size: 24))
+                .bold()
+                .foregroundColor(Color("whiteEgg"))
+                .frame(width: 285, height: 70)
+                .background(Color("greenMedium"))
+                .clipShape(Capsule())
+            }
+            .padding(.bottom, 32)
           }
-          .padding(.bottom, 32)
-          
+            
           Text("Do not have any account?")
             .font(.custom("Jost", size: 16))
             .foregroundColor(Color("greenDark").opacity(0.5))
@@ -135,9 +129,13 @@ struct LoginView: View {
           }
         }
       }
+      .background(Color("appWhite"))
+      .frame(width: .infinity, height: .infinity)
     }
-    .background(Color("appWhite"))
-    .frame(width: .infinity, height: .infinity)
+    .sheet(isPresented: $isPresented) {
+      ForgotPasswordView()
+    }
+
   }
 }
 
@@ -145,5 +143,24 @@ struct Login_Previews: PreviewProvider {
   static var previews: some View {
     LoginView(state: .constant(.logIn))
       .environmentObject(AuthViewModel())
+  }
+}
+
+struct BackgroundLogIn: View {
+  var body: some View {
+    VStack {
+      HStack {
+        Image("LoginTop")
+        Spacer()
+      }
+      
+      Spacer()
+      
+      HStack {
+        Image("LoginBot")
+        Spacer()
+      }
+    }
+    .ignoresSafeArea()
   }
 }
