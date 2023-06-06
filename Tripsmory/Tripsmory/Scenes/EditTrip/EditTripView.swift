@@ -62,6 +62,7 @@ struct TextFieldEditView: View {
           .fontWeight(.semibold)
           .foregroundColor(Color("greenDark"))
           .padding(.vertical, 20)
+        
         VStack(spacing: 16) {
           VStack(alignment: .leading, spacing: 0) {
             Text("Name")
@@ -69,10 +70,10 @@ struct TextFieldEditView: View {
               .fontWeight(.medium)
               .foregroundColor(Color("appBlack"))
               .padding(.bottom, 4)
+            
             TextField("", text: $textName)
               .textFieldStyle(OvalTextFieldStyle())
               .disableAutocorrection(true)
-            
           }
           
           VStack(alignment: .leading, spacing: 0) {
@@ -81,10 +82,10 @@ struct TextFieldEditView: View {
               .fontWeight(.medium)
               .foregroundColor(Color("appBlack"))
               .padding(.bottom, 4)
+            
             TextField("", text: $textLocation)
               .textFieldStyle(OvalTextFieldStyle())
               .disableAutocorrection(true)
-            
           }
           
           VStack(alignment: .leading, spacing: 0) {
@@ -93,10 +94,10 @@ struct TextFieldEditView: View {
               .fontWeight(.medium)
               .foregroundColor(Color("appBlack"))
               .padding(.bottom, 4)
+            
             TextField("", text: $textDate)
               .textFieldStyle(OvalTextFieldStyle())
               .disableAutocorrection(true)
-            
           }
           
           HStack {
@@ -106,10 +107,10 @@ struct TextFieldEditView: View {
                 .fontWeight(.medium)
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
+              
               TextField("", text: $textRating)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
-              
             }
             
             VStack(alignment: .leading, spacing: 0) {
@@ -118,10 +119,10 @@ struct TextFieldEditView: View {
                 .foregroundColor(Color("appBlack"))
                 .fontWeight(.medium)
                 .padding(.bottom, 4)
+              
               TextField("", text: $textCost)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
-              
             }
           }
           
@@ -131,11 +132,11 @@ struct TextFieldEditView: View {
               .fontWeight(.medium)
               .foregroundColor(Color("appBlack"))
               .padding(.bottom, 4)
+            
             TextField("", text: $textStory)
               .font(.custom("Jost", size: 16))
               .textFieldStyle(OvalTextFieldStyle())
               .disableAutocorrection(true)
-            
           }
           
           HStack {

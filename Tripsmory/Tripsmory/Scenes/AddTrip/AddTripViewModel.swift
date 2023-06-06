@@ -50,7 +50,8 @@ class AddTripViewModel: ObservableObject {
         "story": textStory,
         "coverImageURL": uploadedImageURLs[0].absoluteString,
         "photoURLs": uploadedImageURLStrings,
-        "userID": userID
+        "userID": userID,
+        "createdDate": FieldValue.serverTimestamp()
     ]
     
     ref = db.collection("trips").addDocument(data: tripDictionary) { err in

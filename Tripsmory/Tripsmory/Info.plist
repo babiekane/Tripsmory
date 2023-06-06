@@ -2,28 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Jost-VariableFont_wght.ttf</string>
-	</array>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>lunchScreen</string>
-		<key>UIImageName</key>
-		<string>FullLogo_Large</string>
-	</dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb645152657097891</string>
-        <string>com.googleusercontent.apps.1049629314403-e5dv48i056fdohbhegsmf9vu4vub85c9</string>
+				<string>com.googleusercontent.apps.1049629314403-e5dv48i056fdohbhegsmf9vu4vub85c9</string>
 			</array>
 		</dict>
 	</array>
@@ -33,12 +18,23 @@
 	<string>b19280a381dfe60009509f18054799e4</string>
 	<key>FacebookDisplayName</key>
 	<string>Tripsmory</string>
+	<key>GIDClientID</key>
+	<string>1049629314403-e5dv48i056fdohbhegsmf9vu4vub85c9.apps.googleusercontent.com</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
 		<string>fb-messenger-share-api</string>
 	</array>
-  <key>GIDClientID</key>
-  <string>1049629314403-e5dv48i056fdohbhegsmf9vu4vub85c9.apps.googleusercontent.com</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Jost-VariableFont_wght.ttf</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>lunchScreen</string>
+		<key>UIImageName</key>
+		<string>meow</string>
+	</dict>
 </dict>
 </plist>

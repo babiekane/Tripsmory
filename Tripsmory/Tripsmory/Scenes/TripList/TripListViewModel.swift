@@ -40,7 +40,14 @@ class TripListViewModel: ObservableObject {
       } else {
         var fetchedTrips: [TripListItem] = []
         
-        for document in querySnapshot!.documents {
+        let documents = querySnapshot!.documents
+        let sortedDocument = documents.sorted { document1, document2 in
+          let timestamp1 = (document1.data()["createdDate"] as? Timestamp)?.dateValue() ?? Date()
+          let timestamp2 = (document2.data()["createdDate"] as? Timestamp)?.dateValue() ?? Date()
+          return timestamp1 > timestamp2
+        }
+        
+        for document in sortedDocument {
           let data = document.data()
           let coverImageURL = URL(string: (data["coverImageURL"] as? String) ?? "")
           let name = (data["name"] as? String) ?? ""
@@ -51,7 +58,7 @@ class TripListViewModel: ObservableObject {
           fetchedTrips.append(trip)
         }
         
-        self.trips = fetchedTrips.reversed()
+        self.trips = fetchedTrips
       }
       
       self.isLoading = false

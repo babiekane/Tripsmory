@@ -28,7 +28,7 @@ struct StartCoordinatorView: View {
       }
     }
     .onChange(of: startState) { newValue in
-      withAnimation(.easeIn) {
+      withAnimation(.easeOut) {
         animationState = newValue
       }
     }

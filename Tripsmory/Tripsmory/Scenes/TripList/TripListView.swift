@@ -110,6 +110,9 @@ struct TripListView: View {
     .sheet(isPresented: $viewModel.isPresented) {
       AddTripView(viewModel: AddTripViewModel())
     }
+    .refreshable {
+      viewModel.fetchTrips()
+    }
   }
 }
 

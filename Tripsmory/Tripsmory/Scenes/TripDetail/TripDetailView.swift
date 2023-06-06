@@ -247,30 +247,36 @@ struct ShowDetailView: View {
         }
       }
       .fullScreenCover(isPresented: $isEditing) {
-        EditTripView(viewModel: EditTripViewModel(detail: detail))
-        
+        if let editTripViewModel = viewModel.editTripViewModel {
+          EditTripView(viewModel: editTripViewModel)
+            .onDisappear {
+              viewModel.showTripDetails()
+            }
+        } else {
+          EmptyView()
+        }
       }
     }
   }
-}
-
-struct GalleryImageView: View {
   
-  let url: URL
-  
-  var body: some View {
-    AsyncImage(url: url) { image in
-      image
-        .resizable()
-        .aspectRatio(contentMode: .fill)
-        .frame(width: 70, height: 70)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-    } placeholder: {
-      ProgressView()
-        .tint(Color("greenDark"))
-        .frame(width: 70, height: 70)
-        .background(.gray.opacity(0.3))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+  struct GalleryImageView: View {
+    
+    let url: URL
+    
+    var body: some View {
+      AsyncImage(url: url) { image in
+        image
+          .resizable()
+          .aspectRatio(contentMode: .fill)
+          .frame(width: 70, height: 70)
+          .clipShape(RoundedRectangle(cornerRadius: 20))
+      } placeholder: {
+        ProgressView()
+          .tint(Color("greenDark"))
+          .frame(width: 70, height: 70)
+          .background(.gray.opacity(0.3))
+          .clipShape(RoundedRectangle(cornerRadius: 20))
+      }
     }
   }
 }

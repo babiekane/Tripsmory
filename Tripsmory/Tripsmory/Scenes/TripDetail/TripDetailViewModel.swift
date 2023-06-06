@@ -28,6 +28,7 @@ class TripDetailViewModel: ObservableObject {
 
   var tripID: String?
   @Published var detail: TripDetail?
+  var editTripViewModel: EditTripViewModel?
   
   func showTripDetails() {
     guard let tripID = tripID else {
@@ -61,6 +62,7 @@ class TripDetailViewModel: ObservableObject {
       
       let detail = TripDetail(id: document.documentID, coverImageURL: coverImageURL, name: name, location: location, numberOfPhotos: numberOfPhotos, rating: rating, cost: cost, date: date, story: story, photoURLs: photoURLs)
       self.detail = detail
+      self.editTripViewModel = EditTripViewModel(detail: detail)
     }
   }
   
