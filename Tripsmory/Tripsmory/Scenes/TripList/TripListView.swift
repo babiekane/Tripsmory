@@ -107,7 +107,7 @@ struct TripListView: View {
     .onAppear {
       viewModel.fetchTrips()
     }
-    .sheet(isPresented: $viewModel.isPresented) {
+    .fullScreenCover(isPresented: $viewModel.isPresented) {
       AddTripView(viewModel: AddTripViewModel())
     }
     .refreshable {
@@ -135,76 +135,87 @@ struct TripListItemView: View {
     VStack {
       
       VStack(alignment: .leading, spacing: 0) {
-        AsyncImage(url: trip.coverImageURL) { image in
-          image
+        if let coverImage = trip.coverImageURL {
+          AsyncImage(url: trip.coverImageURL) { image in
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(width: screenWidth - 32, height: screenHeight / 5)
+              .clipped()
+              .padding(.bottom, 8)
+          } placeholder: {
+            ProgressView()
+              .tint(Color("greenDark"))
+              .frame(width: screenWidth - 32, height: screenHeight / 4.75)
+              .background(Color("whiteEgg"))
+              .clipShape(RoundedRectangle(cornerRadius: 12))
+          }
+        } else {
+          Image("NoImages")
             .resizable()
-            .aspectRatio(contentMode: .fill)
+            .aspectRatio(contentMode: .fit)
             .frame(width: screenWidth - 32, height: screenHeight / 5)
+            .padding(.vertical, 8)
             .clipped()
+            .background(Color("Test1"))
             .padding(.bottom, 8)
-        } placeholder: {
-          ProgressView()
-            .tint(Color("greenDark"))
-            .frame(width: screenWidth - 32, height: screenHeight / 4.75)
-            .background(Color("whiteEgg"))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
-        
-        HStack {
-          VStack(alignment: .leading, spacing: 0) {
-            Text(trip.name)
-              .font(.custom("Jost", size: 16))
-              .bold()
-              .foregroundColor(Color("greenDark"))
-              .padding(.bottom, 0)
-            
-            HStack(spacing: 26) {
-              HStack(spacing: 4) {
-                Image("Location")
-                  .resizable()
-                  .renderingMode(.template)
-                  .frame(width: 15, height: 15)
-                  .foregroundColor(Color("blueDark"))
-                Text(trip.location)
-                  .font(.custom("Jost", size: 12))
-                  .foregroundColor(Color("greenMedium"))
-              }
-              HStack(spacing: 4) {
-                Image("Photo")
-                  .resizable()
-                  .renderingMode(.template)
-                  .frame(width: 15, height: 15)
-                  .foregroundColor(Color("blueDark"))
-                Text("\(trip.numberOfPhotos) Photos")
-                  .font(.custom("Jost", size: 12))
-                  .foregroundColor(Color("greenMedium"))
-              }
-              HStack(spacing: 4) {
-                Image("Star")
-                  .resizable()
-                  .renderingMode(.template)
-                  .frame(width: 15, height: 15)
-                  .foregroundColor(Color("blueDark"))
-                Text(trip.rating)
-                  .font(.custom("Jost", size: 12))
-                  .foregroundColor(Color("greenMedium"))
-              }
+      
+      HStack {
+        VStack(alignment: .leading, spacing: 0) {
+          Text(trip.name)
+            .font(.custom("Jost", size: 16))
+            .bold()
+            .foregroundColor(Color("greenDark"))
+            .padding(.bottom, 0)
+          
+          HStack(spacing: 26) {
+            HStack(spacing: 4) {
+              Image("Location")
+                .resizable()
+                .renderingMode(.template)
+                .frame(width: 15, height: 15)
+                .foregroundColor(Color("blueDark"))
+              Text(trip.location)
+                .font(.custom("Jost", size: 12))
+                .foregroundColor(Color("greenMedium"))
+            }
+            HStack(spacing: 4) {
+              Image("Photo")
+                .resizable()
+                .renderingMode(.template)
+                .frame(width: 15, height: 15)
+                .foregroundColor(Color("blueDark"))
+              Text("\(trip.numberOfPhotos) Photos")
+                .font(.custom("Jost", size: 12))
+                .foregroundColor(Color("greenMedium"))
+            }
+            HStack(spacing: 4) {
+              Image("Star")
+                .resizable()
+                .renderingMode(.template)
+                .frame(width: 15, height: 15)
+                .foregroundColor(Color("blueDark"))
+              Text(trip.rating)
+                .font(.custom("Jost", size: 12))
+                .foregroundColor(Color("greenMedium"))
             }
           }
-          Spacer()
-          
-          Image("RightArrowAndCircle")
-            .padding(.trailing, 20)
         }
-        .padding(.bottom, 12)
-        .padding(.leading, 20)
+        Spacer()
+        
+        Image("RightArrowAndCircle")
+          .padding(.trailing, 20)
       }
-      .background(Color("whiteEgg"))
-      .clipShape(RoundedRectangle(cornerRadius: 12))
-      .shadow(radius: 3, y: 1)
+      .padding(.bottom, 12)
+      .padding(.leading, 20)
     }
-    
+    .background(Color("whiteEgg"))
+    .clipShape(RoundedRectangle(cornerRadius: 12))
+    .shadow(radius: 3, y: 1)
+  }
+  
     .padding(.horizontal, 16)
     .padding(.bottom, 20)
-  }
+}
 }

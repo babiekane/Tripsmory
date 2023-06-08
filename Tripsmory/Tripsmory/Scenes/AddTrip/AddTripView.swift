@@ -131,7 +131,8 @@ struct TextFieldView: View {
               .fontWeight(.medium)
               .foregroundColor(Color("appBlack"))
               .padding(.bottom, 4)
-            TextField("", text: $textStory)
+            TextField("", text: $textStory, axis: .vertical)
+              .lineLimit(6, reservesSpace: true)
               .font(.custom("Jost", size: 16))
               .textFieldStyle(OvalTextFieldStyle())
               .disableAutocorrection(true)
@@ -183,20 +184,50 @@ struct TextFieldView: View {
       .padding(.horizontal, 16)
       
       VStack {
+        
         Spacer()
-        Button {
-          viewModel.saveTrip()
-          dismiss()
-        } label: {
-          Text("Save to your memory")
-            .font(.custom("Jost", size: 16))
-            .fontWeight(.medium)
-            .frame(width: screenWidth - 32, height: 50)
-            .foregroundColor(Color("appWhite"))
-            .background(Color("greenMedium"))
-            .clipShape(RoundedRectangle(cornerRadius: 40))
-            .padding(.vertical, 8)
-            .padding(.horizontal, 16)
+        
+        HStack {
+          Button {
+            dismiss()
+          } label: {
+            Text("Cancel")
+              .font(.custom("Jost", size: 16))
+              .fontWeight(.medium)
+              .frame(width: screenWidth / 2 - 32, height: 50)
+              .foregroundColor(Color("greenMedium"))
+              .background(Color("appWhite"))
+              .overlay(
+                Capsule().stroke(Color("greenMedium"), lineWidth: 4)
+              )
+              .clipShape(Capsule())
+              .padding(.vertical, 8)
+          }
+          
+          if viewModel.isUploadingImages {
+            Text("Save to your memory")
+              .font(.custom("Jost", size: 16))
+              .fontWeight(.medium)
+              .frame(width: screenWidth / 2 - 32, height: 50)
+              .foregroundColor(Color("appWhite"))
+              .background(Color("greenMedium"))
+              .clipShape(Capsule())
+              .padding(.vertical, 8)
+          } else {
+            Button {
+              viewModel.saveTrip()
+              dismiss()
+            } label: {
+              Text("Save to your memory")
+                .font(.custom("Jost", size: 16))
+                .fontWeight(.medium)
+                .frame(width: screenWidth / 2 - 32, height: 50)
+                .foregroundColor(Color("appWhite"))
+                .background(Color("greenMedium"))
+                .clipShape(Capsule())
+                .padding(.vertical, 8)
+            }
+          }
         }
       }
     }
@@ -222,7 +253,6 @@ struct TextFieldView: View {
     }
     .onChange(of: selectedImage) { newValue in
       if let image = newValue {
-//        viewModel.imageTripsStored.append(image)
         viewModel.addImage(image)
       }
     }

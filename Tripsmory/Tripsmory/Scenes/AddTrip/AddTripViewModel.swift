@@ -27,6 +27,8 @@ class AddTripViewModel: ObservableObject {
   @Published var imageTripsStored = [UIImage]()
   @Published var uploadedImageURLs = [URL]()
   
+  @Published var isUploadingImages = false
+  
   func saveTrip() {
     guard let userID = Auth.auth().currentUser?.uid else {
       return
@@ -41,18 +43,22 @@ class AddTripViewModel: ObservableObject {
     
     var ref: DocumentReference? = nil
     let db = Firestore.firestore()
-    let tripDictionary: [String: Any] = [
+    var tripDictionary: [String: Any] = [
         "name": textName,
         "location": textLocation,
         "date": textDate,
         "rating": textRating,
         "cost": textCost,
         "story": textStory,
-        "coverImageURL": uploadedImageURLs[0].absoluteString,
+//        "coverImageURL": uploadedImageURLs[0].absoluteString,
         "photoURLs": uploadedImageURLStrings,
         "userID": userID,
         "createdDate": FieldValue.serverTimestamp()
     ]
+    
+    if !uploadedImageURLs.isEmpty {
+      tripDictionary.updateValue(uploadedImageURLs[0].absoluteString, forKey: "coverImageURL")
+    }
     
     ref = db.collection("trips").addDocument(data: tripDictionary) { err in
         if let err = err {
@@ -72,8 +78,8 @@ class AddTripViewModel: ObservableObject {
     let storage = Storage.storage()
     let storageRef = storage.reference()
     let photoRef = storageRef.child("\(UUID().uuidString).jpg")
+    isUploadingImages = true
 
-    // Upload the file to the path "images/rivers.jpg"
     _ = photoRef.putData(data, metadata: nil) { (metadata, error) in
       guard error == nil else {
         print(error?.localizedDescription as Any)
@@ -93,8 +99,10 @@ class AddTripViewModel: ObservableObject {
         print(downloadURL)
         //3 store image URL in uploadedImageURLs
         self.uploadedImageURLs.append(downloadURL)
+        self.isUploadingImages = false
       }
     }
+    
   }
 }
 

@@ -71,17 +71,27 @@ struct ShowDetailView: View {
       ScrollView(showsIndicators: false) {
         ZStack(alignment: .top) {
           VStack {
-            AsyncImage(url: detail.coverImageURL) { image in
-              image
+            if let coverImage = detail.coverImageURL {
+              AsyncImage(url: detail.coverImageURL) { image in
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(width: screenWidth - 16, height: screenHeight / 2)
+                  .clipShape(RoundedRectangle(cornerRadius: 20))
+              } placeholder: {
+                ProgressView()
+                  .tint(Color("greenDark"))
+                  .frame(width: screenWidth - 16, height: screenHeight / 2)
+                  .background(.gray.opacity(0.3))
+                  .clipShape(RoundedRectangle(cornerRadius: 20))
+              }
+            } else {
+              Image("NoImages")
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                .aspectRatio(contentMode: .fit)
+                .padding(20)
                 .frame(width: screenWidth - 16, height: screenHeight / 2)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-            } placeholder: {
-              ProgressView()
-                .tint(Color("greenDark"))
-                .frame(width: screenWidth - 16, height: screenHeight / 2)
-                .background(.gray.opacity(0.3))
+                .background(Color("Test1"))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             }
           }

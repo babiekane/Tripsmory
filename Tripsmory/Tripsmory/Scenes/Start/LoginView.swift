@@ -35,6 +35,7 @@ struct LoginView: View {
               .font(.custom("Jost", size: 16))
               .foregroundColor(Color("greenDark"))
               .padding(8)
+              .keyboardType(.emailAddress)
             Rectangle()
               .fill(Color("greenMedium").opacity(0.5))
               .frame(width: 350, height: 1)

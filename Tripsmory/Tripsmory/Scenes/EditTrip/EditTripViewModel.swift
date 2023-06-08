@@ -56,24 +56,24 @@ class EditTripViewModel: ObservableObject {
     
     // create data dictionary of trip
     let tripDictionary: [String: Any] = [
-        "name": textName,
-        "location": textLocation,
-        "date": textDate,
-        "rating": textRating,
-        "cost": textCost,
-        "story": textStory,
-        "coverImageURL": uploadedImageURLs[0].absoluteString,
-        "photoURLs": uploadedImageURLStrings
+      "name": textName,
+      "location": textLocation,
+      "date": textDate,
+      "rating": textRating,
+      "cost": textCost,
+      "story": textStory,
+      "coverImageURL": uploadedImageURLs[0].absoluteString,
+      "photoURLs": uploadedImageURLStrings
     ]
     
     // update trip
     let db = Firestore.firestore()
     db.collection("trips").document(id).updateData(tripDictionary) { err in
-        if let err = err {
-            print("Error updating document: \(err)")
-        } else {
-          print("Document successfully updated")
-        }
+      if let err = err {
+        print("Error updating document: \(err)")
+      } else {
+        print("Document successfully updated")
+      }
     }
   }
   
@@ -81,12 +81,12 @@ class EditTripViewModel: ObservableObject {
     //1 upload image to Firebase
     // Data in memory
     let data = image.jpegData(compressionQuality: 0.8)!
-
+    
     // Create a reference to the file you want to upload
     let storage = Storage.storage()
     let storageRef = storage.reference()
     let photoRef = storageRef.child("\(UUID().uuidString).jpg")
-
+    
     // Upload the file to the path "images/rivers.jpg"
     _ = photoRef.putData(data, metadata: nil) { (metadata, error) in
       guard error == nil else {
@@ -94,7 +94,7 @@ class EditTripViewModel: ObservableObject {
         // An error occurred!
         return
       }
-
+      
       //2 get uploaded image URL
       // You can also access to download URL after upload.
       photoRef.downloadURL { (url, error) in
@@ -118,7 +118,22 @@ class EditTripViewModel: ObservableObject {
     
     uploadedImageURLs.remove(at: index)
   }
-
+  
+  func deleteTrip() {
+    guard let id = id else {
+      return
+    }
+    
+    let db = Firestore.firestore()
+    db.collection("trips").document(id).delete() { err in
+      if let err = err {
+        print("Error removing document: \(err)")
+      } else {
+        print("Document successfully removed!")
+      }
+    }
+  }
+  
 }
 
 
