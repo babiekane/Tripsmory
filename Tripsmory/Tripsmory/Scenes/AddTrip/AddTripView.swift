@@ -47,6 +47,8 @@ struct TextFieldView: View {
   @State var shouldPresentActionScheet = false
   @State var shouldPresentCamera = false
   
+  @FocusState var isInputActive: Bool
+  
   @ObservedObject var viewModel: AddTripViewModel
   
   let screenWidth: Double
@@ -55,169 +57,167 @@ struct TextFieldView: View {
   @Environment(\.dismiss) var dismiss
   
   var body: some View {
-    ZStack {
-      VStack(spacing: 0) {
-        Text("Tell me about your wonderful place")
-          .font(.custom("Jost", size: 24))
-          .fontWeight(.semibold)
-          .foregroundColor(Color("greenDark"))
-          .padding(.vertical, 20)
-        VStack(spacing: 16) {
-          VStack(alignment: .leading, spacing: 0) {
-            Text("Name")
-              .font(.custom("Jost", size: 16))
-              .fontWeight(.medium)
-              .foregroundColor(Color("appBlack"))
-              .padding(.bottom, 4)
-            TextField("", text: $textName)
-              .textFieldStyle(OvalTextFieldStyle())
-              .disableAutocorrection(true)
-
-          }
-          
-          VStack(alignment: .leading, spacing: 0) {
-            Text("Location")
-              .font(.custom("Jost", size: 16))
-              .fontWeight(.medium)
-              .foregroundColor(Color("appBlack"))
-              .padding(.bottom, 4)
-            TextField("", text: $textLocation)
-              .textFieldStyle(OvalTextFieldStyle())
-              .disableAutocorrection(true)
-
-          }
-          
-          VStack(alignment: .leading, spacing: 0) {
-            Text("Date")
-              .font(.custom("Jost", size: 16))
-              .fontWeight(.medium)
-              .foregroundColor(Color("appBlack"))
-              .padding(.bottom, 4)
-            TextField("", text: $textDate)
-              .textFieldStyle(OvalTextFieldStyle())
-              .disableAutocorrection(true)
-
-          }
-          
-          HStack {
+    NavigationStack {
+      ZStack {
+        VStack(spacing: 0) {
+          Text("Tell me about your wonderful place")
+            .font(.custom("Jost", size: 24))
+            .fontWeight(.semibold)
+            .foregroundColor(Color("greenDark"))
+            .padding(.vertical, 20)
+          VStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 0) {
-              Text("Rating")
+              Text("Name")
                 .font(.custom("Jost", size: 16))
                 .fontWeight(.medium)
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
-              TextField("", text: $textRating)
+              TextField("", text: $textName)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
-
+              
             }
             
             VStack(alignment: .leading, spacing: 0) {
-              Text("Cost")
+              Text("Location")
                 .font(.custom("Jost", size: 16))
-                .foregroundColor(Color("appBlack"))
                 .fontWeight(.medium)
+                .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
-              TextField("", text: $textCost)
+              TextField("", text: $textLocation)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
-
+              
             }
-          }
-          
-          VStack(alignment: .leading, spacing: 0) {
-            Text("Best parts of this place...")
-              .font(.custom("Jost", size: 16))
-              .fontWeight(.medium)
-              .foregroundColor(Color("appBlack"))
-              .padding(.bottom, 4)
-            TextField("", text: $textStory, axis: .vertical)
-              .lineLimit(6, reservesSpace: true)
-              .font(.custom("Jost", size: 16))
-              .textFieldStyle(OvalTextFieldStyle())
-              .disableAutocorrection(true)
-
-          }
-          
-          HStack {
+            
             VStack(alignment: .leading, spacing: 0) {
-              Text("Photo")
+              Text("Date")
+                .font(.custom("Jost", size: 16))
+                .fontWeight(.medium)
+                .foregroundColor(Color("appBlack"))
+                .padding(.bottom, 4)
+              TextField("", text: $textDate)
+                .textFieldStyle(OvalTextFieldStyle())
+                .disableAutocorrection(true)
+              
+            }
+            
+            HStack {
+              VStack(alignment: .leading, spacing: 0) {
+                Text("Rating")
+                  .font(.custom("Jost", size: 16))
+                  .fontWeight(.medium)
+                  .foregroundColor(Color("appBlack"))
+                  .padding(.bottom, 4)
+                TextField("", text: $textRating)
+                  .textFieldStyle(OvalTextFieldStyle())
+                  .disableAutocorrection(true)
+                
+              }
+              
+              VStack(alignment: .leading, spacing: 0) {
+                Text("Cost")
+                  .font(.custom("Jost", size: 16))
+                  .foregroundColor(Color("appBlack"))
+                  .fontWeight(.medium)
+                  .padding(.bottom, 4)
+                TextField("", text: $textCost)
+                  .textFieldStyle(OvalTextFieldStyle())
+                  .disableAutocorrection(true)
+                
+              }
+            }
+            
+            VStack(alignment: .leading, spacing: 0) {
+              Text("Best parts of this place...")
                 .font(.custom("Jost", size: 16))
                 .fontWeight(.medium)
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
               
-              ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                  ZStack {
-                    RoundedRectangle(cornerRadius: 20)
-                      .fill(Color("greenLight").opacity(0.5))
-                      .frame(width: 80, height: 80)
-                    Image("Camera")
+              TextField("", text: $textStory, axis: .vertical)
+                .lineLimit(6, reservesSpace: true)
+                .font(.custom("Jost", size: 16))
+                .textFieldStyle(OvalTextFieldStyle())
+                .disableAutocorrection(true)
+                .focused($isInputActive)
+                .toolbar {
+                  ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    
+                    Button("Done") {
+                      isInputActive = false
+                    }
                   }
-                  
-                  ForEach(viewModel.uploadedImageURLs, id: \.self) { url in
-                    AsyncImage(url: url) { image in
-                      image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
+                }
+            }
+            
+            HStack {
+              VStack(alignment: .leading, spacing: 0) {
+                Text("Photo")
+                  .font(.custom("Jost", size: 16))
+                  .fontWeight(.medium)
+                  .foregroundColor(Color("appBlack"))
+                  .padding(.bottom, 4)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                  HStack {
+                    ZStack {
+                      RoundedRectangle(cornerRadius: 20)
+                        .fill(Color("greenLight").opacity(0.5))
                         .frame(width: 80, height: 80)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                    } placeholder: {
-                      ProgressView()
-                        .tint(Color("greenDark"))
-                        .frame(width: 80, height: 80)
-                        .background(.gray.opacity(0.3))
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                      Image("Camera")
+                    }
+                    
+                    ForEach(viewModel.uploadedImageURLs, id: \.self) { url in
+                      AsyncImage(url: url) { image in
+                        image
+                          .resizable()
+                          .aspectRatio(contentMode: .fill)
+                          .frame(width: 80, height: 80)
+                          .clipShape(RoundedRectangle(cornerRadius: 20))
+                      } placeholder: {
+                        ProgressView()
+                          .tint(Color("greenDark"))
+                          .frame(width: 80, height: 80)
+                          .background(.gray.opacity(0.3))
+                          .clipShape(RoundedRectangle(cornerRadius: 20))
+                      }
                     }
                   }
                 }
               }
+              
+              Spacer()
             }
-            
-            Spacer()
+            .onTapGesture { self.shouldPresentActionScheet = true }
           }
-          .onTapGesture { self.shouldPresentActionScheet = true }
+          Spacer()
         }
-        Spacer()
-      }
-      .padding(.horizontal, 16)
-      
-      VStack {
+        .padding(.horizontal, 16)
         
-        Spacer()
-        
-        HStack {
-          Button {
-            dismiss()
-          } label: {
-            Text("Cancel")
-              .font(.custom("Jost", size: 16))
-              .fontWeight(.medium)
-              .frame(width: screenWidth / 2 - 32, height: 50)
-              .foregroundColor(Color("greenMedium"))
-              .background(Color("appWhite"))
-              .overlay(
-                Capsule().stroke(Color("greenMedium"), lineWidth: 4)
-              )
-              .clipShape(Capsule())
-              .padding(.vertical, 8)
-          }
+        VStack {
           
-          if viewModel.isUploadingImages {
-            Text("Save to your memory")
-              .font(.custom("Jost", size: 16))
-              .fontWeight(.medium)
-              .frame(width: screenWidth / 2 - 32, height: 50)
-              .foregroundColor(Color("appWhite"))
-              .background(Color("greenMedium"))
-              .clipShape(Capsule())
-              .padding(.vertical, 8)
-          } else {
+          Spacer()
+          
+          HStack {
             Button {
-              viewModel.saveTrip()
               dismiss()
             } label: {
+              Text("Cancel")
+                .font(.custom("Jost", size: 16))
+                .fontWeight(.medium)
+                .frame(width: screenWidth / 2 - 32, height: 50)
+                .foregroundColor(Color("greenMedium"))
+                .background(Color("appWhite"))
+                .overlay(
+                  Capsule().stroke(Color("greenMedium"), lineWidth: 4)
+                )
+                .clipShape(Capsule())
+                .padding(.vertical, 8)
+            }
+            
+            if viewModel.isUploadingImages {
               Text("Save to your memory")
                 .font(.custom("Jost", size: 16))
                 .fontWeight(.medium)
@@ -226,6 +226,20 @@ struct TextFieldView: View {
                 .background(Color("greenMedium"))
                 .clipShape(Capsule())
                 .padding(.vertical, 8)
+            } else {
+              Button {
+                viewModel.saveTrip()
+                dismiss()
+              } label: {
+                Text("Save to your memory")
+                  .font(.custom("Jost", size: 16))
+                  .fontWeight(.medium)
+                  .frame(width: screenWidth / 2 - 32, height: 50)
+                  .foregroundColor(Color("appWhite"))
+                  .background(Color("greenMedium"))
+                  .clipShape(Capsule())
+                  .padding(.vertical, 8)
+              }
             }
           }
         }

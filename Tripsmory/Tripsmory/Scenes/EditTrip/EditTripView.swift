@@ -49,6 +49,8 @@ struct TextFieldEditView: View {
   
   @State var showingAlert = false
   
+  @FocusState var isInputActive: Bool
+  
   @ObservedObject var viewModel: EditTripViewModel
   
   let screenWidth: Double
@@ -57,6 +59,7 @@ struct TextFieldEditView: View {
   @Environment(\.dismiss) var dismiss
   
   var body: some View {
+    NavigationStack {
       ZStack {
         ScrollView(showsIndicators: false) {
           VStack(spacing: 0) {
@@ -141,6 +144,16 @@ struct TextFieldEditView: View {
                   .font(.custom("Jost", size: 16))
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
+                  .focused($isInputActive)
+                  .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                      Spacer()
+                      
+                      Button("Done") {
+                        isInputActive = false
+                      }
+                    }
+                  }
               }
               
               HStack {
@@ -261,6 +274,7 @@ struct TextFieldEditView: View {
           }
         }
       }
+    }
       .frame(width: screenWidth, height: screenHeight)
       .background(Color("appWhite"))
       .sheet(isPresented: $shouldPresentImagePicker) {
