@@ -107,11 +107,11 @@ struct TripListView: View {
     .onAppear {
       viewModel.fetchTrips()
     }
-    .fullScreenCover(isPresented: $viewModel.isPresented) {
-      AddTripView(viewModel: AddTripViewModel())
-    }
     .refreshable {
       viewModel.fetchTrips()
+    }
+    .fullScreenCover(isPresented: $viewModel.isPresented) {
+      AddTripView(viewModel: AddTripViewModel())
     }
   }
 }

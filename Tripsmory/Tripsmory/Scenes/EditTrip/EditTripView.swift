@@ -6,21 +6,15 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct EditTripView: View {
   
   @ObservedObject var viewModel: EditTripViewModel
   
-  
   var body: some View {
     GeometryReader { geometry in
-      TextFieldEditView(textName: $viewModel.textName,
-                        textLocation: $viewModel.textLocation,
-                        textDate: $viewModel.textDate,
-                        textRating: $viewModel.textRating,
-                        textCost: $viewModel.textCost,
-                        textStory: $viewModel.textStory,
-                        viewModel: viewModel,
+      TextFieldEditView(viewModel: viewModel,
                         screenWidth: geometry.size.width,
                         screenHeight: geometry.size.height
       )
@@ -35,23 +29,15 @@ struct EditTripView_Previews: PreviewProvider {
 }
 
 struct TextFieldEditView: View {
-  @Binding var textName: String
-  @Binding var textLocation: String
-  @Binding var textDate: String
-  @Binding var textRating: String
-  @Binding var textCost: String
-  @Binding var textStory: String
-  
-  @State var selectedImage: UIImage?
-  @State var shouldPresentImagePicker = false
-  @State var shouldPresentActionScheet = false
-  @State var shouldPresentCamera = false
+  @ObservedObject var viewModel: EditTripViewModel
+
+  @State var selectedItems = [PhotosPickerItem]()
+  @State var selectedPhotos = [UIImage]()
   
   @State var showingAlert = false
   
   @FocusState var isInputActive: Bool
   
-  @ObservedObject var viewModel: EditTripViewModel
   
   let screenWidth: Double
   let screenHeight: Double
@@ -60,7 +46,7 @@ struct TextFieldEditView: View {
   
   var body: some View {
     NavigationStack {
-      ZStack {
+      VStack(spacing: 8) {
         ScrollView(showsIndicators: false) {
           VStack(spacing: 0) {
             Text("Edit your trip")
@@ -77,7 +63,7 @@ struct TextFieldEditView: View {
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
                 
-                TextField("", text: $textName)
+                TextField("", text: $viewModel.textName)
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
               }
@@ -89,7 +75,7 @@ struct TextFieldEditView: View {
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
                 
-                TextField("", text: $textLocation)
+                TextField("", text: $viewModel.textLocation)
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
               }
@@ -101,7 +87,7 @@ struct TextFieldEditView: View {
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
                 
-                TextField("", text: $textDate)
+                TextField("", text: $viewModel.textDate)
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
               }
@@ -114,7 +100,7 @@ struct TextFieldEditView: View {
                     .foregroundColor(Color("appBlack"))
                     .padding(.bottom, 4)
                   
-                  TextField("", text: $textRating)
+                  TextField("", text: $viewModel.textRating)
                     .textFieldStyle(OvalTextFieldStyle())
                     .disableAutocorrection(true)
                 }
@@ -126,7 +112,7 @@ struct TextFieldEditView: View {
                     .fontWeight(.medium)
                     .padding(.bottom, 4)
                   
-                  TextField("", text: $textCost)
+                  TextField("", text: $viewModel.textCost)
                     .textFieldStyle(OvalTextFieldStyle())
                     .disableAutocorrection(true)
                 }
@@ -139,7 +125,7 @@ struct TextFieldEditView: View {
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
                 
-                TextField("", text: $textStory, axis: .vertical)
+                TextField("", text: $viewModel.textStory, axis: .vertical)
                   .lineLimit(6, reservesSpace: true)
                   .font(.custom("Jost", size: 16))
                   .textFieldStyle(OvalTextFieldStyle())
@@ -166,11 +152,15 @@ struct TextFieldEditView: View {
                   
                   ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                      ZStack {
-                        RoundedRectangle(cornerRadius: 20)
-                          .fill(Color("greenLight").opacity(0.5))
-                          .frame(width: 80, height: 80)
-                        Image("Camera")
+                      PhotosPicker(selection: $selectedItems,
+                                   matching: .images) {
+                        
+                        ZStack {
+                          RoundedRectangle(cornerRadius: 20)
+                            .fill(Color("greenLight").opacity(0.5))
+                            .frame(width: 80, height: 80)
+                          Image("Camera")
+                        }
                       }
                       
                       HStack {
@@ -205,22 +195,13 @@ struct TextFieldEditView: View {
                     }
                   }
                 }
-                
-                Spacer()
-              }
-              .onTapGesture {
-                self.shouldPresentActionScheet = true
               }
             }
-            Spacer()
           }
         }
         .padding(.horizontal, 16)
         
         VStack(spacing: 0) {
-          
-          Spacer()
-          
           HStack(spacing: 16) {
             Button {
               dismiss()
@@ -275,31 +256,16 @@ struct TextFieldEditView: View {
         }
       }
     }
-      .frame(width: screenWidth, height: screenHeight)
-      .background(Color("appWhite"))
-      .sheet(isPresented: $shouldPresentImagePicker) {
-        SUImagePickerView(sourceType: shouldPresentCamera ? .camera : .photoLibrary, image: $selectedImage, isPresented: $shouldPresentImagePicker)
-      }
-      .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-        ActionSheet(
-          title: Text("Take a new photo or select a photo from library"),
-          buttons: [
-            ActionSheet.Button.default(Text("Camera"), action: {
-              self.shouldPresentImagePicker = true
-              self.shouldPresentCamera = true
-            }),
-            ActionSheet.Button.default(Text("Photo Library"), action: {
-              self.shouldPresentImagePicker = true
-              self.shouldPresentCamera = false
-            }),
-            ActionSheet.Button.cancel()
-          ]
-        )
-      }
-      .onChange(of: selectedImage) { newValue in
-        if let image = newValue {
-          viewModel.addImage(image)
-        }
-      }
+    .frame(width: screenWidth, height: screenHeight)
+    .background(Color("appWhite"))
+    .onChange(of: selectedItems) { newItems in
+         newItems.forEach { item in
+             Task {
+                 guard let data = try? await item.loadTransferable(type: Data.self) else { return }
+                 guard let image = UIImage(data: data) else { return }
+               viewModel.addImage(image)
+             }
+         }
     }
   }
+}

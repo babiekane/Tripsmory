@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct AddTripView: View {
   
@@ -14,13 +15,7 @@ struct AddTripView: View {
   
   var body: some View {
     GeometryReader { geometry in
-      TextFieldView(textName: $viewModel.textName,
-                    textLocation: $viewModel.textLocation,
-                    textDate: $viewModel.textDate,
-                    textRating: $viewModel.textRating,
-                    textCost: $viewModel.textCost,
-                    textStory: $viewModel.textStory,
-                    viewModel: viewModel,
+      TextFieldView(viewModel: viewModel,
                     screenWidth: geometry.size.width,
                     screenHeight: geometry.size.height
       )
@@ -35,21 +30,17 @@ struct AddTripView_Previews: PreviewProvider {
 }
 
 struct TextFieldView: View {
-  @Binding var textName: String
-  @Binding var textLocation: String
-  @Binding var textDate: String
-  @Binding var textRating: String
-  @Binding var textCost: String
-  @Binding var textStory: String
+  @ObservedObject var viewModel: AddTripViewModel
   
-  @State var selectedImage: UIImage?
-  @State var shouldPresentImagePicker = false
-  @State var shouldPresentActionScheet = false
-  @State var shouldPresentCamera = false
+//  @State var selectedImage: UIImage?
+//  @State var shouldPresentImagePicker = false
+//  @State var shouldPresentActionScheet = false
+//  @State var shouldPresentCamera = false
+  @State var selectedItems = [PhotosPickerItem]()
+  @State var selectedPhotos = [UIImage]()
   
   @FocusState var isInputActive: Bool
   
-  @ObservedObject var viewModel: AddTripViewModel
   
   let screenWidth: Double
   let screenHeight: Double
@@ -72,7 +63,7 @@ struct TextFieldView: View {
                 .fontWeight(.medium)
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
-              TextField("", text: $textName)
+              TextField("", text: $viewModel.textName)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
               
@@ -84,7 +75,7 @@ struct TextFieldView: View {
                 .fontWeight(.medium)
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
-              TextField("", text: $textLocation)
+              TextField("", text: $viewModel.textLocation)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
               
@@ -96,7 +87,7 @@ struct TextFieldView: View {
                 .fontWeight(.medium)
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
-              TextField("", text: $textDate)
+              TextField("", text: $viewModel.textDate)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
               
@@ -109,7 +100,7 @@ struct TextFieldView: View {
                   .fontWeight(.medium)
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
-                TextField("", text: $textRating)
+                TextField("", text: $viewModel.textRating)
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
                 
@@ -121,7 +112,7 @@ struct TextFieldView: View {
                   .foregroundColor(Color("appBlack"))
                   .fontWeight(.medium)
                   .padding(.bottom, 4)
-                TextField("", text: $textCost)
+                TextField("", text: $viewModel.textCost)
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
                 
@@ -135,7 +126,7 @@ struct TextFieldView: View {
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
               
-              TextField("", text: $textStory, axis: .vertical)
+              TextField("", text: $viewModel.textStory, axis: .vertical)
                 .lineLimit(6, reservesSpace: true)
                 .font(.custom("Jost", size: 16))
                 .textFieldStyle(OvalTextFieldStyle())
@@ -162,11 +153,21 @@ struct TextFieldView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                   HStack {
-                    ZStack {
-                      RoundedRectangle(cornerRadius: 20)
-                        .fill(Color("greenLight").opacity(0.5))
-                        .frame(width: 80, height: 80)
-                      Image("Camera")
+//                      RoundedRectangle(cornerRadius: 20)
+//                        .fill(Color("greenLight").opacity(0.5))
+//                        .frame(width: 80, height: 80)
+//                      Image("Camera")
+                      
+                      PhotosPicker(selection: $selectedItems,
+                                               matching: .images) {
+                        
+                        ZStack {
+                          RoundedRectangle(cornerRadius: 20)
+                            .fill(Color("greenLight").opacity(0.5))
+                            .frame(width: 80, height: 80)
+                          Image("Camera")
+                        
+                      }
                     }
                     
                     ForEach(viewModel.uploadedImageURLs, id: \.self) { url in
@@ -190,7 +191,7 @@ struct TextFieldView: View {
               
               Spacer()
             }
-            .onTapGesture { self.shouldPresentActionScheet = true }
+//            .onTapGesture { self.shouldPresentActionScheet = true }
           }
           Spacer()
         }
@@ -246,32 +247,41 @@ struct TextFieldView: View {
       }
     }
     .background(Color("appWhite"))
-    .sheet(isPresented: $shouldPresentImagePicker) {
-      SUImagePickerView(sourceType: shouldPresentCamera ? .camera : .photoLibrary, image: $selectedImage, isPresented: $shouldPresentImagePicker)
-    }
-    .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
-      ActionSheet(
-        title: Text("Take a new photo or select a photo from library"),
-        buttons: [
-          ActionSheet.Button.default(Text("Camera"), action: {
-            self.shouldPresentImagePicker = true
-            self.shouldPresentCamera = true
-          }),
-          ActionSheet.Button.default(Text("Photo Library"), action: {
-            self.shouldPresentImagePicker = true
-            self.shouldPresentCamera = false
-          }),
-          ActionSheet.Button.cancel()
-        ]
-      )
-    }
-    .onChange(of: selectedImage) { newValue in
-      if let image = newValue {
-        viewModel.addImage(image)
-      }
+    .onChange(of: selectedItems) { newItems in
+         newItems.forEach { item in
+             Task {
+                 guard let data = try? await item.loadTransferable(type: Data.self) else { return }
+                 guard let image = UIImage(data: data) else { return }
+               viewModel.addImage(image)
+             }
+         }
+     }
+//    .sheet(isPresented: $shouldPresentImagePicker) {
+//      SUImagePickerView(sourceType: shouldPresentCamera ? .camera : .photoLibrary, image: $selectedImage, isPresented: $shouldPresentImagePicker)
+//    }
+//    .actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
+//      ActionSheet(
+//        title: Text("Take a new photo or select a photo from library"),
+//        buttons: [
+//          ActionSheet.Button.default(Text("Camera"), action: {
+//            self.shouldPresentImagePicker = true
+//            self.shouldPresentCamera = true
+//          }),
+//          ActionSheet.Button.default(Text("Photo Library"), action: {
+//            self.shouldPresentImagePicker = true
+//            self.shouldPresentCamera = false
+//          }),
+//          ActionSheet.Button.cancel()
+//        ]
+//      )
+//    }
+//    .onChange(of: selectedImage) { newValue in
+//      if let image = newValue {
+//        viewModel.addImage(image)
+//      }
     }
   }
-}
+
 
 
 struct OvalTextFieldStyle: TextFieldStyle {
