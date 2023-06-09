@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F1C5C9729DD9064000CE7D8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */; };
 		0F38FE8E2A1C7089004E2D6D /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F38FE8D2A1C7089004E2D6D /* StartView.swift */; };
 		0F38FE902A1C7096004E2D6D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F38FE8F2A1C7096004E2D6D /* SignUpView.swift */; };
 		0F38FE922A1C94AD004E2D6D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F38FE912A1C94AD004E2D6D /* LoginView.swift */; };
@@ -43,7 +42,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0F38FE8D2A1C7089004E2D6D /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		0F38FE8F2A1C7096004E2D6D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		0F38FE912A1C94AD004E2D6D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 				0FEA167429D4182F00DE95A2 /* Jost-VariableFont_wght.ttf */,
 				0F8B0D602A2B3F260028BF5C /* GoogleService-Info.plist */,
 				0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */,
-				0F1C5C9629DD9064000CE7D8 /* ImagePicker.swift */,
 				0FEA165429D2E30100DE95A2 /* Assets.xcassets */,
 				0FE4E93A29F9864900775DD7 /* GalleryView.swift */,
 				0F60CDA32A094A710073F50F /* Coordinators */,
@@ -320,7 +317,6 @@
 				0FEA167129D3393000DE95A2 /* EditTripView.swift in Sources */,
 				0F60CDA52A094AC70073F50F /* MainCoordinatorView.swift in Sources */,
 				0F38FE992A1DD9F0004E2D6D /* StartCoordinatorView.swift in Sources */,
-				0F1C5C9729DD9064000CE7D8 /* ImagePicker.swift in Sources */,
 				0FEA166729D338D800DE95A2 /* AddTripView.swift in Sources */,
 				0F38FE9B2A1F5600004E2D6D /* AuthViewModel.swift in Sources */,
 				0FEA166E29D3391700DE95A2 /* TripDetailViewModel.swift in Sources */,

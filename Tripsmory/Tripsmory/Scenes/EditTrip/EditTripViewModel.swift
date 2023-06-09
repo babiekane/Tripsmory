@@ -55,16 +55,20 @@ class EditTripViewModel: ObservableObject {
     }
     
     // create data dictionary of trip
-    let tripDictionary: [String: Any] = [
+    var tripDictionary: [String: Any] = [
       "name": textName,
       "location": textLocation,
       "date": textDate,
       "rating": textRating,
       "cost": textCost,
       "story": textStory,
-      "coverImageURL": uploadedImageURLs[0].absoluteString,
+//      "coverImageURL": uploadedImageURLs[0].absoluteString,
       "photoURLs": uploadedImageURLStrings
     ]
+    
+    if !uploadedImageURLs.isEmpty {
+      tripDictionary.updateValue(uploadedImageURLs[0].absoluteString, forKey: "coverImageURL")
+    }
     
     // update trip
     let db = Firestore.firestore()
