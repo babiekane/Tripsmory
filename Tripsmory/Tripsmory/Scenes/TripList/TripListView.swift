@@ -180,25 +180,34 @@ struct TripListItemView: View {
                 .font(.custom("Jost", size: 12))
                 .foregroundColor(Color("greenMedium"))
             }
-            HStack(spacing: 4) {
-              Image("Photo")
-                .resizable()
-                .renderingMode(.template)
-                .frame(width: 15, height: 15)
-                .foregroundColor(Color("blueDark"))
-              Text("\(trip.numberOfPhotos) Photos")
-                .font(.custom("Jost", size: 12))
-                .foregroundColor(Color("greenMedium"))
+            if trip.numberOfPhotos == 0 {
+              Text("")
+            } else {
+              HStack(spacing: 4) {
+                Image("Photo")
+                  .resizable()
+                  .renderingMode(.template)
+                  .frame(width: 15, height: 15)
+                  .foregroundColor(Color("blueDark"))
+                Text("\(trip.numberOfPhotos) Photos")
+                  .font(.custom("Jost", size: 12))
+                  .foregroundColor(Color("greenMedium"))
+              }
             }
-            HStack(spacing: 4) {
-              Image("Star")
-                .resizable()
-                .renderingMode(.template)
-                .frame(width: 15, height: 15)
-                .foregroundColor(Color("blueDark"))
-              Text(trip.rating)
-                .font(.custom("Jost", size: 12))
-                .foregroundColor(Color("greenMedium"))
+            
+            if trip.rating == "" {
+              Text("")
+            } else {
+              HStack(spacing: 4) {
+                Image("Star")
+                  .resizable()
+                  .renderingMode(.template)
+                  .frame(width: 15, height: 15)
+                  .foregroundColor(Color("blueDark"))
+                Text(trip.rating)
+                  .font(.custom("Jost", size: 12))
+                  .foregroundColor(Color("greenMedium"))
+              }
             }
           }
         }

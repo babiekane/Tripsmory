@@ -135,17 +135,22 @@ struct ShowDetailView: View {
             
             Spacer()
             
-            HStack(alignment: .center, spacing: 4) {
-              Image("Star.fill")
-                .resizable()
-                .renderingMode(.template)
-                .frame(width: 20, height: 20)
-                .foregroundColor(Color("yellow"))
-              
-              Text(detail.rating)
-                .font(.custom("Jost", size: 16))
-                .fontWeight(.medium)
-                .foregroundColor(Color("greenDark"))
+            if detail.rating == "" {
+              Text("")
+            }
+            else {
+              HStack(alignment: .center, spacing: 4) {
+                Image("Star.fill")
+                  .resizable()
+                  .renderingMode(.template)
+                  .frame(width: 20, height: 20)
+                  .foregroundColor(Color("yellow"))
+                
+                Text(detail.rating)
+                  .font(.custom("Jost", size: 16))
+                  .fontWeight(.medium)
+                  .foregroundColor(Color("greenDark"))
+              }
             }
           }
           .padding(.horizontal, 26)
@@ -163,45 +168,59 @@ struct ShowDetailView: View {
                   .font(.custom("Jost", size: 14))
                   .foregroundColor(Color("greenMedium"))
               }
-              HStack(spacing: 4) {
-                Image("Calendar")
-                  .resizable()
-                  .renderingMode(.template)
-                  .frame(width: 20, height: 20)
-                  .foregroundColor(Color("blueDark"))
-                Text(detail.date)
-                  .font(.custom("Jost", size: 14))
-                  .foregroundColor(Color("greenMedium"))
+              
+              if detail.date == "" {
+                Text("")
+              } else {
+                HStack(spacing: 4) {
+                  Image("Calendar")
+                    .resizable()
+                    .renderingMode(.template)
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(Color("blueDark"))
+                  Text(detail.date)
+                    .font(.custom("Jost", size: 14))
+                    .foregroundColor(Color("greenMedium"))
+                }
               }
-              HStack(spacing: 4) {
-                Image("Cost")
-                  .resizable()
-                  .renderingMode(.template)
-                  .frame(width: 22, height: 22)
-                  .foregroundColor(Color("blueDark"))
-                Text(detail.cost)
-                  .font(.custom("Jost", size: 14))
-                  .foregroundColor(Color("greenMedium"))
+              
+              if detail.cost == "" {
+                Text("")
+              } else {
+                HStack(spacing: 4) {
+                  Image("Cost")
+                    .resizable()
+                    .renderingMode(.template)
+                    .frame(width: 22, height: 22)
+                    .foregroundColor(Color("blueDark"))
+                  Text(detail.cost)
+                    .font(.custom("Jost", size: 14))
+                    .foregroundColor(Color("greenMedium"))
+                }
               }
             }
           }
           .padding(.horizontal, 26)
           .padding(.bottom, 20)
           
-          Text("About this place")
-            .font(.custom("Jost", size: 16))
-            .fontWeight(.medium)
-            .foregroundColor(Color("greenDark"))
-            .padding(.leading, 26)
-            .padding(.bottom, 4)
-          
-          Text("""
+          if detail.story == "" {
+            Text("")
+          } else {
+            Text("About this place")
+              .font(.custom("Jost", size: 16))
+              .fontWeight(.medium)
+              .foregroundColor(Color("greenDark"))
+              .padding(.leading, 26)
+              .padding(.bottom, 4)
+            
+            Text("""
       "\(detail.story)"
       """)
-          .padding(.horizontal, 36)
-          .font(.custom("Jost", size: 14))
-          .foregroundColor(Color("appBlack"))
-          .padding(.bottom, 20)
+            .padding(.horizontal, 36)
+            .font(.custom("Jost", size: 14))
+            .foregroundColor(Color("appBlack"))
+            .padding(.bottom, 20)
+          }
           
           if !detail.photoURLs.isEmpty {
           Text("Gallery")

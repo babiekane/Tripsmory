@@ -219,18 +219,30 @@ struct TextFieldEditView: View {
                 .padding(.vertical, 8)
             }
             
-            Button {
-              viewModel.updateTrip()
-              dismiss()
-            } label: {
-              Text("Update")
-                .font(.custom("Jost", size: 16))
-                .fontWeight(.medium)
-                .frame(width: screenWidth / 2 - 32, height: 50)
-                .foregroundColor(Color("appWhite"))
-                .background(Color("greenMedium"))
-                .clipShape(Capsule())
-                .padding(.vertical, 8)
+            if viewModel.isUploadingImages {
+                Text("Update")
+                  .font(.custom("Jost", size: 16))
+                  .fontWeight(.medium)
+                  .frame(width: screenWidth / 2 - 32, height: 50)
+                  .foregroundColor(Color("appWhite"))
+                  .background(Color("greenMedium").opacity(0.7))
+                  .clipShape(Capsule())
+                  .padding(.vertical, 8)
+              
+            } else {
+              Button {
+                viewModel.updateTrip()
+                dismiss()
+              } label: {
+                Text("Update")
+                  .font(.custom("Jost", size: 16))
+                  .fontWeight(.medium)
+                  .frame(width: screenWidth / 2 - 32, height: 50)
+                  .foregroundColor(Color("appWhite"))
+                  .background(Color("greenMedium"))
+                  .clipShape(Capsule())
+                  .padding(.vertical, 8)
+              }
             }
           }
           

@@ -224,7 +224,7 @@ struct TextFieldView: View {
                 .fontWeight(.medium)
                 .frame(width: screenWidth / 2 - 32, height: 50)
                 .foregroundColor(Color("appWhite"))
-                .background(Color("greenMedium"))
+                .background(Color("greenMedium").opacity(0.7))
                 .clipShape(Capsule())
                 .padding(.vertical, 8)
             } else {

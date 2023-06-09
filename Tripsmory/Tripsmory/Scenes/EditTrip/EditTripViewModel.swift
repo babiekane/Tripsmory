@@ -41,6 +41,8 @@ class EditTripViewModel: ObservableObject {
   @Published var shouldPresentActionScheet = false
   @Published var shouldPresentCamera = false
   
+  @Published var isUploadingImages = false
+  
   var id: String?
   
   func updateTrip() {
@@ -90,6 +92,7 @@ class EditTripViewModel: ObservableObject {
     let storage = Storage.storage()
     let storageRef = storage.reference()
     let photoRef = storageRef.child("\(UUID().uuidString).jpg")
+    isUploadingImages = true
     
     // Upload the file to the path "images/rivers.jpg"
     _ = photoRef.putData(data, metadata: nil) { (metadata, error) in
@@ -111,6 +114,7 @@ class EditTripViewModel: ObservableObject {
         print(downloadURL)
         //3 store image URL in uploadedImageURLs
         self.uploadedImageURLs.append(downloadURL)
+        self.isUploadingImages = false
       }
     }
   }
