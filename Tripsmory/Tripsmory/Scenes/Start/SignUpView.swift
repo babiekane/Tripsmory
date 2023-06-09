@@ -18,6 +18,8 @@ struct SignUpView: View {
   @State var password: String = ""
   @State var showPassword: Bool = false
   
+  @State var showAlert: Bool = false
+  
   var body: some View {
     NavigationStack {
       ZStack {
@@ -79,7 +81,11 @@ struct SignUpView: View {
               .padding(.bottom, 32)
           } else {
             Button {
-              viewModel.signUp(email: email, password: password)
+              if email.isEmpty || password.isEmpty {
+                showAlert = true
+              } else {
+                viewModel.signUp(email: email, password: password)
+              }
             } label: {
               Text("Create Account")
                 .font(.custom("Jost", size: 24))
@@ -90,6 +96,13 @@ struct SignUpView: View {
                 .clipShape(Capsule())
             }
             .padding(.bottom, 32)
+            .alert(isPresented: $showAlert) {
+                 Alert(
+                     title: Text("Unable to create account"),
+                     message: Text("Please fill email and password."),
+                     dismissButton: .default(Text("OK"))
+                 )
+             }
           }
           
           Text("or continue with".uppercased())

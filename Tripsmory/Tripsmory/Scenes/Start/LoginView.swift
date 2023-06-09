@@ -15,7 +15,9 @@ struct LoginView: View {
   @State var password: String = ""
   @State var showPassword: Bool = false
   
-  @State var isPresented = false
+  @State var isPresented: Bool = false
+  
+  @State var showAlert: Bool = false
 
   
   @EnvironmentObject var viewModel: AuthViewModel
@@ -98,10 +100,14 @@ struct LoginView: View {
               .padding(.bottom, 32)
           } else {
             Button {
-              guard !email.isEmpty, !password.isEmpty else {
-                return
+              if email.isEmpty || password.isEmpty {
+                showAlert = true
+              } else {
+                guard !email.isEmpty, !password.isEmpty else {
+                  return
+                }
+                viewModel.logIn(email: email, password: password)
               }
-              viewModel.logIn(email: email, password: password)
             } label: {
               Text("Login")
                 .font(.custom("Jost", size: 24))
@@ -112,6 +118,13 @@ struct LoginView: View {
                 .clipShape(Capsule())
             }
             .padding(.bottom, 32)
+            .alert(isPresented: $showAlert) {
+                 Alert(
+                     title: Text("Unable to login"),
+                     message: Text("Please fill email and password."),
+                     dismissButton: .default(Text("OK"))
+                 )
+             }
           }
             
           Text("Do not have any account?")

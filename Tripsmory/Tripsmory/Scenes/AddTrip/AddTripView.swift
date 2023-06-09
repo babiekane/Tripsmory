@@ -41,6 +41,8 @@ struct TextFieldView: View {
   
   @FocusState var isInputActive: Bool
   
+  @State var showAlert: Bool = false
+  
   
   let screenWidth: Double
   let screenHeight: Double
@@ -56,6 +58,7 @@ struct TextFieldView: View {
             .fontWeight(.semibold)
             .foregroundColor(Color("greenDark"))
             .padding(.vertical, 20)
+          
           VStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 0) {
               Text("Name")
@@ -63,6 +66,7 @@ struct TextFieldView: View {
                 .fontWeight(.medium)
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
+              
               TextField("", text: $viewModel.textName)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
@@ -75,6 +79,7 @@ struct TextFieldView: View {
                 .fontWeight(.medium)
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
+              
               TextField("", text: $viewModel.textLocation)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
@@ -87,6 +92,7 @@ struct TextFieldView: View {
                 .fontWeight(.medium)
                 .foregroundColor(Color("appBlack"))
                 .padding(.bottom, 4)
+              
               TextField("", text: $viewModel.textDate)
                 .textFieldStyle(OvalTextFieldStyle())
                 .disableAutocorrection(true)
@@ -100,6 +106,7 @@ struct TextFieldView: View {
                   .fontWeight(.medium)
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
+                
                 TextField("", text: $viewModel.textRating)
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
@@ -112,6 +119,7 @@ struct TextFieldView: View {
                   .foregroundColor(Color("appBlack"))
                   .fontWeight(.medium)
                   .padding(.bottom, 4)
+                
                 TextField("", text: $viewModel.textCost)
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
@@ -153,11 +161,6 @@ struct TextFieldView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                   HStack {
-//                      RoundedRectangle(cornerRadius: 20)
-//                        .fill(Color("greenLight").opacity(0.5))
-//                        .frame(width: 80, height: 80)
-//                      Image("Camera")
-                      
                       PhotosPicker(selection: $selectedItems,
                                                matching: .images) {
                         
@@ -191,7 +194,6 @@ struct TextFieldView: View {
               
               Spacer()
             }
-//            .onTapGesture { self.shouldPresentActionScheet = true }
           }
           Spacer()
         }
@@ -229,8 +231,12 @@ struct TextFieldView: View {
                 .padding(.vertical, 8)
             } else {
               Button {
-                viewModel.saveTrip()
-                dismiss()
+                if viewModel.textName.isEmpty || viewModel.textLocation.isEmpty {
+                  showAlert = true
+                } else {
+                  viewModel.saveTrip()
+                  dismiss()
+                }
               } label: {
                 Text("Save to your memory")
                   .font(.custom("Jost", size: 16))
@@ -241,6 +247,13 @@ struct TextFieldView: View {
                   .clipShape(Capsule())
                   .padding(.vertical, 8)
               }
+              .alert(isPresented: $showAlert) {
+                   Alert(
+                       title: Text("Empty Text"),
+                       message: Text("Please fill name and location."),
+                       dismissButton: .default(Text("OK"))
+                   )
+               }
             }
           }
         }
