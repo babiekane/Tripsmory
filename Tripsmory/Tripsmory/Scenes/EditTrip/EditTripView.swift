@@ -19,6 +19,9 @@ struct EditTripView: View {
                         screenHeight: geometry.size.height
       )
     }
+    .background(Color("appWhite"))
+    .preferredColorScheme(.light)
+    .frame(width: .infinity, height: .infinity)
   }
 }
 

@@ -247,6 +247,8 @@ struct TextFieldView: View {
       }
     }
     .background(Color("appWhite"))
+    .preferredColorScheme(.light)
+    .frame(width: .infinity, height: .infinity)
     .onChange(of: selectedItems) { newItems in
          newItems.forEach { item in
              Task {

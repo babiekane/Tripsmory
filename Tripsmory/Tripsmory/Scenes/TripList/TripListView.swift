@@ -104,6 +104,8 @@ struct TripListView: View {
       }
     }
     .background(Color("appWhite"))
+    .preferredColorScheme(.light)
+    .frame(width: .infinity, height: .infinity)
     .onAppear {
       viewModel.fetchTrips()
     }

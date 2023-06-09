@@ -131,6 +131,7 @@ struct LoginView: View {
         }
       }
       .background(Color("appWhite"))
+      .preferredColorScheme(.light)
       .frame(width: .infinity, height: .infinity)
     }
     .sheet(isPresented: $isPresented) {

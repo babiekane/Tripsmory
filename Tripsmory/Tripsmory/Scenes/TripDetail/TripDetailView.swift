@@ -44,6 +44,9 @@ struct TripDetailView: View {
       // setting environment object
       .environmentObject(viewModel)
     }
+    .background(Color("appWhite"))
+    .preferredColorScheme(.light)
+    .frame(width: .infinity, height: .infinity)
   }
 }
 
