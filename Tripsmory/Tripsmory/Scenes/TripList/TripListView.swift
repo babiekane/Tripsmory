@@ -62,7 +62,7 @@ struct TripListView: View {
                     .frame(width: 300, height: 280)
                     .padding(.top, 36)
                   Text("Add your first memory")
-                    .font(.custom("Jost", size: 24))
+                    .font(.custom("Jost", size: 20))
                     .foregroundColor(Color("greenDark"))
                 }
               } else {

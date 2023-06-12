@@ -17,11 +17,12 @@ class AuthViewModel: ObservableObject {
   @Published var loggedIn = false
   @Published var loading = false
   
+  @Published var errorMessage: String?
+  
   let auth = Auth.auth()
   let loginManager = LoginManager()
   
   func start() {
-    //    loggedIn = auth.currentUser != nil
     
     if auth.currentUser == nil {
       loggedIn = false
@@ -30,23 +31,36 @@ class AuthViewModel: ObservableObject {
     }
   }
   
+  // Login with email & password
   func logIn(email: String, password: String) {
-    loading = true
-    
-    auth.signIn(withEmail: email, password: password) { [weak self] result, error in
-      guard result != nil, error == nil else {
-        return
-      }
+    if email.isEmpty || password.isEmpty {
+      errorMessage = "Please fill email and password."
+    } else {
       
-      DispatchQueue.main.async {
-        // success
-        self?.loading = false
-        self?.loggedIn = true
-      }
+      loading = true
       
+      auth.signIn(withEmail: email, password: password) { [weak self] result, error in
+        DispatchQueue.main.async {
+          self?.loading = false
+        }
+        
+        if let error = error?.localizedDescription {
+          self?.errorMessage = error
+        } else {
+          guard result != nil else {
+            return
+          }
+          
+          DispatchQueue.main.async {
+            // success
+            self?.loggedIn = true
+          }
+        }
+      }
     }
   }
   
+  // Sign up with email & password
   func signUp(email: String, password: String) {
     loading = true
     
@@ -64,12 +78,14 @@ class AuthViewModel: ObservableObject {
     }
   }
   
+  // Sign out
   func signOut() {
     try? auth.signOut()
     
     self.loggedIn = false
   }
   
+  // Login with facebook
   func logInWithFacebook() {
     let configuration = LoginConfiguration(permissions: ["public_profile", "email"], tracking: .enabled)
     loginManager.logIn(configuration: configuration) { loginResult in
@@ -100,6 +116,7 @@ class AuthViewModel: ObservableObject {
     }
   }
   
+  // Login with Gmail
   func logInWithGoogle() {
     guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
       return
@@ -134,6 +151,7 @@ class AuthViewModel: ObservableObject {
     }
   }
   
+  // Forgot password from login with email & password
   func forgotPassword(email: String) {
     Auth.auth().sendPasswordReset(withEmail: email) { error in
     }
