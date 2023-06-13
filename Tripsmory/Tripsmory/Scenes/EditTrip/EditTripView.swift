@@ -12,9 +12,12 @@ struct EditTripView: View {
   
   @ObservedObject var viewModel: EditTripViewModel
   
+  let onDelete: () -> Void
+  
   var body: some View {
     GeometryReader { geometry in
       TextFieldEditView(viewModel: viewModel,
+                        onDelete: onDelete,
                         screenWidth: geometry.size.width,
                         screenHeight: geometry.size.height
       )
@@ -27,7 +30,7 @@ struct EditTripView: View {
 
 struct EditTripView_Previews: PreviewProvider {
   static var previews: some View {
-    EditTripView(viewModel: EditTripViewModel())
+    EditTripView(viewModel: EditTripViewModel(), onDelete: {})
   }
 }
 
@@ -41,6 +44,7 @@ struct TextFieldEditView: View {
   
   @FocusState var isInputActive: Bool
   
+  let onDelete: () -> Void
   
   let screenWidth: Double
   let screenHeight: Double
@@ -266,6 +270,7 @@ struct TextFieldEditView: View {
             Button("Delete", role: .destructive) {
               viewModel.deleteTrip()
               dismiss()
+              onDelete()
             }
           }
         }

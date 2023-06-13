@@ -48,19 +48,6 @@ struct StartView: View {
             .foregroundColor(Color("greenDark"))
             .padding(.bottom, 100)
           
-//          NavigationLink {
-//            SignUpView()
-//          } label: {
-//            Text("Get Started")
-//              .font(.custom("Jost", size: 24))
-//              .bold()
-//              .foregroundColor(Color("whiteEgg"))
-//              .frame(width: 285, height: 70)
-//              .background(Color("greenMedium"))
-//              .clipShape(Capsule())
-//              .padding(.bottom, 120)
-//          }
-          
           Button {
             state = .signUp
           } label: {

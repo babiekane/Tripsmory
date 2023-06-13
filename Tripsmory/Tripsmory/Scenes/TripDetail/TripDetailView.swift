@@ -287,7 +287,11 @@ struct ShowDetailView: View {
       }
       .fullScreenCover(isPresented: $isEditing) {
         if let editTripViewModel = viewModel.editTripViewModel {
-          EditTripView(viewModel: editTripViewModel)
+          EditTripView(viewModel: editTripViewModel, onDelete: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+              dismiss()
+            }
+          })
             .onDisappear {
               viewModel.showTripDetails()
             }

@@ -23,6 +23,7 @@ struct MainCoordinatorView: View {
     }
   }
   
+  /// Create TripDetailView as a separate function to prevent SwiftUI build error
   func makeTripDetailView(for destination: MainDestination) -> some View {
     tripDetailViewModel.tripID = destination.tripID
     return TripDetailView(viewModel: tripDetailViewModel)
