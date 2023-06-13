@@ -49,7 +49,7 @@ struct TripListView: View {
             
             if viewModel.isLoading {
               VStack {
-                ProgressView("Downloading your trips")
+                ProgressView("Loading your trips")
                   .font(.custom("Jost", size: 20))
                   .tint(Color("blueDark"))
                   .foregroundColor(Color("greenDark"))

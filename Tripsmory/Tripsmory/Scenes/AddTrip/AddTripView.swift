@@ -173,19 +173,33 @@ struct TextFieldView: View {
                         }
                       }
                       
-                      ForEach(viewModel.uploadedImageURLs, id: \.self) { url in
-                        AsyncImage(url: url) { image in
-                          image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 80, height: 80)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                        } placeholder: {
-                          ProgressView()
-                            .tint(Color("greenDark"))
-                            .frame(width: 80, height: 80)
-                            .background(.gray.opacity(0.3))
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                      HStack {
+                        ForEach(viewModel.uploadedImageURLs, id: \.self) { url in
+                          AsyncImage(url: url) { image in
+                            ZStack(alignment: .topTrailing) {
+                              image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 80, height: 80)
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                              
+                              Button {
+                                viewModel.deleteImage(url: url)
+                              } label: {
+                                Image(systemName: "xmark")
+                                  .symbolVariant(.circle.fill)
+                                  .foregroundStyle(Color("greenDark"), Color("whiteEgg"))
+                                  .padding(6)
+                              }
+                              Spacer()
+                            }
+                          } placeholder: {
+                            ProgressView()
+                              .tint(Color("greenDark"))
+                              .frame(width: 80, height: 80)
+                              .background(.gray.opacity(0.3))
+                              .clipShape(RoundedRectangle(cornerRadius: 20))
+                          }
                         }
                       }
                     }
@@ -246,7 +260,7 @@ struct TextFieldView: View {
                 }
                 .alert(isPresented: $showAlert) {
                   Alert(
-                    title: Text("Empty Text"),
+                    title: Text("Missing information"),
                     message: Text("Please fill name and location."),
                     dismissButton: .default(Text("OK"))
                   )
@@ -254,21 +268,23 @@ struct TextFieldView: View {
               }
             }
           }
-    }
-    .background(Color("appWhite"))
-    .preferredColorScheme(.light)
-    .frame(width: .infinity, height: .infinity)
-    .onChange(of: selectedItems) { newItems in
-         newItems.forEach { item in
-             Task {
-                 guard let data = try? await item.loadTransferable(type: Data.self) else { return }
-                 guard let image = UIImage(data: data) else { return }
-               viewModel.addImage(image)
-             }
-         }
-     }
-    }
+      }
+      .background(Color("appWhite"))
+      .preferredColorScheme(.light)
+      .frame(width: .infinity, height: .infinity)
+      .onChange(of: selectedItems) { newItems in
+        newItems.forEach { item in
+          Task {
+            guard let data = try? await item.loadTransferable(type: Data.self) else { return }
+            guard let image = UIImage(data: data) else { return }
+            viewModel.addImage(image)
+          }
+        }
+        
+        selectedItems = []
+      }
   }
+}
 
 
 

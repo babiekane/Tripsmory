@@ -86,7 +86,7 @@ class AddTripViewModel: ObservableObject {
         // An error occurred!
         return
       }
-
+      
       //2 get uploaded image URL
       // You can also access to download URL after upload.
       photoRef.downloadURL { (url, error) in
@@ -102,7 +102,14 @@ class AddTripViewModel: ObservableObject {
         self.isUploadingImages = false
       }
     }
+  }
+  
+  func deleteImage(url: URL) {
+    guard let index = uploadedImageURLs.firstIndex(of: url) else {
+      return
+    }
     
+    uploadedImageURLs.remove(at: index)
   }
 }
 
