@@ -30,11 +30,6 @@
 		<string>Jost-VariableFont_wght.ttf</string>
 	</array>
 	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>lunchScreen</string>
-		<key>UIImageName</key>
-		<string>meow</string>
-	</dict>
+	<dict/>
 </dict>
 </plist>

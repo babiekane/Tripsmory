@@ -111,11 +111,6 @@ struct LoginView: View {
                 .clipShape(Capsule())
             }
             .padding(.bottom, 32)
-            
-//            .alert("Error", isPresented: $viewModel.hasError) {
-//            } message: {
-//                Text(viewModel.errorMessage)
-//            }
           }
             
           Text("Do not have any account?")
@@ -138,21 +133,7 @@ struct LoginView: View {
       .preferredColorScheme(.light)
       .frame(width: .infinity, height: .infinity)
     }
-//    .alert(isPresented: $showAlert) {
-//      Alert(
-//        title: Text("Unable to login"),
-//        message: Text("Please fill email and password."),
-//        dismissButton: .default(Text("OK"))
-//      )
-//    }
-//    .alert(<#T##titleKey: LocalizedStringKey##LocalizedStringKey#>, isPresented: <#T##Binding<Bool>#>, presenting: <#T##T?#>, actions: <#T##(T) -> View#>)
-//    .alert(isPresented: $viewModel.hasError) {
-//      Alert(
-//        title: Text("Unable to login"),
-//        message: Text("Something went wrong"),
-//        dismissButton: .default(Text("OK"))
-//      )
-//    }
+    
     .alert(item: $viewModel.errorMessage) { errorMessage in
       Alert(
         title: Text("Unable to login"),
