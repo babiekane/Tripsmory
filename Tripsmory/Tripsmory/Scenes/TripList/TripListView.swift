@@ -105,7 +105,7 @@ struct TripListView: View {
     }
     .background(Color("appWhite"))
     .preferredColorScheme(.light)
-    .frame(width: .infinity, height: .infinity)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
     .onAppear {
       viewModel.fetchTrips()
     }
@@ -138,7 +138,7 @@ struct TripListItemView: View {
       
       VStack(alignment: .leading, spacing: 0) {
         if let coverImage = trip.coverImageURL {
-          AsyncImage(url: trip.coverImageURL) { image in
+          AsyncImage(url: coverImage) { image in
             image
               .resizable()
               .aspectRatio(contentMode: .fill)

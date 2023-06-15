@@ -28,7 +28,6 @@
 		0FCEF1BE2A2880C600A9060E /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0FCEF1BD2A2880C600A9060E /* FacebookCore */; };
 		0FCEF1C02A2880C600A9060E /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 0FCEF1BF2A2880C600A9060E /* FacebookLogin */; };
 		0FCEF1C22A2880C600A9060E /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 0FCEF1C12A2880C600A9060E /* FacebookShare */; };
-		0FE4E93B29F9864900775DD7 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE4E93A29F9864900775DD7 /* GalleryView.swift */; };
 		0FEA165129D2E2FF00DE95A2 /* TripsmoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */; };
 		0FEA165529D2E30100DE95A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA165429D2E30100DE95A2 /* Assets.xcassets */; };
 		0FEA165829D2E30100DE95A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FEA165729D2E30100DE95A2 /* Preview Assets.xcassets */; };
@@ -54,7 +53,6 @@
 		0F8B0D602A2B3F260028BF5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0F8B0D622A2B54940028BF5C /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		0FA0947B2A388B4F004E59C2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0FE4E93A29F9864900775DD7 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		0FEA164D29D2E2FF00DE95A2 /* Tripsmory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tripsmory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsmoryApp.swift; sourceTree = "<group>"; };
 		0FEA165429D2E30100DE95A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 				0FEA165029D2E2FF00DE95A2 /* TripsmoryApp.swift */,
 				0FEA165429D2E30100DE95A2 /* Assets.xcassets */,
 				0FA0947B2A388B4F004E59C2 /* LaunchScreen.storyboard */,
-				0FE4E93A29F9864900775DD7 /* GalleryView.swift */,
 				0F60CDA32A094A710073F50F /* Coordinators */,
 				0FEA165E29D3382B00DE95A2 /* Scenes */,
 				0FEA165629D2E30100DE95A2 /* Preview Content */,
@@ -316,7 +313,6 @@
 				0F7B96672A13745C00E5F57E /* ImageView.swift in Sources */,
 				0F38FE902A1C7096004E2D6D /* SignUpView.swift in Sources */,
 				0FEA166329D3389300DE95A2 /* TripListViewModel.swift in Sources */,
-				0FE4E93B29F9864900775DD7 /* GalleryView.swift in Sources */,
 				0FEA166129D3386F00DE95A2 /* TripListView.swift in Sources */,
 				0FEA167129D3393000DE95A2 /* EditTripView.swift in Sources */,
 				0F60CDA52A094AC70073F50F /* MainCoordinatorView.swift in Sources */,
@@ -453,9 +449,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Tripsmory/Preview Content\"";
-				DEVELOPMENT_TEAM = A524LR8F6J;
+				DEVELOPMENT_TEAM = BPNC3L23WM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tripsmory/Info.plist;
@@ -464,8 +460,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -473,9 +469,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.catmeox.Tripsmory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -485,9 +484,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Tripsmory/Preview Content\"";
-				DEVELOPMENT_TEAM = A524LR8F6J;
+				DEVELOPMENT_TEAM = BPNC3L23WM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tripsmory/Info.plist;
@@ -496,8 +495,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,9 +504,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.catmeox.Tripsmory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

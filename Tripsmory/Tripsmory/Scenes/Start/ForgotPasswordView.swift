@@ -14,66 +14,73 @@ struct ForgotPasswordView: View {
   @Environment(\.dismiss) var dismiss
     
   var body: some View {
-    VStack {
-      Text("Forgot your password?")
-        .font(.custom("Jost", size: 28))
-        .bold()
-        .foregroundColor(Color("greenMedium"))
-        .padding(.bottom, 12)
+    GeometryReader { geometry in
       VStack {
-        Text("Enter your registered email below")
-        Text("to receive password reset instruction")
-      }
-      .font(.custom("Jost", size: 16))
-      .foregroundColor(Color("greenDark"))
-      .padding(.bottom, 32)
-      
-      Image("Plane")
-        .resizable()
-        .frame(width: 200, height: 300)
-        .padding(.bottom, 32)
-      
-      TextField("Email", text: $email)
+        
+        Spacer ()
+        
+        Text("Forgot your password?")
+          .font(.custom("Jost", size: 28))
+          .bold()
+          .foregroundColor(Color("greenMedium"))
+          .padding(.bottom, 12)
+        
+        VStack {
+          Text("Enter your registered email below")
+          Text("to receive password reset instruction")
+        }
         .font(.custom("Jost", size: 16))
         .foregroundColor(Color("greenDark"))
-        .padding(8)
-        .padding(.horizontal, 36)
-      Rectangle()
-        .fill(Color("greenMedium").opacity(0.5))
-        .frame(width: 350, height: 1)
-        .padding(.bottom, 8)
-      
-      HStack {
-        Text("Remember password?")
+        .padding(.bottom)
+        
+        Image("Plane")
+          .resizable()
+          .frame(width: geometry.size.width / 2 , height: geometry.size.height / 2.5)
+          .padding(.bottom)
+        
+        TextField("Email", text: $email)
           .font(.custom("Jost", size: 16))
           .foregroundColor(Color("greenDark"))
+          .padding(8)
+          .padding(.horizontal, 36)
+        Rectangle()
+          .fill(Color("greenMedium").opacity(0.5))
+          .frame(width: geometry.size.width - 72, height: 1)
+          .padding(.bottom, 4)
+        
+        HStack {
+          Text("Remember password?")
+            .font(.custom("Jost", size: 16))
+            .foregroundColor(Color("greenDark"))
+          
+          Button {
+            dismiss()
+          } label: {
+            Text("Login")
+              .font(.custom("Jost", size: 16))
+              .bold()
+              .foregroundColor(Color("greenMedium"))
+          }
+        }
+        .padding(.bottom)
+        
         Button {
+          viewModel.forgotPassword(email: email)
           dismiss()
         } label: {
-          Text("Login")
-            .font(.custom("Jost", size: 16))
+          Text("Send")
+            .font(.custom("Jost", size: 24))
             .bold()
-            .foregroundColor(Color("greenMedium"))
+            .foregroundColor(Color("whiteEgg"))
+            .frame(width: 285, height: 70)
+            .background(Color("greenMedium"))
+            .clipShape(Capsule())
         }
+        
+        Spacer()
       }
-      .padding(.bottom, 32)
-      
-      Button {
-        viewModel.forgotPassword(email: email)
-        dismiss()
-      } label: {
-        Text("Send")
-          .font(.custom("Jost", size: 24))
-          .bold()
-          .foregroundColor(Color("whiteEgg"))
-          .frame(width: 285, height: 70)
-          .background(Color("greenMedium"))
-          .clipShape(Capsule())
-      }
-      
-      Spacer()
+      .padding(.vertical, 16)
     }
-    .padding(.top, 36)
   }
 }
 

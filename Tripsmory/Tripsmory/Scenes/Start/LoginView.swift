@@ -131,7 +131,7 @@ struct LoginView: View {
       }
       .background(Color("appWhite"))
       .preferredColorScheme(.light)
-      .frame(width: .infinity, height: .infinity)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     .alert(item: $viewModel.errorMessage) { errorMessage in

@@ -13,58 +13,59 @@ struct StartView: View {
   
   var body: some View {
     NavigationStack {
-      ZStack {
-        VStack {
-          
-          HStack {
-            Image("StartTop")
+        ZStack {
+          VStack {
             
-            Spacer()
-          }
-          Spacer()
-          
-          HStack {
+            HStack {
+              Image("StartTop")
+              
+              Spacer()
+            }
             Spacer()
             
-            Image("StartBot")
+            HStack {
+              Spacer()
+              
+              Image("StartBot")
+            }
           }
-        }
-        .ignoresSafeArea()
-        
-        VStack {
+          .ignoresSafeArea()
           
-          Spacer()
-          
-          Image("Stuff")
-            .padding(.bottom, 36)
-          
-          Text("Welcome our travelers")
-            .font(.custom("Jost", size: 28))
-            .bold()
-            .foregroundColor(Color("greenMedium"))
-          
-          Text("Let's create your memory".uppercased())
-            .font(.custom("Jost", size: 16))
-            .foregroundColor(Color("greenDark"))
-            .padding(.bottom, 100)
-          
-          Button {
-            state = .signUp
-          } label: {
-            Text("Get Started")
-              .font(.custom("Jost", size: 24))
+          VStack {
+            
+            Spacer()
+            
+            Image("Stuff")
+              .padding(.bottom, 36)
+            
+            Text("Welcome our travelers")
+              .font(.custom("Jost", size: 28))
               .bold()
-              .foregroundColor(Color("whiteEgg"))
-              .frame(width: 285, height: 70)
-              .background(Color("greenMedium"))
-              .clipShape(Capsule())
-              .padding(.bottom, 120)
+              .foregroundColor(Color("greenMedium"))
+            
+            Text("Let's create your memory".uppercased())
+              .font(.custom("Jost", size: 16))
+              .foregroundColor(Color("greenDark"))
+              .padding(.bottom)
+            
+            Button {
+              state = .signUp
+            } label: {
+              Text("Get Started")
+                .font(.custom("Jost", size: 24))
+                .bold()
+                .foregroundColor(Color("whiteEgg"))
+                .frame(width: 285, height: 70)
+                .background(Color("greenMedium"))
+                .clipShape(Capsule())
+            }
+            
+            Spacer()
           }
         }
-      }
       .background(Color("appWhite"))
       .preferredColorScheme(.light)
-      .frame(width: .infinity, height: .infinity)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
   }
 }

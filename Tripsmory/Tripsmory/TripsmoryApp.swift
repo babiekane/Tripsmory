@@ -44,7 +44,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct TripsmoryApp: App {
   
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-  //  @StateObject var tripListViewModel: TripListViewModel = TripListViewModel()
   @StateObject var authViewModel: AuthViewModel = AuthViewModel()
   
   var body: some Scene {

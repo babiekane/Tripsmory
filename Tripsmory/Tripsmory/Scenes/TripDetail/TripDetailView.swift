@@ -46,7 +46,7 @@ struct TripDetailView: View {
     }
     .background(Color("appWhite"))
     .preferredColorScheme(.light)
-    .frame(width: .infinity, height: .infinity)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 }
 
@@ -75,7 +75,7 @@ struct ShowDetailView: View {
           ZStack(alignment: .top) {
             VStack {
               if let coverImage = detail.coverImageURL {
-                AsyncImage(url: detail.coverImageURL) { image in
+                AsyncImage(url: coverImage) { image in
                   image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -84,7 +84,7 @@ struct ShowDetailView: View {
                 } placeholder: {
                   ProgressView()
                     .tint(Color("greenDark"))
-                    .frame(width: screenWidth - 16, height: screenHeight / 2)
+                    .frame(width: (screenWidth - 16), height: (screenHeight / 2))
                     .background(.gray.opacity(0.3))
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
@@ -317,12 +317,12 @@ struct ShowDetailView: View {
         image
           .resizable()
           .aspectRatio(contentMode: .fill)
-          .frame(width: screenWidth / 4.5 - 26 , height: screenWidth / 4.5 - 26)
+          .frame(width: (screenWidth / 4.5) - 26 , height: (screenWidth / 4.5) - 26)
           .clipShape(RoundedRectangle(cornerRadius: 20))
       } placeholder: {
         ProgressView()
           .tint(Color("greenDark"))
-          .frame(width: screenWidth / 4.5 - 26 , height: screenWidth / 4.5 - 26)
+          .frame(width: (screenWidth / 4.5) - 26 , height: (screenWidth / 4.5) - 26)
           .background(.gray.opacity(0.3))
           .clipShape(RoundedRectangle(cornerRadius: 20))
       }

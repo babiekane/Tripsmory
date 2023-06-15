@@ -24,7 +24,7 @@ struct EditTripView: View {
     }
     .background(Color("appWhite"))
     .preferredColorScheme(.light)
-    .frame(width: .infinity, height: .infinity)
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 }
 
@@ -279,13 +279,14 @@ struct TextFieldEditView: View {
     .frame(width: screenWidth, height: screenHeight)
     .background(Color("appWhite"))
     .onChange(of: selectedItems) { newItems in
-         newItems.forEach { item in
-             Task {
-                 guard let data = try? await item.loadTransferable(type: Data.self) else { return }
-                 guard let image = UIImage(data: data) else { return }
-               viewModel.addImage(image)
-             }
-         }
+      newItems.forEach { item in
+        Task {
+          guard let data = try? await item.loadTransferable(type: Data.self) else { return }
+          guard let image = UIImage(data: data) else { return }
+          viewModel.addImage(image)
+        }
+      }
+      selectedItems = []
     }
   }
 }
