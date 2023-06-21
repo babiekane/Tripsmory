@@ -12,15 +12,21 @@ struct EditTripView: View {
   
   @ObservedObject var viewModel: EditTripViewModel
   
+  @State var isShowingCalendarView: Bool
+  
   let onDelete: () -> Void
   
   var body: some View {
     GeometryReader { geometry in
       TextFieldEditView(viewModel: viewModel,
+                        isShowingCalendarView: $isShowingCalendarView,
+                        date: $viewModel.date,
                         onDelete: onDelete,
                         screenWidth: geometry.size.width,
                         screenHeight: geometry.size.height
       )
+      
+      BottomSheetCalendarView(isShowingCalendarView: $isShowingCalendarView, date: $viewModel.date)
     }
     .background(Color("appWhite"))
     .preferredColorScheme(.light)
@@ -30,7 +36,7 @@ struct EditTripView: View {
 
 struct EditTripView_Previews: PreviewProvider {
   static var previews: some View {
-    EditTripView(viewModel: EditTripViewModel(), onDelete: {})
+    EditTripView(viewModel: EditTripViewModel(), isShowingCalendarView: false, onDelete: {})
   }
 }
 
@@ -43,6 +49,11 @@ struct TextFieldEditView: View {
   @State var showingAlert = false
   
   @FocusState var isInputActive: Bool
+  
+  @Binding var isShowingCalendarView: Bool
+  @Binding var date: Date
+  
+  @State private var isDatePickerShown = false
   
   let onDelete: () -> Void
   
@@ -94,9 +105,26 @@ struct TextFieldEditView: View {
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
                 
-                TextField("", text: $viewModel.textDate)
-                  .textFieldStyle(OvalTextFieldStyle())
-                  .disableAutocorrection(true)
+                HStack {
+                    Text("\(date.formatted(.dateTime.day().month().year()))")
+                    .padding(.leading, 16)
+                      .foregroundColor(Color("appBlack"))
+                      .frame(width: screenWidth - 32 - 30, height: 40, alignment: .leading)
+                      .background((Color("greenLight").opacity(0.5)))
+                      .clipShape(Capsule())
+                  
+                  Spacer()
+                  
+                  Button {
+                    withAnimation {
+                      isShowingCalendarView.toggle()
+                    }
+                    self.isDatePickerShown = true
+                  } label: {
+                    Image(systemName: "calendar")
+                      .foregroundColor(Color("greenMedium"))
+                  }
+                }
               }
               
               HStack {
@@ -135,7 +163,7 @@ struct TextFieldEditView: View {
                 TextField("", text: $viewModel.textStory, axis: .vertical)
                   .lineLimit(6, reservesSpace: true)
                   .font(.custom("Jost", size: 16))
-                  .textFieldStyle(OvalTextFieldStyle())
+                  .textFieldStyle(OvalTextViewStyle())
                   .disableAutocorrection(true)
                   .focused($isInputActive)
                   .toolbar {

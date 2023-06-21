@@ -19,6 +19,7 @@ class AddTripViewModel: ObservableObject {
   @Published var textRating = ""
   @Published var textCost = ""
   @Published var textStory = ""
+  @Published var date = Date()
   
   @Published var shouldPresentImagePicker = false
   @Published var shouldPresentActionScheet = false
@@ -46,7 +47,7 @@ class AddTripViewModel: ObservableObject {
     var tripDictionary: [String: Any] = [
         "name": textName,
         "location": textLocation,
-        "date": textDate,
+        "date": date,
         "rating": textRating,
         "cost": textCost,
         "story": textStory,

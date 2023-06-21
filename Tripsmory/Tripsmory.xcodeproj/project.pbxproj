@@ -39,6 +39,8 @@
 		0FEA166E29D3391700DE95A2 /* TripDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA166D29D3391700DE95A2 /* TripDetailViewModel.swift */; };
 		0FEA167129D3393000DE95A2 /* EditTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA167029D3393000DE95A2 /* EditTripView.swift */; };
 		0FEA167329D3393B00DE95A2 /* EditTripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEA167229D3393B00DE95A2 /* EditTripViewModel.swift */; };
+		0FFC0F1A2A42F0D4007E69DF /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFC0F192A42F0D4007E69DF /* CalendarView.swift */; };
+		0FFC0F1C2A42F40E007E69DF /* BottomSheetCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFC0F1B2A42F40E007E69DF /* BottomSheetCalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		0FEA167229D3393B00DE95A2 /* EditTripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripViewModel.swift; sourceTree = "<group>"; };
 		0FEA167429D4182F00DE95A2 /* Jost-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		0FEA167629D418D700DE95A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0FFC0F192A42F0D4007E69DF /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		0FFC0F1B2A42F40E007E69DF /* BottomSheetCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetCalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				0FEA166629D338D800DE95A2 /* AddTripView.swift */,
+				0FFC0F192A42F0D4007E69DF /* CalendarView.swift */,
+				0FFC0F1B2A42F40E007E69DF /* BottomSheetCalendarView.swift */,
 				0FEA166829D338E200DE95A2 /* AddTripViewModel.swift */,
 			);
 			path = AddTrip;
@@ -312,11 +318,13 @@
 				0FEA166C29D3390A00DE95A2 /* TripDetailView.swift in Sources */,
 				0F7B96672A13745C00E5F57E /* ImageView.swift in Sources */,
 				0F38FE902A1C7096004E2D6D /* SignUpView.swift in Sources */,
+				0FFC0F1C2A42F40E007E69DF /* BottomSheetCalendarView.swift in Sources */,
 				0FEA166329D3389300DE95A2 /* TripListViewModel.swift in Sources */,
 				0FEA166129D3386F00DE95A2 /* TripListView.swift in Sources */,
 				0FEA167129D3393000DE95A2 /* EditTripView.swift in Sources */,
 				0F60CDA52A094AC70073F50F /* MainCoordinatorView.swift in Sources */,
 				0F38FE992A1DD9F0004E2D6D /* StartCoordinatorView.swift in Sources */,
+				0FFC0F1A2A42F0D4007E69DF /* CalendarView.swift in Sources */,
 				0FEA166729D338D800DE95A2 /* AddTripView.swift in Sources */,
 				0F38FE9B2A1F5600004E2D6D /* AuthViewModel.swift in Sources */,
 				0FEA166E29D3391700DE95A2 /* TripDetailViewModel.swift in Sources */,

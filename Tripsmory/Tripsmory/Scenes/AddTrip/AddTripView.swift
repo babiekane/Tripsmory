@@ -12,36 +12,43 @@ struct AddTripView: View {
   
   @ObservedObject var viewModel: AddTripViewModel
   
+  @State var isShowingCalendarView: Bool
+  @State var date: Date
   
   var body: some View {
     GeometryReader { geometry in
       TextFieldView(viewModel: viewModel,
+                    isShowingCalendarView: $isShowingCalendarView,
+                    date: $date,
                     screenWidth: geometry.size.width,
                     screenHeight: geometry.size.height
       )
+      
+      BottomSheetCalendarView(isShowingCalendarView: $isShowingCalendarView, date: $date)
     }
   }
 }
 
 struct AddTripView_Previews: PreviewProvider {
   static var previews: some View {
-    AddTripView(viewModel: AddTripViewModel())
+    AddTripView(viewModel: AddTripViewModel(), isShowingCalendarView: false, date: Date())
   }
 }
 
 struct TextFieldView: View {
   @ObservedObject var viewModel: AddTripViewModel
   
-//  @State var selectedImage: UIImage?
-//  @State var shouldPresentImagePicker = false
-//  @State var shouldPresentActionScheet = false
-//  @State var shouldPresentCamera = false
   @State var selectedItems = [PhotosPickerItem]()
   @State var selectedPhotos = [UIImage]()
   
   @FocusState var isInputActive: Bool
   
   @State var showAlert: Bool = false
+  
+  @Binding var isShowingCalendarView: Bool
+  @Binding var date: Date
+  
+  @State private var isDatePickerShown = false
   
   
   let screenWidth: Double
@@ -84,19 +91,48 @@ struct TextFieldView: View {
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
                 
+//                HStack {
+//                  RoundedRectangle(cornerRadius: 20)
+//                    .fill(Color("greenLight").opacity(0.5))
+//                    .frame(width: screenWidth - 32 - 30, height: 40)
+//                    .cornerRadius(20)
+//
+//                  Button {
+//                    //TODO
+//                  } label: {
+//                    Image(systemName: "location")
+//                      .foregroundColor(Color("greenMedium"))
+//                  }
+//                }
               }
               
               VStack(alignment: .leading, spacing: 0) {
-                Text("Date")
-                  .font(.custom("Jost", size: 16))
-                  .fontWeight(.medium)
-                  .foregroundColor(Color("appBlack"))
-                  .padding(.bottom, 4)
-                
-                TextField("", text: $viewModel.textDate)
-                  .textFieldStyle(OvalTextFieldStyle())
-                  .disableAutocorrection(true)
-                
+                  Text("Date")
+                    .font(.custom("Jost", size: 16))
+                    .fontWeight(.medium)
+                    .foregroundColor(Color("appBlack"))
+                    .padding(.bottom, 4)
+
+                HStack {
+                    Text("\(date.formatted(.dateTime.day().month().year()))")
+                    .padding(.leading, 16)
+                      .foregroundColor(Color("appBlack"))
+                      .frame(width: screenWidth - 32 - 30, height: 40, alignment: .leading)
+                      .background((Color("greenLight").opacity(0.5)))
+                      .clipShape(Capsule())
+                  
+                  Spacer()
+                  
+                  Button {
+                    withAnimation {
+                      isShowingCalendarView.toggle()
+                    }
+                    self.isDatePickerShown = true
+                  } label: {
+                    Image(systemName: "calendar")
+                      .foregroundColor(Color("greenMedium"))
+                  }
+                }
               }
               
               HStack {
@@ -137,7 +173,7 @@ struct TextFieldView: View {
                 TextField("", text: $viewModel.textStory, axis: .vertical)
                   .lineLimit(6, reservesSpace: true)
                   .font(.custom("Jost", size: 16))
-                  .textFieldStyle(OvalTextFieldStyle())
+                  .textFieldStyle(OvalTextViewStyle())
                   .disableAutocorrection(true)
                   .focused($isInputActive)
                   .toolbar {
@@ -292,6 +328,19 @@ struct OvalTextFieldStyle: TextFieldStyle {
   func _body(configuration: TextField<Self._Label>) -> some View {
     configuration
       .padding(10)
+      .padding(.leading, 6)
+      .frame(height: 40)
+      .background(Color("greenLight").opacity(0.5))
+      .foregroundColor(Color("appBlack"))
+      .cornerRadius(20)
+  }
+}
+
+struct OvalTextViewStyle: TextFieldStyle {
+  func _body(configuration: TextField<Self._Label>) -> some View {
+    configuration
+      .padding(10)
+      .padding(.leading, 6)
       .background(Color("greenLight").opacity(0.5))
       .foregroundColor(Color("appBlack"))
       .cornerRadius(20)

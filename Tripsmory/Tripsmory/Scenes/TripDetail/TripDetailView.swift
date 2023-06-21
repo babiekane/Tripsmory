@@ -289,7 +289,7 @@ struct ShowDetailView: View {
         }
         .fullScreenCover(isPresented: $isEditing) {
           if let editTripViewModel = viewModel.editTripViewModel {
-            EditTripView(viewModel: editTripViewModel, onDelete: {
+            EditTripView(viewModel: editTripViewModel, isShowingCalendarView: false, onDelete: {
               DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 dismiss()
               }

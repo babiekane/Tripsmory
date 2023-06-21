@@ -32,6 +32,7 @@ class EditTripViewModel: ObservableObject {
   @Published var textName = ""
   @Published var textLocation = ""
   @Published var textDate = ""
+  @Published var date = Date()
   @Published var textRating = ""
   @Published var textCost = ""
   @Published var textStory = ""
@@ -60,7 +61,7 @@ class EditTripViewModel: ObservableObject {
     var tripDictionary: [String: Any] = [
       "name": textName,
       "location": textLocation,
-      "date": textDate,
+      "date": date,
       "rating": textRating,
       "cost": textCost,
       "story": textStory,

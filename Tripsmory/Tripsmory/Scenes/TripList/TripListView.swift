@@ -113,7 +113,7 @@ struct TripListView: View {
       viewModel.fetchTrips()
     }
     .fullScreenCover(isPresented: $viewModel.isPresented) {
-      AddTripView(viewModel: AddTripViewModel())
+      AddTripView(viewModel: AddTripViewModel(), isShowingCalendarView: false, date: Date.now)
     }
   }
 }
