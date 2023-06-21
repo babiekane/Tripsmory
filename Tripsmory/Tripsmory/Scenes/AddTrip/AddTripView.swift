@@ -13,25 +13,27 @@ struct AddTripView: View {
   @ObservedObject var viewModel: AddTripViewModel
   
   @State var isShowingCalendarView: Bool
-  @State var date: Date
+  @State var pickerDate = Date()
   
   var body: some View {
     GeometryReader { geometry in
       TextFieldView(viewModel: viewModel,
                     isShowingCalendarView: $isShowingCalendarView,
-                    date: $date,
                     screenWidth: geometry.size.width,
                     screenHeight: geometry.size.height
       )
       
-      BottomSheetCalendarView(isShowingCalendarView: $isShowingCalendarView, date: $date)
+      BottomSheetCalendarView(isShowingCalendarView: $isShowingCalendarView, date: $pickerDate)
+    }
+    .onChange(of: pickerDate) { newValue in
+      viewModel.date = newValue
     }
   }
 }
 
 struct AddTripView_Previews: PreviewProvider {
   static var previews: some View {
-    AddTripView(viewModel: AddTripViewModel(), isShowingCalendarView: false, date: Date())
+    AddTripView(viewModel: AddTripViewModel(), isShowingCalendarView: false)
   }
 }
 
@@ -46,7 +48,6 @@ struct TextFieldView: View {
   @State var showAlert: Bool = false
   
   @Binding var isShowingCalendarView: Bool
-  @Binding var date: Date
   
   @State private var isDatePickerShown = false
   
@@ -114,7 +115,7 @@ struct TextFieldView: View {
                     .padding(.bottom, 4)
 
                 HStack {
-                    Text("\(date.formatted(.dateTime.day().month().year()))")
+                  Text("\(viewModel.date?.formatted(.dateTime.day().month().year()) ?? "")")
                     .padding(.leading, 16)
                       .foregroundColor(Color("appBlack"))
                       .frame(width: screenWidth - 32 - 30, height: 40, alignment: .leading)

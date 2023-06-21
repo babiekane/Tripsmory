@@ -19,7 +19,7 @@ class AddTripViewModel: ObservableObject {
   @Published var textRating = ""
   @Published var textCost = ""
   @Published var textStory = ""
-  @Published var date = Date()
+  @Published var date: Date? = nil
   
   @Published var shouldPresentImagePicker = false
   @Published var shouldPresentActionScheet = false
