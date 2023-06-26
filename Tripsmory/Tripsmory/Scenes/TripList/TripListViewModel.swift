@@ -12,11 +12,14 @@ import FirebaseAuth
 
 class TripListViewModel: ObservableObject {
   
-  init(onTripSelected: @escaping (TripListItem) -> Void) {
+  init(onTripSelected: @escaping (TripListItem) -> Void, onSettingsSelected: @escaping () -> Void) {
     self.onTripSelected = onTripSelected
+    self.onSettingsSelected = onSettingsSelected
   }
   
   let onTripSelected: (TripListItem) -> Void
+  
+  let onSettingsSelected: () -> Void
   
   @Published var trips: [TripListItem] = []
   @Published var isLoading = true

@@ -16,7 +16,7 @@ struct RootView: View {
       if authManager.loggedIn {
         MainCoordinatorView()
       } else {
-        StartCoordinatorView()
+        StartCoordinatorView(authViewModel: authManager)
       }
     }
     .onAppear {

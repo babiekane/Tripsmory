@@ -30,21 +30,14 @@ struct TripListView: View {
               Spacer()
               
               Button {
-                showingAlert = true
+                viewModel.onSettingsSelected()
               } label: {
-                Image(systemName: "rectangle.portrait.and.arrow.right")
+                Image(systemName: "gear")
                   .resizable()
-                  .frame(width: 30, height: 25)
+                  .frame(width: 30, height: 30)
                   .foregroundColor(Color("greenMedium"))
                   .padding(.trailing, 36)
               }
-              .alert("Are you sure to log out?", isPresented: $showingAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Log out", role: .destructive) {
-                  authViewModel.signOut()
-                }
-              }
-              
             }
             
             if viewModel.isLoading {
@@ -120,7 +113,7 @@ struct TripListView: View {
 
 struct TripListView_Previews: PreviewProvider {
   static var previews: some View {
-    TripListView(viewModel: TripListViewModel(onTripSelected: { trip in }))
+    TripListView(viewModel: TripListViewModel(onTripSelected: { trip in }, onSettingsSelected: {}))
       .environmentObject(AuthViewModel())
   }
 }

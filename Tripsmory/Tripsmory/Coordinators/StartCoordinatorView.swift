@@ -12,24 +12,22 @@ enum StartState {
 }
 
 struct StartCoordinatorView: View {
-    
-  @State var startState = StartState.start
-  @State var animationState = StartState.start
+  @ObservedObject var authViewModel: AuthViewModel
   
   var body: some View {
     VStack {
-      switch animationState {
+      switch authViewModel.animationState {
       case .start:
-        StartView(state: $startState)
+        StartView(state: $authViewModel.startState)
       case .signUp:
-        SignUpView(state: $startState)
+        SignUpView(state: $authViewModel.startState)
       case .logIn:
-        LoginView(state: $startState)
+        LoginView(state: $authViewModel.startState)
       }
     }
-    .onChange(of: startState) { newValue in
+    .onChange(of: authViewModel.startState) { newValue in
       withAnimation(.easeOut) {
-        animationState = newValue
+        authViewModel.animationState = newValue
       }
     }
   }
@@ -37,6 +35,6 @@ struct StartCoordinatorView: View {
 
 struct StartCoordinatorView_Previews: PreviewProvider {
   static var previews: some View {
-    StartCoordinatorView()
+    StartCoordinatorView(authViewModel: AuthViewModel())
   }
 }

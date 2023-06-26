@@ -19,6 +19,9 @@ class AuthViewModel: ObservableObject {
   
   @Published var errorMessage: String?
   
+  @Published var startState = StartState.start
+  @Published var animationState = StartState.start
+  
   let auth = Auth.auth()
   let loginManager = LoginManager()
   
@@ -83,6 +86,11 @@ class AuthViewModel: ObservableObject {
     try? auth.signOut()
     
     self.loggedIn = false
+  }
+  
+  // Login with Apple
+  func logInWithApple() {
+    //TODO
   }
   
   // Login with facebook
@@ -154,6 +162,24 @@ class AuthViewModel: ObservableObject {
   // Forgot password from login with email & password
   func forgotPassword(email: String) {
     Auth.auth().sendPasswordReset(withEmail: email) { error in
+    }
+  }
+  
+  func deleteUser() {
+    let user = Auth.auth().currentUser
+
+    user?.delete { error in
+      DispatchQueue.main.async {
+        if let error = error?.localizedDescription {
+          self.errorMessage = error
+        } else {
+          self.loggedIn = false
+          
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.startState = .start
+          }
+        }
+      }
     }
   }
 }

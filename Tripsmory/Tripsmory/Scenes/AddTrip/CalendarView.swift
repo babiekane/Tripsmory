@@ -21,7 +21,7 @@ struct CalendarView: View {
         self.isDatePickerShown = false
     })
     .datePickerStyle(.graphical)
-    .padding(16)
+    .padding(24)
     .background(Color("appWhite"))
     .accentColor(Color("greenMedium"))
     .preferredColorScheme(.light)

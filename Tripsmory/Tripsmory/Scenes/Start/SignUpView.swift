@@ -110,7 +110,15 @@ struct SignUpView: View {
             .foregroundColor(Color("greenDark").opacity(0.5))
             .padding(.bottom, 8)
           
-          HStack(alignment: .center, spacing: 30) {
+          HStack(alignment: .center, spacing: 20) {
+            Button {
+              viewModel.logInWithApple()
+            } label: {
+              Image("Apple")
+                .resizable()
+                .frame(width: 30, height: 30)
+            }
+            
             Button {
               viewModel.logInWithFacebook()
             } label: {
@@ -124,7 +132,7 @@ struct SignUpView: View {
             } label: {
               Image("Gmail")
                 .resizable()
-                .frame(width: 35, height: 30)
+                .frame(width: 30, height: 30)
             }
           }
           .padding(.bottom, 32)
