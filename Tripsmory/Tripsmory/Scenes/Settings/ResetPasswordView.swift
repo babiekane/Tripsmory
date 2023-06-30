@@ -73,6 +73,7 @@ struct ResetPasswordView: View {
         TextField("", text: $email)
           .textFieldStyle(OvalTextFieldStyle())
           .disableAutocorrection(true)
+          .keyboardType(.emailAddress)
       }
       .padding(.bottom, 24)
       

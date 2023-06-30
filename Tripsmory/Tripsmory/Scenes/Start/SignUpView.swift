@@ -7,10 +7,11 @@
 
 import SwiftUI
 import GoogleSignInSwift
+import AuthenticationServices
 
 
 struct SignUpView: View {
-
+  
   @Binding var state: StartState
   @EnvironmentObject var viewModel: AuthViewModel
   
@@ -97,12 +98,12 @@ struct SignUpView: View {
             }
             .padding(.bottom, 32)
             .alert(isPresented: $showAlert) {
-                 Alert(
-                     title: Text("Unable to create account"),
-                     message: Text("Please fill email and password."),
-                     dismissButton: .default(Text("OK"))
-                 )
-             }
+              Alert(
+                title: Text("Unable to create account"),
+                message: Text("Please fill email and password."),
+                dismissButton: .default(Text("OK"))
+              )
+            }
           }
           
           Text("or continue with".uppercased())
@@ -111,6 +112,7 @@ struct SignUpView: View {
             .padding(.bottom, 8)
           
           HStack(alignment: .center, spacing: 20) {
+            
             Button {
               viewModel.logInWithApple()
             } label: {
@@ -119,13 +121,21 @@ struct SignUpView: View {
                 .frame(width: 30, height: 30)
             }
             
-            Button {
-              viewModel.logInWithFacebook()
-            } label: {
-              Image("Facebook")
-                .resizable()
-                .frame(width: 30, height: 30)
-            }
+//            Button {
+//              viewModel.logInWithFacebook()
+//            } label: {
+//              Image("Facebook")
+//                .resizable()
+//                .frame(width: 30, height: 30)
+//            }
+            
+//            Button {
+//              viewModel.logInWithTwitter()
+//            } label: {
+//              Image("Twitter")
+//                .resizable()
+//                .frame(width: 30, height: 30)
+//            }
             
             Button {
               viewModel.logInWithGoogle()
@@ -141,7 +151,7 @@ struct SignUpView: View {
             .font(.custom("Jost", size: 16))
             .foregroundColor(Color("greenDark").opacity(0.5))
             .padding(.bottom, 8)
-
+          
           Button {
             state = .logIn
           } label: {

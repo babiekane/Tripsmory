@@ -105,22 +105,23 @@ struct TextFieldEditView: View {
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
                 
-                HStack {
-                    Text("\(date.formatted(.dateTime.day().month().year()))")
-                    .padding(.leading, 16)
-                      .foregroundColor(Color("appBlack"))
-                      .frame(width: screenWidth - 32 - 30, height: 40, alignment: .leading)
-                      .background((Color("greenLight").opacity(0.5)))
-                      .clipShape(Capsule())
-                  
-                  Spacer()
-                  
                   Button {
                     withAnimation {
                       isShowingCalendarView.toggle()
                     }
                     self.isDatePickerShown = true
+                    hideKeyboard()
                   } label: {
+                    HStack {
+                      Text("\(date.formatted(.dateTime.day().month().year()))")
+                        .padding(.leading, 16)
+                        .foregroundColor(Color("appBlack"))
+                        .frame(width: screenWidth - 32 - 30, height: 40, alignment: .leading)
+                        .background((Color("greenLight").opacity(0.5)))
+                        .clipShape(Capsule())
+                      
+                      Spacer()
+                      
                     Image(systemName: "calendar")
                       .foregroundColor(Color("greenMedium"))
                   }

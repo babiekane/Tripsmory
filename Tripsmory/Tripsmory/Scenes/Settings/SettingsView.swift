@@ -13,7 +13,7 @@ struct SettingsView: View {
   @Environment(\.dismiss) var dismiss
   
   var body: some View {
-//    NavigationStack {
+    GeometryReader { geometry in
       VStack(alignment: .leading) {
         ZStack {
           Button {
@@ -50,21 +50,21 @@ struct SettingsView: View {
           .padding(.bottom, 12)
         
         Group {
-          NavigationLink {
-            ProfileView()
-              .navigationBarBackButtonHidden(true)
-          } label: {
-            HStack(spacing: 16) {
-              Image(systemName: "person")
-                .resizable()
-                .frame(width: 20, height: 20)
-              Text("Profile")
-                .font(.custom("Jost", size: 16))
-                .fontWeight(.medium)
-            }
-            .foregroundColor(Color("greenMedium"))
-          }
-          .padding(.bottom, 24)
+          //          NavigationLink {
+          //            ProfileView()
+          //              .navigationBarBackButtonHidden(true)
+          //          } label: {
+          //            HStack(spacing: 16) {
+          //              Image(systemName: "person")
+          //                .resizable()
+          //                .frame(width: 20, height: 20)
+          //              Text("Profile")
+          //                .font(.custom("Jost", size: 16))
+          //                .fontWeight(.medium)
+          //            }
+          //            .foregroundColor(Color("greenMedium"))
+          //          }
+          //          .padding(.bottom, 24)
           
           NavigationLink {
             ResetPasswordView()
@@ -151,7 +151,7 @@ struct SettingsView: View {
               .font(.custom("Jost", size: 16))
               .fontWeight(.medium)
           }
-          .frame(width: 366, height: 50)
+          .frame(width: geometry.size.width - 72, height: 50)
           .foregroundColor(Color("appWhite"))
           .background(Color("greenMedium"))
           .clipShape(Capsule())
@@ -167,8 +167,8 @@ struct SettingsView: View {
       .padding(.horizontal, 36)
       .background(Color("appWhite"))
       .preferredColorScheme(.light)
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-//    }
+      .frame(width: geometry.size.width, height: geometry.size.height)
+    }
   }
 }
 
