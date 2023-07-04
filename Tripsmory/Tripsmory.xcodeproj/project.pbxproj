@@ -18,6 +18,8 @@
 		0F38FEA22A1F5C09004E2D6D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0F38FEA12A1F5C09004E2D6D /* FirebaseFirestore */; };
 		0F38FEA42A1F5C09004E2D6D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0F38FEA32A1F5C09004E2D6D /* FirebaseStorage */; };
 		0F60CDA52A094AC70073F50F /* MainCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F60CDA42A094AC70073F50F /* MainCoordinatorView.swift */; };
+		0F6BB4D02A52D35C00F81230 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BB4CF2A52D35C00F81230 /* LocationManager.swift */; };
+		0F6BB4D22A52D5EE00F81230 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BB4D12A52D5EE00F81230 /* SearchLocationView.swift */; };
 		0F7B96672A13745C00E5F57E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7B96662A13745C00E5F57E /* ImageView.swift */; };
 		0F8B0D5D2A29E60A0028BF5C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 0F8B0D5C2A29E60A0028BF5C /* GoogleSignIn */; };
 		0F8B0D5F2A29E60A0028BF5C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F8B0D5E2A29E60A0028BF5C /* GoogleSignInSwift */; };
@@ -58,6 +60,8 @@
 		0F38FE9A2A1F5600004E2D6D /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		0F60CDA42A094AC70073F50F /* MainCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorView.swift; sourceTree = "<group>"; };
 		0F6BB4922A4C258500F81230 /* Tripsmory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tripsmory.entitlements; sourceTree = "<group>"; };
+		0F6BB4CF2A52D35C00F81230 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		0F6BB4D12A52D5EE00F81230 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
 		0F7B96662A13745C00E5F57E /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		0F8B0D602A2B3F260028BF5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0F8B0D622A2B54940028BF5C /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -211,9 +215,11 @@
 			isa = PBXGroup;
 			children = (
 				0FEA166629D338D800DE95A2 /* AddTripView.swift */,
+				0F6BB4D12A52D5EE00F81230 /* SearchLocationView.swift */,
 				0FFC0F192A42F0D4007E69DF /* CalendarView.swift */,
 				0FFC0F1B2A42F40E007E69DF /* BottomSheetCalendarView.swift */,
 				0FEA166829D338E200DE95A2 /* AddTripViewModel.swift */,
+				0F6BB4CF2A52D35C00F81230 /* LocationManager.swift */,
 			);
 			path = AddTrip;
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 				0FEA167129D3393000DE95A2 /* EditTripView.swift in Sources */,
 				0F60CDA52A094AC70073F50F /* MainCoordinatorView.swift in Sources */,
 				0F38FE992A1DD9F0004E2D6D /* StartCoordinatorView.swift in Sources */,
+				0F6BB4D22A52D5EE00F81230 /* SearchLocationView.swift in Sources */,
 				0FFC0F1A2A42F0D4007E69DF /* CalendarView.swift in Sources */,
 				0FEA166729D338D800DE95A2 /* AddTripView.swift in Sources */,
 				0F38FE9B2A1F5600004E2D6D /* AuthViewModel.swift in Sources */,
@@ -365,6 +372,7 @@
 				0FFC0F262A454A46007E69DF /* ResetPasswordView.swift in Sources */,
 				0FFC0F242A44CBE3007E69DF /* ProfileView.swift in Sources */,
 				0F38FE922A1C94AD004E2D6D /* LoginView.swift in Sources */,
+				0F6BB4D02A52D35C00F81230 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +508,7 @@
 				INFOPLIST_FILE = Tripsmory/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Tripsmory;
 				INFOPLIST_KEY_NSCameraUsageDescription = "I would like to access your camera.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To access location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -536,6 +545,7 @@
 				INFOPLIST_FILE = Tripsmory/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Tripsmory;
 				INFOPLIST_KEY_NSCameraUsageDescription = "I would like to access your camera.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To access location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;

@@ -129,13 +129,13 @@ struct SignUpView: View {
 //                .frame(width: 30, height: 30)
 //            }
             
-//            Button {
-//              viewModel.logInWithTwitter()
-//            } label: {
-//              Image("Twitter")
-//                .resizable()
-//                .frame(width: 30, height: 30)
-//            }
+            Button {
+              viewModel.logInWithTwitter()
+            } label: {
+              Image("Twitter")
+                .resizable()
+                .frame(width: 35, height: 30)
+            }
             
             Button {
               viewModel.logInWithGoogle()

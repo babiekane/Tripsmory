@@ -11,10 +11,12 @@ import FirebaseFirestore
 import FirebaseStorage
 import FirebaseAuth
 import UIKit
+import CoreLocation
 
 class AddTripViewModel: ObservableObject {
   @Published var textName = ""
   @Published var textLocation = ""
+  @Published var placemark: CLPlacemark?
   @Published var textDate = ""
   @Published var textRating = ""
   @Published var textCost = ""
@@ -29,6 +31,8 @@ class AddTripViewModel: ObservableObject {
   @Published var uploadedImageURLs = [URL]()
   
   @Published var isUploadingImages = false
+  
+  @Published var isSearchingLocation = false
   
   func saveTrip() {
     guard let userID = Auth.auth().currentUser?.uid else {

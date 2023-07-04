@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
 import UIKit
+import CoreLocation
 
 class EditTripViewModel: ObservableObject {
   
@@ -31,6 +32,7 @@ class EditTripViewModel: ObservableObject {
   
   @Published var textName = ""
   @Published var textLocation = ""
+  @Published var placemark: CLPlacemark?
   @Published var textDate = ""
   @Published var date = Date()
   @Published var textRating = ""
@@ -43,6 +45,7 @@ class EditTripViewModel: ObservableObject {
   @Published var shouldPresentCamera = false
   
   @Published var isUploadingImages = false
+  @Published var isSearchingLocation = false
   
   var id: String?
   

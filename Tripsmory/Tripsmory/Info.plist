@@ -5,10 +5,20 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb645152657097891</string>
 				<string>com.googleusercontent.apps.1049629314403-e5dv48i056fdohbhegsmf9vu4vub85c9</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twittersdk</string>
 			</array>
 		</dict>
 	</array>

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import MapKit
 
 struct AddTripView: View {
   
@@ -18,15 +19,23 @@ struct AddTripView: View {
   var body: some View {
     GeometryReader { geometry in
       TextFieldView(viewModel: viewModel,
-                    isShowingCalendarView: $isShowingCalendarView,
-                    screenWidth: geometry.size.width,
-                    screenHeight: geometry.size.height
+                    isShowingCalendarView: $isShowingCalendarView
       )
       
       BottomSheetCalendarView(isShowingCalendarView: $isShowingCalendarView, date: $pickerDate)
     }
     .onChange(of: pickerDate) { newValue in
       viewModel.date = newValue
+    }
+    .onChange(of: viewModel.placemark) { placemark in
+      if let name = placemark?.name {
+        viewModel.textLocation = name
+      }
+    }
+    .fullScreenCover(isPresented: $viewModel.isSearchingLocation) {
+      NavigationView {
+        SearchLocationView(placemark: $viewModel.placemark, isSearchingLocation: $viewModel.isSearchingLocation)
+      }
     }
   }
 }
@@ -51,13 +60,11 @@ struct TextFieldView: View {
   
   @State private var isDatePickerShown = false
   
-  
-  let screenWidth: Double
-  let screenHeight: Double
-  
   @Environment(\.dismiss) var dismiss
+
   
   var body: some View {
+    GeometryReader { geometry in
       NavigationStack {
         ScrollView(.vertical, showsIndicators: false) {
           VStack(spacing: 0) {
@@ -88,50 +95,48 @@ struct TextFieldView: View {
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
                 
-                TextField("", text: $viewModel.textLocation)
-                  .textFieldStyle(OvalTextFieldStyle())
-                  .disableAutocorrection(true)
-                
-//                HStack {
-//                  RoundedRectangle(cornerRadius: 20)
-//                    .fill(Color("greenLight").opacity(0.5))
-//                    .frame(width: screenWidth - 32 - 30, height: 40)
-//                    .cornerRadius(20)
-//
-//                  Button {
-//                    //TODO
-//                  } label: {
-//                    Image(systemName: "location")
-//                      .foregroundColor(Color("greenMedium"))
-//                  }
-//                }
-              }
-              
-              VStack(alignment: .leading, spacing: 0) {
-                  Text("Date")
-                    .font(.custom("Jost", size: 16))
-                    .fontWeight(.medium)
-                    .foregroundColor(Color("appBlack"))
-                    .padding(.bottom, 4)
-
-                  
                   Button {
-                    withAnimation {
-                      isShowingCalendarView.toggle()
-                    }
-                    self.isDatePickerShown = true
-                    hideKeyboard()
+                    viewModel.isSearchingLocation = true
                   } label: {
                     HStack {
-                      Text("\(viewModel.date?.formatted(.dateTime.day().month().year()) ?? "")")
+                      Text(viewModel.textLocation)
                         .padding(.leading, 16)
                         .foregroundColor(Color("appBlack"))
-                        .frame(width: screenWidth - 32 - 30, height: 40, alignment: .leading)
+                        .frame(width: geometry.size.width - 32 - 30, height: 40, alignment: .leading)
                         .background((Color("greenLight").opacity(0.5)))
                         .clipShape(Capsule())
                       
-                      Spacer()
-                      
+                    Image(systemName: "location")
+                      .foregroundColor(Color("greenMedium"))
+                  }
+                }
+              }
+              
+              VStack(alignment: .leading, spacing: 0) {
+                Text("Date")
+                  .font(.custom("Jost", size: 16))
+                  .fontWeight(.medium)
+                  .foregroundColor(Color("appBlack"))
+                  .padding(.bottom, 4)
+                
+                
+                Button {
+                  withAnimation {
+                    isShowingCalendarView.toggle()
+                  }
+                  self.isDatePickerShown = true
+                  hideKeyboard()
+                } label: {
+                  HStack {
+                    Text("\(viewModel.date?.formatted(.dateTime.day().month().year()) ?? "")")
+                      .padding(.leading, 16)
+                      .foregroundColor(Color("appBlack"))
+                      .frame(width: geometry.size.width - 32 - 30, height: 40, alignment: .leading)
+                      .background((Color("greenLight").opacity(0.5)))
+                      .clipShape(Capsule())
+                    
+                    Spacer()
+                    
                     Image(systemName: "calendar")
                       .foregroundColor(Color("greenMedium"))
                   }
@@ -250,63 +255,63 @@ struct TextFieldView: View {
             }
           }
         }
-          .padding(.horizontal, 16)
-          
-          VStack {
-            HStack {
+        .padding(.horizontal, 16)
+        
+        VStack {
+          HStack {
+            Button {
+              dismiss()
+            } label: {
+              Text("Cancel")
+                .font(.custom("Jost", size: 16))
+                .fontWeight(.medium)
+                .frame(width: geometry.size.width / 2 - 32, height: 50)
+                .foregroundColor(Color("greenMedium"))
+                .background(Color("appWhite"))
+                .overlay(
+                  Capsule().stroke(Color("greenMedium"), lineWidth: 4)
+                )
+                .clipShape(Capsule())
+                .padding(.vertical, 8)
+            }
+            
+            if viewModel.isUploadingImages {
+              Text("Save")
+                .font(.custom("Jost", size: 16))
+                .fontWeight(.medium)
+                .frame(width: geometry.size.width / 2 - 32, height: 50)
+                .foregroundColor(Color("appWhite"))
+                .background(Color("greenMedium").opacity(0.7))
+                .clipShape(Capsule())
+                .padding(.vertical, 8)
+            } else {
               Button {
-                dismiss()
+                if viewModel.textName.isEmpty || viewModel.textLocation.isEmpty {
+                  showAlert = true
+                } else {
+                  viewModel.saveTrip()
+                  dismiss()
+                }
               } label: {
-                Text("Cancel")
-                  .font(.custom("Jost", size: 16))
-                  .fontWeight(.medium)
-                  .frame(width: screenWidth / 2 - 32, height: 50)
-                  .foregroundColor(Color("greenMedium"))
-                  .background(Color("appWhite"))
-                  .overlay(
-                    Capsule().stroke(Color("greenMedium"), lineWidth: 4)
-                  )
-                  .clipShape(Capsule())
-                  .padding(.vertical, 8)
-              }
-              
-              if viewModel.isUploadingImages {
                 Text("Save")
                   .font(.custom("Jost", size: 16))
                   .fontWeight(.medium)
-                  .frame(width: screenWidth / 2 - 32, height: 50)
+                  .frame(width: geometry.size.width / 2 - 32, height: 50)
                   .foregroundColor(Color("appWhite"))
-                  .background(Color("greenMedium").opacity(0.7))
+                  .background(Color("greenMedium"))
                   .clipShape(Capsule())
                   .padding(.vertical, 8)
-              } else {
-                Button {
-                  if viewModel.textName.isEmpty || viewModel.textLocation.isEmpty {
-                    showAlert = true
-                  } else {
-                    viewModel.saveTrip()
-                    dismiss()
-                  }
-                } label: {
-                  Text("Save")
-                    .font(.custom("Jost", size: 16))
-                    .fontWeight(.medium)
-                    .frame(width: screenWidth / 2 - 32, height: 50)
-                    .foregroundColor(Color("appWhite"))
-                    .background(Color("greenMedium"))
-                    .clipShape(Capsule())
-                    .padding(.vertical, 8)
-                }
-                .alert(isPresented: $showAlert) {
-                  Alert(
-                    title: Text("Missing information"),
-                    message: Text("Please fill name and location."),
-                    dismissButton: .default(Text("OK"))
-                  )
-                }
+              }
+              .alert(isPresented: $showAlert) {
+                Alert(
+                  title: Text("Missing information"),
+                  message: Text("Please fill name and location."),
+                  dismissButton: .default(Text("OK"))
+                )
               }
             }
           }
+        }
       }
       .background(Color("appWhite"))
       .preferredColorScheme(.light)
@@ -322,6 +327,7 @@ struct TextFieldView: View {
         
         selectedItems = []
       }
+    }
   }
 }
 

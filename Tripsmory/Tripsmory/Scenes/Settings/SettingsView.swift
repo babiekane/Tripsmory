@@ -21,8 +21,8 @@ struct SettingsView: View {
           } label: {
             HStack(alignment: .center, spacing: 0) {
               Image(systemName: "chevron.backward")
-                .resizable()
-                .frame(width: 12, height: 18)
+                .font(.title2)
+                .fontWeight(.semibold)
                 .foregroundColor(Color("greenDark"))
               
               Spacer()
