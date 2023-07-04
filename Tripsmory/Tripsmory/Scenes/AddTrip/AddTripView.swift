@@ -17,7 +17,7 @@ struct AddTripView: View {
   @State var pickerDate = Date()
   
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       TextFieldView(viewModel: viewModel,
                     isShowingCalendarView: $isShowingCalendarView
       )
@@ -64,7 +64,7 @@ struct TextFieldView: View {
 
   
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       NavigationStack {
         ScrollView(.vertical, showsIndicators: false) {
           VStack(spacing: 0) {
@@ -102,7 +102,7 @@ struct TextFieldView: View {
                       Text(viewModel.textLocation)
                         .padding(.leading, 16)
                         .foregroundColor(Color("appBlack"))
-                        .frame(width: geometry.size.width - 32 - 30, height: 40, alignment: .leading)
+                        .frame(width: geo.size.width - 32 - 30, height: 40, alignment: .leading)
                         .background((Color("greenLight").opacity(0.5)))
                         .clipShape(Capsule())
                       
@@ -131,7 +131,7 @@ struct TextFieldView: View {
                     Text("\(viewModel.date?.formatted(.dateTime.day().month().year()) ?? "")")
                       .padding(.leading, 16)
                       .foregroundColor(Color("appBlack"))
-                      .frame(width: geometry.size.width - 32 - 30, height: 40, alignment: .leading)
+                      .frame(width: geo.size.width - 32 - 30, height: 40, alignment: .leading)
                       .background((Color("greenLight").opacity(0.5)))
                       .clipShape(Capsule())
                     
@@ -265,7 +265,7 @@ struct TextFieldView: View {
               Text("Cancel")
                 .font(.custom("Jost", size: 16))
                 .fontWeight(.medium)
-                .frame(width: geometry.size.width / 2 - 32, height: 50)
+                .frame(width: geo.size.width / 2 - 32, height: 50)
                 .foregroundColor(Color("greenMedium"))
                 .background(Color("appWhite"))
                 .overlay(
@@ -279,7 +279,7 @@ struct TextFieldView: View {
               Text("Save")
                 .font(.custom("Jost", size: 16))
                 .fontWeight(.medium)
-                .frame(width: geometry.size.width / 2 - 32, height: 50)
+                .frame(width: geo.size.width / 2 - 32, height: 50)
                 .foregroundColor(Color("appWhite"))
                 .background(Color("greenMedium").opacity(0.7))
                 .clipShape(Capsule())
@@ -296,7 +296,7 @@ struct TextFieldView: View {
                 Text("Save")
                   .font(.custom("Jost", size: 16))
                   .fontWeight(.medium)
-                  .frame(width: geometry.size.width / 2 - 32, height: 50)
+                  .frame(width: geo.size.width / 2 - 32, height: 50)
                   .foregroundColor(Color("appWhite"))
                   .background(Color("greenMedium"))
                   .clipShape(Capsule())

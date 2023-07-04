@@ -13,13 +13,13 @@ struct TripDetailView: View {
   @State var isShowingImages = false
   
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       ZStack {
         if let detail = viewModel.detail {
           ShowDetailView(viewModel: viewModel,
                          detail: detail,
-                         screenWidth: geometry.size.width,
-                         screenHeight: geometry.size.height)
+                         width: geo.size.width,
+                         height: geo.size.height)
         }
       }
       .background(Color("appWhite"))
@@ -62,8 +62,8 @@ struct ShowDetailView: View {
   
   let detail: TripDetail
   
-  let screenWidth: Double
-  let screenHeight: Double
+  let width: Double
+  let height: Double
   
   @Environment(\.dismiss) var dismiss
   
@@ -79,12 +79,12 @@ struct ShowDetailView: View {
                   image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: screenWidth - 16, height: screenHeight / 2)
+                    .frame(width: width - 16, height: height / 2)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                 } placeholder: {
                   ProgressView()
                     .tint(Color("greenDark"))
-                    .frame(width: (screenWidth - 16), height: (screenHeight / 2))
+                    .frame(width: (width - 16), height: (height / 2))
                     .background(.gray.opacity(0.3))
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
@@ -93,7 +93,7 @@ struct ShowDetailView: View {
                   .resizable()
                   .aspectRatio(contentMode: .fit)
                   .padding(20)
-                  .frame(width: screenWidth - 16, height: screenHeight / 2)
+                  .frame(width: width - 16, height: height / 2)
                   .background(Color("Test1"))
                   .clipShape(RoundedRectangle(cornerRadius: 20))
               }
@@ -247,8 +247,8 @@ struct ShowDetailView: View {
                           }
                         } label: {
                           GalleryImageView(url: url,
-                                           screenWidth: screenWidth,
-                                           screenHeight: screenHeight)
+                                           width: width,
+                                           height: height)
                         }
                       } else {
                         Button {
@@ -259,8 +259,8 @@ struct ShowDetailView: View {
                           }
                         } label: {
                           GalleryImageView(url: url,
-                                           screenWidth: screenWidth,
-                                           screenHeight: screenHeight)
+                                           width: width,
+                                           height: height)
                             .overlay {
                               let remainingImage = detail.photoURLs.count - 5
                               if remainingImage > 0 {
@@ -309,20 +309,20 @@ struct ShowDetailView: View {
     
     let url: URL
     
-    let screenWidth: Double
-    let screenHeight: Double
+    let width: Double
+    let height: Double
     
     var body: some View {
       AsyncImage(url: url) { image in
         image
           .resizable()
           .aspectRatio(contentMode: .fill)
-          .frame(width: (screenWidth / 4.5) - 26 , height: (screenWidth / 4.5) - 26)
+          .frame(width: (width / 4.5) - 26 , height: (width / 4.5) - 26)
           .clipShape(RoundedRectangle(cornerRadius: 20))
       } placeholder: {
         ProgressView()
           .tint(Color("greenDark"))
-          .frame(width: (screenWidth / 4.5) - 26 , height: (screenWidth / 4.5) - 26)
+          .frame(width: (width / 4.5) - 26 , height: (width / 4.5) - 26)
           .background(.gray.opacity(0.3))
           .clipShape(RoundedRectangle(cornerRadius: 20))
       }

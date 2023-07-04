@@ -13,7 +13,7 @@ struct SettingsView: View {
   @Environment(\.dismiss) var dismiss
   
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       VStack(alignment: .leading) {
         ZStack {
           Button {
@@ -151,7 +151,7 @@ struct SettingsView: View {
               .font(.custom("Jost", size: 16))
               .fontWeight(.medium)
           }
-          .frame(width: geometry.size.width - 72, height: 50)
+          .frame(width: geo.size.width - 72, height: 50)
           .foregroundColor(Color("appWhite"))
           .background(Color("greenMedium"))
           .clipShape(Capsule())
@@ -167,7 +167,7 @@ struct SettingsView: View {
       .padding(.horizontal, 36)
       .background(Color("appWhite"))
       .preferredColorScheme(.light)
-      .frame(width: geometry.size.width, height: geometry.size.height)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
   }
 }

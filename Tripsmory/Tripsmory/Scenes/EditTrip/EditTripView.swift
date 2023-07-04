@@ -17,7 +17,7 @@ struct EditTripView: View {
   let onDelete: () -> Void
   
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       TextFieldEditView(viewModel: viewModel,
                         isShowingCalendarView: $isShowingCalendarView,
                         date: $viewModel.date,
@@ -68,7 +68,7 @@ struct TextFieldEditView: View {
   @Environment(\.dismiss) var dismiss
   
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       NavigationStack {
         VStack(spacing: 8) {
           ScrollView(showsIndicators: false) {
@@ -106,7 +106,7 @@ struct TextFieldEditView: View {
                       Text(viewModel.textLocation)
                         .padding(.leading, 16)
                         .foregroundColor(Color("appBlack"))
-                        .frame(width: geometry.size.width - 32 - 30, height: 40, alignment: .leading)
+                        .frame(width: geo.size.width - 32 - 30, height: 40, alignment: .leading)
                         .background((Color("greenLight").opacity(0.5)))
                         .clipShape(Capsule())
                       
@@ -134,7 +134,7 @@ struct TextFieldEditView: View {
                       Text("\(date.formatted(.dateTime.day().month().year()))")
                         .padding(.leading, 16)
                         .foregroundColor(Color("appBlack"))
-                        .frame(width: geometry.size.width - 32 - 30, height: 40, alignment: .leading)
+                        .frame(width: geo.size.width - 32 - 30, height: 40, alignment: .leading)
                         .background((Color("greenLight").opacity(0.5)))
                         .clipShape(Capsule())
                       
@@ -263,7 +263,7 @@ struct TextFieldEditView: View {
                 Text("Cancel")
                   .font(.custom("Jost", size: 16))
                   .fontWeight(.medium)
-                  .frame(width: geometry.size.width / 2 - 32, height: 50)
+                  .frame(width: geo.size.width / 2 - 32, height: 50)
                   .foregroundColor(Color("greenMedium"))
                   .background(Color("appWhite"))
                   .overlay(
@@ -277,7 +277,7 @@ struct TextFieldEditView: View {
                 Text("Update")
                   .font(.custom("Jost", size: 16))
                   .fontWeight(.medium)
-                  .frame(width: geometry.size.width / 2 - 32, height: 50)
+                  .frame(width: geo.size.width / 2 - 32, height: 50)
                   .foregroundColor(Color("appWhite"))
                   .background(Color("greenMedium").opacity(0.7))
                   .clipShape(Capsule())
@@ -291,7 +291,7 @@ struct TextFieldEditView: View {
                   Text("Update")
                     .font(.custom("Jost", size: 16))
                     .fontWeight(.medium)
-                    .frame(width: geometry.size.width / 2 - 32, height: 50)
+                    .frame(width: geo.size.width / 2 - 32, height: 50)
                     .foregroundColor(Color("appWhite"))
                     .background(Color("greenMedium"))
                     .clipShape(Capsule())
@@ -306,7 +306,7 @@ struct TextFieldEditView: View {
               Text("Delete")
                 .font(.custom("Jost", size: 16))
                 .fontWeight(.medium)
-                .frame(width: geometry.size.width - 48, height: 50)
+                .frame(width: geo.size.width - 48, height: 50)
                 .foregroundColor(Color("appWhite"))
                 .background(Color("Red"))
                 .clipShape(Capsule())
@@ -323,7 +323,7 @@ struct TextFieldEditView: View {
           }
         }
       }
-      .frame(width: geometry.size.width, height: geometry.size.height)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
       .background(Color("appWhite"))
       .onChange(of: selectedItems) { newItems in
         newItems.forEach { item in

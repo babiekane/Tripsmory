@@ -14,7 +14,7 @@ struct ForgotPasswordView: View {
   @Environment(\.dismiss) var dismiss
     
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       VStack {
         
         Spacer ()
@@ -35,7 +35,7 @@ struct ForgotPasswordView: View {
         
         Image("Plane")
           .resizable()
-          .frame(width: geometry.size.width / 2 , height: geometry.size.height / 2.5)
+          .frame(width: geo.size.width / 2 , height: geo.size.height / 2.5)
           .padding(.bottom)
         
         TextField("Email", text: $email)
@@ -45,7 +45,7 @@ struct ForgotPasswordView: View {
           .padding(.horizontal, 36)
         Rectangle()
           .fill(Color("greenMedium").opacity(0.5))
-          .frame(width: geometry.size.width - 72, height: 1)
+          .frame(width: geo.size.width - 72, height: 1)
           .padding(.bottom, 4)
         
         HStack {
@@ -72,7 +72,7 @@ struct ForgotPasswordView: View {
             .font(.custom("Jost", size: 24))
             .bold()
             .foregroundColor(Color("whiteEgg"))
-            .frame(width: 285, height: 70)
+            .frame(width: geo.size.width / 1.6, height: 70)
             .background(Color("greenMedium"))
             .clipShape(Capsule())
         }

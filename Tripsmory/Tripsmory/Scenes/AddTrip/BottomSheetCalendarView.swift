@@ -23,7 +23,7 @@ struct BottomSheetCalendarView: View {
           }
         
         CalendarView(date: $date, isDatePickerShown: $isShowingCalendarView)
-          .padding(.bottom, 42)
+          .padding(.bottom)
           .transition(.move(edge: .bottom))
           .background(Color("appWhite"))
           .cornerRadius(20, corners: [.topLeft, .topRight])

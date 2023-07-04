@@ -13,7 +13,7 @@ struct ImageView: View {
   @GestureState var draggingOffset: CGSize = .zero
   
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       ZStack {
         ScrollView(.init()) {
           TabView(selection: $viewModel.selectedImageURL) {
@@ -64,7 +64,7 @@ struct ImageView: View {
                 .clipShape(Circle())
             }
               .padding(10)
-              .padding(.top, geometry.safeAreaInsets.top)
+              .padding(.top, geo.safeAreaInsets.top)
               .opacity(viewModel.bgOpacity),
             alignment: .topTrailing
           )

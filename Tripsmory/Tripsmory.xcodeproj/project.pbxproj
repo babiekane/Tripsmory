@@ -191,13 +191,13 @@
 		0FEA165E29D3382B00DE95A2 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				0FFC0F1E2A444F05007E69DF /* Settings */,
 				0F38FE932A1DD677004E2D6D /* Roots */,
 				0F38FE8C2A1C706D004E2D6D /* Start */,
 				0FEA165F29D3385000DE95A2 /* TripList */,
 				0FEA166A29D338F300DE95A2 /* TripDetail */,
 				0FEA166429D338A500DE95A2 /* AddTrip */,
 				0FEA166F29D3391D00DE95A2 /* EditTrip */,
+				0FFC0F1E2A444F05007E69DF /* Settings */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";

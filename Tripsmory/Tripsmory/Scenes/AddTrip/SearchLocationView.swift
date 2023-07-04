@@ -106,7 +106,7 @@ struct SearchLocationView : View {
           }
         } label: {
           Label {
-            Text("Use Current Location")
+            Text("Use current location")
               .font(.custom("Jost", size: 16))
           } icon: {
             Image(systemName: "location")

@@ -15,7 +15,7 @@ struct TripListView: View {
   @State var showingAlert = false
   
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       ZStack {
         ScrollView {
           VStack(spacing: 0) {
@@ -64,8 +64,8 @@ struct TripListView: View {
                     viewModel.onTripSelected(trip)
                   } label: {
                     TripListItemView(trip: trip,
-                                     screenWidth: geometry.size.width,
-                                     screenHeight: geometry.size.height)
+                                     width: geo.size.width,
+                                     height: geo .size.height)
                   }
                 }
               }
@@ -122,8 +122,8 @@ struct TripListItemView: View {
   
   let trip: TripListItem
   
-  let screenWidth: Double
-  let screenHeight: Double
+  let width: Double
+  let height: Double
   
   var body: some View {
     
@@ -135,13 +135,13 @@ struct TripListItemView: View {
             image
               .resizable()
               .aspectRatio(contentMode: .fill)
-              .frame(width: screenWidth - 32, height: screenHeight / 5)
+              .frame(width: width - 32, height: height / 5)
               .clipped()
               .padding(.bottom, 8)
           } placeholder: {
             ProgressView()
               .tint(Color("greenDark"))
-              .frame(width: screenWidth - 32, height: screenHeight / 4.75)
+              .frame(width: width - 32, height: height / 4.75)
               .background(Color("whiteEgg"))
               .clipShape(RoundedRectangle(cornerRadius: 12))
           }
@@ -149,7 +149,7 @@ struct TripListItemView: View {
           Image("NoImages")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: screenWidth - 32, height: screenHeight / 5)
+            .frame(width: width - 32, height: height / 5)
             .padding(.vertical, 8)
             .clipped()
             .background(Color("Test1"))

@@ -17,7 +17,7 @@ struct ManageAccView: View {
   @State var showingAlert = false
   
   var body: some View {
-    GeometryReader { geometry in
+    GeometryReader { geo in
       VStack(alignment: .center) {
         ZStack {
           Button {
@@ -48,14 +48,14 @@ struct ManageAccView: View {
         
         Text("Account deletion is irreversible, permanently removing all personal information, data, and associated content.")
           .multilineTextAlignment(.center)
-          .frame(width: geometry.size.width - 72)
+          .frame(width: geo.size.width - 72)
           .font(.custom("Jost", size: 16))
           .foregroundColor(Color("appBlack"))
           .padding(.bottom, 8)
         
         Text("Recovery or access restoration is not possible after deletion.")
           .multilineTextAlignment(.center)
-          .frame(width: geometry.size.width - 72)
+          .frame(width: geo.size.width - 72)
           .font(.custom("Jost", size: 16))
           .fontWeight(.medium)
           .foregroundColor(Color("Red"))
@@ -72,7 +72,7 @@ struct ManageAccView: View {
           Text("Delete account")
             .font(.custom("Jost", size: 16))
             .fontWeight(.medium)
-            .frame(width: geometry.size.width - 72, height: 50)
+            .frame(width: geo.size.width - 36, height: 50)
             .foregroundColor(Color("Red"))
             .background(Color("appWhite"))
             .overlay(
@@ -84,10 +84,11 @@ struct ManageAccView: View {
         
         Spacer()
       }
+    }
       .padding(.horizontal, 36)
       .background(Color("appWhite"))
       .preferredColorScheme(.light)
-      .frame(width: geometry.size.width, height: geometry.size.height)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
       .alert("Are you sure to delete your account?", isPresented: $showingAlert) {
         Button("Cancel", role: .cancel) { }
         Button("Delete", role: .destructive) {
@@ -102,7 +103,7 @@ struct ManageAccView: View {
           dismissButton: .default(Text("OK"))
         )
       }
-    }
+    
   }
 }
 
