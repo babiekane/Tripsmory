@@ -20,7 +20,6 @@ struct EditTripView: View {
     GeometryReader { geo in
       TextFieldEditView(viewModel: viewModel,
                         isShowingCalendarView: $isShowingCalendarView,
-                        date: $viewModel.date,
                         onDelete: onDelete
       )
       
@@ -59,8 +58,6 @@ struct TextFieldEditView: View {
   @FocusState var isInputActive: Bool
   
   @Binding var isShowingCalendarView: Bool
-  @Binding var date: Date
-  
   @State private var isDatePickerShown = false
   
   let onDelete: () -> Void
@@ -131,7 +128,7 @@ struct TextFieldEditView: View {
                     hideKeyboard()
                   } label: {
                     HStack {
-                      Text("\(date.formatted(.dateTime.day().month().year()))")
+                      Text("\(viewModel.textDate ?? "")")
                         .padding(.leading, 16)
                         .foregroundColor(Color("appBlack"))
                         .frame(width: geo.size.width - 32 - 30, height: 40, alignment: .leading)

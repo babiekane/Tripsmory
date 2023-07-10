@@ -5,7 +5,8 @@
 //  Created by CatMeox on 28/3/2566 BE.
 //
 
-import Foundation
+import SwiftUI
+import Firebase
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseStorage
@@ -77,7 +78,9 @@ class AddTripViewModel: ObservableObject {
   func addImage(_ image: UIImage) {
     //1 upload image to Firebase
     // Data in memory
-    let data = image.jpegData(compressionQuality: 0.8)!
+    
+    let resizedImage = image.aspectFittedToHeight(500)
+    let data = resizedImage.jpegData(compressionQuality: 0.5)!
 
     // Create a reference to the file you want to upload
     let storage = Storage.storage()
@@ -128,4 +131,15 @@ struct TextFieldItem {
   var photoURLs: [URL]
 }
 
+extension UIImage {
+    func aspectFittedToHeight(_ newHeight: CGFloat) -> UIImage {
+        let scale = newHeight / self.size.height
+        let newWidth = self.size.width * scale
+        let newSize = CGSize(width: newWidth, height: newHeight)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
 
+        return renderer.image { _ in
+            self.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
+}

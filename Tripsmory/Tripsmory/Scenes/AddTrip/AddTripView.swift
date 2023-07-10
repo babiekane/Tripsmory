@@ -14,7 +14,7 @@ struct AddTripView: View {
   @ObservedObject var viewModel: AddTripViewModel
   
   @State var isShowingCalendarView: Bool
-  @State var pickerDate = Date()
+  @State var pickerDate: Date?
   
   var body: some View {
     GeometryReader { geo in
@@ -201,7 +201,12 @@ struct TextFieldView: View {
                     .font(.custom("Jost", size: 16))
                     .fontWeight(.medium)
                     .foregroundColor(Color("appBlack"))
-                    .padding(.bottom, 4)
+                    .padding(.bottom, -4)
+                  
+                  Text("Please select photo less than 5 photos/time")
+                    .font(.custom("Jost", size: 12))
+                    .foregroundColor(.gray)
+                    .padding(.bottom, 8)
                   
                   ScrollView(.horizontal, showsIndicators: false) {
                     HStack {

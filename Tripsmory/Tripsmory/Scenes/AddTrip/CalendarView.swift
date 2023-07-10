@@ -8,17 +8,26 @@
 import SwiftUI
 
 struct CalendarView: View {
-  @Binding var date: Date
-  @Binding var isDatePickerShown : Bool
+  init(date: Binding<Date?>, isDatePickerShown: Binding<Bool>) {
+    self._date = date
+    self._isDatePickerShown = isDatePickerShown
+    self._pickerDate = State(initialValue: date.wrappedValue ?? Date.now)
+  }
+  
+  @Binding var date: Date?
+  @Binding var isDatePickerShown: Bool
+  
+  @State private var pickerDate: Date
   
   var body: some View {
     DatePicker(
       "Start Date",
-      selection: $date,
+      selection: $pickerDate,
       displayedComponents: [.date]
     )
-    .onChange(of: date, perform: { _ in
-        self.isDatePickerShown = false
+    .onChange(of: pickerDate, perform: { newValue in
+      date = newValue
+      self.isDatePickerShown = false
     })
     .datePickerStyle(.graphical)
     .padding(24)

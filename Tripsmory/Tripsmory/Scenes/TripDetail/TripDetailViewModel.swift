@@ -19,9 +19,13 @@ struct TripDetail: Identifiable {
   let numberOfPhotos: Int
   let rating: String
   let cost: String
-  let date: String
+  let date: Date?
   let story: String
   let photoURLs: [URL]
+  
+  var textDate: String? {
+    date?.formatted(.dateTime.day().month().year())
+  }
 }
 
 class TripDetailViewModel: ObservableObject {
@@ -48,7 +52,8 @@ class TripDetailViewModel: ObservableObject {
       let rating = (data["rating"] as? String) ?? ""
       let numberOfPhotos = (data["photoURLs"] as? [String] ?? []).count
       let cost = (data["cost"] as? String) ?? ""
-      let date = (data["date"] as? Timestamp)?.dateValue().formatted(.dateTime.day().month().year()) ?? ""
+//      let date = (data["date"] as? Timestamp)?.dateValue().formatted(.dateTime.day().month().year()) ?? ""
+      let date = (data["date"] as? Timestamp)?.dateValue()
       let story = (data["story"] as? String) ?? ""
       
       var photoURLs: [URL] = []

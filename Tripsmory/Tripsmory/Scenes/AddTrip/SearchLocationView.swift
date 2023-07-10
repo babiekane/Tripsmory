@@ -156,6 +156,7 @@ struct MapViewSelection: View {
         Image(systemName: "chevron.left")
           .font(.title2)
           .fontWeight(.semibold)
+          .frame(width: 25, height: 25)
           .foregroundColor(Color("greenDark"))
       }
       .padding()

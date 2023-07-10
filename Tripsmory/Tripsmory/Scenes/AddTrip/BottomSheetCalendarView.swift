@@ -10,7 +10,7 @@ import SwiftUI
 struct BottomSheetCalendarView: View {
   
   @Binding var isShowingCalendarView: Bool
-  @Binding var date: Date
+  @Binding var date: Date?
   
   var body: some View {
     ZStack(alignment: .bottom) {
@@ -31,7 +31,7 @@ struct BottomSheetCalendarView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
     .ignoresSafeArea()
-    .animation(.easeOut , value: isShowingCalendarView)
+    .animation(.easeOut, value: isShowingCalendarView)
   }
 }
 

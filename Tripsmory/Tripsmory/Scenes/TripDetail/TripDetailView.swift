@@ -172,19 +172,19 @@ struct ShowDetailView: View {
                     .foregroundColor(Color("greenMedium"))
                 }
                 
-                if detail.date == "" {
-                  Text("")
-                } else {
+                if let textDate = detail.textDate, !textDate.isEmpty {
                   HStack(spacing: 4) {
                     Image("Calendar")
                       .resizable()
                       .renderingMode(.template)
                       .frame(width: 20, height: 20)
                       .foregroundColor(Color("blueDark"))
-                    Text(detail.date)
+                    Text(textDate)
                       .font(.custom("Jost", size: 14))
                       .foregroundColor(Color("greenMedium"))
                   }
+                } else {
+                  Text("")
                 }
                 
                 if detail.cost == "" {

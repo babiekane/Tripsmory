@@ -22,7 +22,7 @@ class EditTripViewModel: ObservableObject {
     id = detail.id
     textName = detail.name
     textLocation = detail.location
-    textDate = detail.date
+    date = detail.date
     textRating = detail.rating
     textCost = detail.cost
     textStory = detail.story
@@ -33,8 +33,10 @@ class EditTripViewModel: ObservableObject {
   @Published var textName = ""
   @Published var textLocation = ""
   @Published var placemark: CLPlacemark?
-  @Published var textDate = ""
-  @Published var date = Date()
+  var textDate: String? {
+    date?.formatted(.dateTime.day().month().year())
+  }
+  @Published var date: Date?
   @Published var textRating = ""
   @Published var textCost = ""
   @Published var textStory = ""
