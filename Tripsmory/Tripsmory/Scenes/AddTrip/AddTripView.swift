@@ -17,24 +17,26 @@ struct AddTripView: View {
   @State var pickerDate: Date?
   
   var body: some View {
-    GeometryReader { geo in
-      TextFieldView(viewModel: viewModel,
-                    isShowingCalendarView: $isShowingCalendarView
-      )
-      
-      BottomSheetCalendarView(isShowingCalendarView: $isShowingCalendarView, date: $pickerDate)
-    }
-    .onChange(of: pickerDate) { newValue in
-      viewModel.date = newValue
-    }
-    .onChange(of: viewModel.placemark) { placemark in
-      if let name = placemark?.name {
-        viewModel.textLocation = name
+    NavigationStack {
+      GeometryReader { geo in
+        TextFieldView(viewModel: viewModel,
+                      isShowingCalendarView: $isShowingCalendarView
+        )
+        
+        BottomSheetCalendarView(isShowingCalendarView: $isShowingCalendarView, date: $pickerDate)
       }
-    }
-    .fullScreenCover(isPresented: $viewModel.isSearchingLocation) {
-      NavigationView {
-        SearchLocationView(placemark: $viewModel.placemark, isSearchingLocation: $viewModel.isSearchingLocation)
+      .onChange(of: pickerDate) { newValue in
+        viewModel.date = newValue
+      }
+      .onChange(of: viewModel.placemark) { placemark in
+        if let name = placemark?.name {
+          viewModel.textLocation = name
+        }
+      }
+      .fullScreenCover(isPresented: $viewModel.isSearchingLocation) {
+        NavigationView {
+          SearchLocationView(placemark: $viewModel.placemark, isSearchingLocation: $viewModel.isSearchingLocation)
+        }
       }
     }
   }
@@ -65,7 +67,7 @@ struct TextFieldView: View {
   
   var body: some View {
     GeometryReader { geo in
-      NavigationStack {
+      VStack {
         ScrollView(.vertical, showsIndicators: false) {
           VStack(spacing: 0) {
             Text("Add your memory")
@@ -203,7 +205,7 @@ struct TextFieldView: View {
                     .foregroundColor(Color("appBlack"))
                     .padding(.bottom, -4)
                   
-                  Text("Please select photo less than 5 photos/time")
+                  Text("Limit 5 photos per batch")
                     .font(.custom("Jost", size: 12))
                     .foregroundColor(.gray)
                     .padding(.bottom, 8)
@@ -211,6 +213,7 @@ struct TextFieldView: View {
                   ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                       PhotosPicker(selection: $selectedItems,
+                                   maxSelectionCount: 5,
                                    matching: .images) {
                         
                         ZStack {
@@ -261,6 +264,7 @@ struct TextFieldView: View {
           }
         }
         .padding(.horizontal, 16)
+        .frame(maxHeight: .infinity)
         
         VStack {
           HStack {
@@ -318,6 +322,7 @@ struct TextFieldView: View {
           }
         }
       }
+      .ignoresSafeArea(.keyboard, edges: .bottom)
       .background(Color("appWhite"))
       .preferredColorScheme(.light)
       .frame(maxWidth: .infinity, maxHeight: .infinity)
