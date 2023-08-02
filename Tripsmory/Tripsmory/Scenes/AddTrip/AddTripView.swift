@@ -203,7 +203,7 @@ struct TextFieldView: View {
                     .foregroundColor(Color("appBlack"))
                     .padding(.bottom, -4)
                   
-                  Text("Please select photo less than 5 photos/time")
+                  Text("Limit 5 photos per batch")
                     .font(.custom("Jost", size: 12))
                     .foregroundColor(.gray)
                     .padding(.bottom, 8)
@@ -211,6 +211,7 @@ struct TextFieldView: View {
                   ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                       PhotosPicker(selection: $selectedItems,
+                                   maxSelectionCount: 5,
                                    matching: .images) {
                         
                         ZStack {

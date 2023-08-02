@@ -139,13 +139,6 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		0F8B0D582A29D62E0028BF5C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		0FEA164429D2E2FF00DE95A2 = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				0F6BB4922A4C258500F81230 /* Tripsmory.entitlements */,
-				0F8B0D582A29D62E0028BF5C /* Views */,
 				0FEA167629D418D700DE95A2 /* Info.plist */,
 				0FEA167429D4182F00DE95A2 /* Jost-VariableFont_wght.ttf */,
 				0F8B0D602A2B3F260028BF5C /* GoogleService-Info.plist */,
