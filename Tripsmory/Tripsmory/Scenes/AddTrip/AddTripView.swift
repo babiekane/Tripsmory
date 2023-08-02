@@ -67,7 +67,7 @@ struct TextFieldView: View {
   
   var body: some View {
     GeometryReader { geo in
-      VStack {
+      ZStack {
         ScrollView(.vertical, showsIndicators: false) {
           VStack(spacing: 0) {
             Text("Add your memory")
@@ -87,7 +87,7 @@ struct TextFieldView: View {
                 TextField("", text: $viewModel.textName)
                   .textFieldStyle(OvalTextFieldStyle())
                   .disableAutocorrection(true)
-                
+                  .focused($isInputActive)
               }
               
               VStack(alignment: .leading, spacing: 0) {
@@ -156,7 +156,8 @@ struct TextFieldView: View {
                   TextField("", text: $viewModel.textRating)
                     .textFieldStyle(OvalTextFieldStyle())
                     .disableAutocorrection(true)
-                  
+                    .focused($isInputActive)
+                    .keyboardType(.decimalPad)
                 }
                 
                 VStack(alignment: .leading, spacing: 0) {
@@ -169,7 +170,7 @@ struct TextFieldView: View {
                   TextField("", text: $viewModel.textCost)
                     .textFieldStyle(OvalTextFieldStyle())
                     .disableAutocorrection(true)
-                  
+                    .focused($isInputActive)
                 }
               }
               
@@ -186,15 +187,6 @@ struct TextFieldView: View {
                   .textFieldStyle(OvalTextViewStyle())
                   .disableAutocorrection(true)
                   .focused($isInputActive)
-                  .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                      Spacer()
-                      
-                      Button("Done") {
-                        isInputActive = false
-                      }
-                    }
-                  }
               }
               
               HStack {
@@ -262,11 +254,14 @@ struct TextFieldView: View {
               }
             }
           }
+          .padding(.bottom, 64)
         }
         .padding(.horizontal, 16)
         .frame(maxHeight: .infinity)
         
         VStack {
+          Spacer()
+          
           HStack {
             Button {
               dismiss()
@@ -281,7 +276,6 @@ struct TextFieldView: View {
                   Capsule().stroke(Color("greenMedium"), lineWidth: 4)
                 )
                 .clipShape(Capsule())
-                .padding(.vertical, 8)
             }
             
             if viewModel.isUploadingImages {
@@ -292,7 +286,6 @@ struct TextFieldView: View {
                 .foregroundColor(Color("appWhite"))
                 .background(Color("greenMedium").opacity(0.7))
                 .clipShape(Capsule())
-                .padding(.vertical, 8)
             } else {
               Button {
                 if viewModel.textName.isEmpty || viewModel.textLocation.isEmpty {
@@ -309,7 +302,6 @@ struct TextFieldView: View {
                   .foregroundColor(Color("appWhite"))
                   .background(Color("greenMedium"))
                   .clipShape(Capsule())
-                  .padding(.vertical, 8)
               }
               .alert(isPresented: $showAlert) {
                 Alert(
@@ -320,9 +312,21 @@ struct TextFieldView: View {
               }
             }
           }
+          .padding(.horizontal)
+          .padding(.vertical, 4)
+          .background(Color("appWhite"))
+        }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
+      }
+      .toolbar {
+        ToolbarItemGroup(placement: .keyboard) {
+          Spacer()
+          
+          Button("Done") {
+            isInputActive = false
+          }
         }
       }
-      .ignoresSafeArea(.keyboard, edges: .bottom)
       .background(Color("appWhite"))
       .preferredColorScheme(.light)
       .frame(maxWidth: .infinity, maxHeight: .infinity)
