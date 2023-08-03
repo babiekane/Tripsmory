@@ -38,6 +38,8 @@ struct AddTripView: View {
           SearchLocationView(placemark: $viewModel.placemark, isSearchingLocation: $viewModel.isSearchingLocation)
         }
       }
+      .background(Color("appWhite"))
+      .preferredColorScheme(.light)
     }
   }
 }
@@ -59,11 +61,9 @@ struct TextFieldView: View {
   @State var showAlert: Bool = false
   
   @Binding var isShowingCalendarView: Bool
-  
   @State private var isDatePickerShown = false
   
   @Environment(\.dismiss) var dismiss
-
   
   var body: some View {
     GeometryReader { geo in
@@ -97,17 +97,17 @@ struct TextFieldView: View {
                   .foregroundColor(Color("appBlack"))
                   .padding(.bottom, 4)
                 
-                  Button {
-                    viewModel.isSearchingLocation = true
-                  } label: {
-                    HStack {
-                      Text(viewModel.textLocation)
-                        .padding(.leading, 16)
-                        .foregroundColor(Color("appBlack"))
-                        .frame(width: geo.size.width - 32 - 30, height: 40, alignment: .leading)
-                        .background((Color("greenLight").opacity(0.5)))
-                        .clipShape(Capsule())
-                      
+                Button {
+                  viewModel.isSearchingLocation = true
+                } label: {
+                  HStack {
+                    Text(viewModel.textLocation)
+                      .padding(.leading, 16)
+                      .foregroundColor(Color("appBlack"))
+                      .frame(width: geo.size.width - 32 - 30, height: 40, alignment: .leading)
+                      .background((Color("greenLight").opacity(0.5)))
+                      .clipShape(Capsule())
+                    
                     Image(systemName: "location")
                       .foregroundColor(Color("greenMedium"))
                   }
@@ -249,8 +249,6 @@ struct TextFieldView: View {
                     }
                   }
                 }
-                
-                Spacer()
               }
             }
           }
@@ -259,7 +257,7 @@ struct TextFieldView: View {
         .padding(.horizontal, 16)
         .frame(maxHeight: .infinity)
         
-        VStack {
+        VStack(spacing: 0) {
           Spacer()
           
           HStack {
@@ -269,7 +267,7 @@ struct TextFieldView: View {
               Text("Cancel")
                 .font(.custom("Jost", size: 16))
                 .fontWeight(.medium)
-                .frame(width: geo.size.width / 2 - 32, height: 50)
+                .frame(width: (geo.size.width / 2) - 32, height: 50)
                 .foregroundColor(Color("greenMedium"))
                 .background(Color("appWhite"))
                 .overlay(
@@ -282,7 +280,7 @@ struct TextFieldView: View {
               Text("Save")
                 .font(.custom("Jost", size: 16))
                 .fontWeight(.medium)
-                .frame(width: geo.size.width / 2 - 32, height: 50)
+                .frame(width: (geo.size.width / 2) - 32, height: 50)
                 .foregroundColor(Color("appWhite"))
                 .background(Color("greenMedium").opacity(0.7))
                 .clipShape(Capsule())
@@ -318,6 +316,18 @@ struct TextFieldView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
       }
+      .background(Color("appWhite"))
+      .preferredColorScheme(.light)
+      .onChange(of: selectedItems) { newItems in
+        newItems.forEach { item in
+          Task {
+            guard let data = try? await item.loadTransferable(type: Data.self) else { return }
+            guard let image = UIImage(data: data) else { return }
+            viewModel.addImage(image)
+          }
+        }
+        selectedItems = []
+      }
       .toolbar {
         ToolbarItemGroup(placement: .keyboard) {
           Spacer()
@@ -327,25 +337,9 @@ struct TextFieldView: View {
           }
         }
       }
-      .background(Color("appWhite"))
-      .preferredColorScheme(.light)
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .onChange(of: selectedItems) { newItems in
-        newItems.forEach { item in
-          Task {
-            guard let data = try? await item.loadTransferable(type: Data.self) else { return }
-            guard let image = UIImage(data: data) else { return }
-            viewModel.addImage(image)
-          }
-        }
-        
-        selectedItems = []
-      }
     }
   }
 }
-
-
 
 struct OvalTextFieldStyle: TextFieldStyle {
   func _body(configuration: TextField<Self._Label>) -> some View {
@@ -371,7 +365,7 @@ struct OvalTextViewStyle: TextFieldStyle {
 }
 
 extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
+  func hideKeyboard() {
+    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+  }
 }
