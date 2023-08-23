@@ -15,7 +15,7 @@ extension CompositionRoot: MainCoordinatorViewFactory {
   }
   
   func makeMainTripDetail(for item: TripListItem, onEdit: @escaping (TripDetail) -> Void) -> AnyView {
-    let viewModel = TripDetailViewModel(tripID: item.id)
+    let viewModel = TripDetailViewModel(tripID: item.id, onEdit: onEdit)
     let view = TripDetailView(viewModel: viewModel)
       .navigationBarHidden(true)
     return AnyView(view)

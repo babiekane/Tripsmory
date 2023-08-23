@@ -44,21 +44,21 @@ final class MainCoordinatorViewModel: ObservableObject {
   }
   
   func onTripUpdated() {
-    // TODO
+    editItem = nil
   }
   
   func onTripDeleted() {
-    // TODO
+    editItem = nil
+    _ = destinations.popLast()
   }
   
   func onTripEditingCancel() {
-    // TODO
+    editItem = nil
   }
   
   func onSignoutSuccess() {
     signoutCompletion()
   }
-  
 }
 
 struct ViewItem: Hashable, Identifiable {

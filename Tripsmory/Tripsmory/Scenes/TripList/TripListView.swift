@@ -10,7 +10,6 @@ import SwiftUI
 struct TripListView: View {
   
   @ObservedObject var viewModel: TripListViewModel
-  @EnvironmentObject var authViewModel: AuthViewModel
   @StateObject var addTripViewModel = AddTripViewModel()
   
   @State var showingAlert = false
@@ -115,7 +114,6 @@ struct TripListView: View {
 struct TripListView_Previews: PreviewProvider {
   static var previews: some View {
     TripListView(viewModel: TripListViewModel(onTripSelected: { trip in }, onSettingsSelected: {}))
-      .environmentObject(AuthViewModel())
   }
 }
 

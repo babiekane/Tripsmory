@@ -61,8 +61,6 @@ struct ShowDetailView: View {
   
   @Environment(\.dismiss) var dismiss
   
-  @State var isEditing = false
-  
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
       ScrollView(showsIndicators: false) {
@@ -107,7 +105,7 @@ struct ShowDetailView: View {
               Spacer()
               
               Button {
-                isEditing = true
+                viewModel.editTrip()
               } label: {
                 Image("Edit")
                   .padding(16)
@@ -134,8 +132,7 @@ struct ShowDetailView: View {
             
             if detail.rating == "" {
               Text("")
-            }
-            else {
+            } else {
               HStack(alignment: .center, spacing: 4) {
                 Image("Star.fill")
                   .resizable()
