@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+  
+  @ObservedObject var viewModel: SettingsViewModel
+  
   @State var showingAlert = false
   @EnvironmentObject var authViewModel: AuthViewModel
   @Environment(\.dismiss) var dismiss
@@ -159,7 +162,7 @@ struct SettingsView: View {
         .alert("Are you sure to log out?", isPresented: $showingAlert) {
           Button("Cancel", role: .cancel) { }
           Button("Log out", role: .destructive) {
-            authViewModel.signOut()
+            viewModel.signOut()
           }
         }
         .padding(.bottom, 36)
@@ -169,11 +172,5 @@ struct SettingsView: View {
       .preferredColorScheme(.light)
       .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-  }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-  static var previews: some View {
-    SettingsView()
   }
 }

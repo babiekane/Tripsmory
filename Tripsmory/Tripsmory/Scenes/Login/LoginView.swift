@@ -1,23 +1,21 @@
 //
-//  Log in.swift
+//  Login.swift
 //  Tripsmory
 //
 //  Created by CatMeox on 23/5/2566 BE.
 //
 
 import SwiftUI
-import GoogleSignInSwift
-import AuthenticationServices
 
-
-struct SignUpView: View {
+struct LoginView: View {
   
-  @Binding var state: StartState
-  @EnvironmentObject var viewModel: AuthViewModel
+  @ObservedObject var viewModel: LoginViewModel
   
   @State var email: String = ""
   @State var password: String = ""
   @State var showPassword: Bool = false
+  
+  @State var isPresented: Bool = false
   
   @State var showAlert: Bool = false
   
@@ -25,10 +23,10 @@ struct SignUpView: View {
     GeometryReader { geo in
       NavigationStack {
         ZStack {
-          
-          BackgroundSignUp()
+          BackgroundLogIn()
           
           VStack {
+            
             Spacer()
             
             VStack(alignment: .center, spacing: 0) {
@@ -71,10 +69,26 @@ struct SignUpView: View {
             }
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
-            .padding(.bottom, 32)
+            .padding(.bottom, 8)
             .padding(.horizontal, 64)
             
-            if viewModel.loading {
+            HStack {
+              
+              Spacer()
+              
+              Button {
+                isPresented = true
+              } label : {
+                Text("Forgot password?")
+                  .font(.custom("Jost", size: 16))
+                  .bold()
+                  .foregroundColor(Color("greenDark"))
+              }
+              .padding(.bottom, 32)
+              .padding(.trailing, 64)
+            }
+            
+            if viewModel.isLoading {
               ProgressView()
                 .tint(Color("whiteEgg"))
                 .frame(width: geo.size.width / 1.6, height: 70)
@@ -83,13 +97,9 @@ struct SignUpView: View {
                 .padding(.bottom, 32)
             } else {
               Button {
-                if email.isEmpty || password.isEmpty {
-                  showAlert = true
-                } else {
-                  viewModel.signUp(email: email, password: password)
-                }
+                viewModel.logIn(email: email, password: password)
               } label: {
-                Text("Create Account")
+                Text("Login")
                   .font(.custom("Jost", size: 24))
                   .bold()
                   .foregroundColor(Color("whiteEgg"))
@@ -98,64 +108,17 @@ struct SignUpView: View {
                   .clipShape(Capsule())
               }
               .padding(.bottom, 32)
-              .alert(isPresented: $showAlert) {
-                Alert(
-                  title: Text("Unable to create account"),
-                  message: Text("Please fill email and password."),
-                  dismissButton: .default(Text("OK"))
-                )
-              }
             }
             
-            Text("or continue with".uppercased())
-              .font(.custom("Jost", size: 16))
-              .foregroundColor(Color("greenDark").opacity(0.5))
-              .padding(.bottom, 8)
-            
-            HStack(alignment: .center, spacing: 20) {
-              Button {
-                viewModel.logInWithApple()
-              } label: {
-                Image("Apple")
-                  .resizable()
-                  .frame(width: 30, height: 30)
-              }
-              
-              //            Button {
-              //              viewModel.logInWithFacebook()
-              //            } label: {
-              //              Image("Facebook")
-              //                .resizable()
-              //                .frame(width: 30, height: 30)
-              //            }
-              //
-              //            Button {
-              //              viewModel.logInWithTwitter()
-              //            } label: {
-              //              Image("Twitter")
-              //                .resizable()
-              //                .frame(width: 35, height: 30)
-              //            }
-              
-              Button {
-                viewModel.logInWithGoogle()
-              } label: {
-                Image("Gmail")
-                  .resizable()
-                  .frame(width: 30, height: 30)
-              }
-            }
-            .padding(.bottom, 32)
-            
-            Text("Already a traveler?")
+            Text("Do not have any account?")
               .font(.custom("Jost", size: 16))
               .foregroundColor(Color("greenDark").opacity(0.5))
               .padding(.bottom, 8)
             
             Button {
-              state = .logIn
+              viewModel.proceedToSignup()
             } label: {
-              Text("Login")
+              Text("Sign up")
                 .font(.custom("Jost", size: 16))
                 .bold()
                 .foregroundColor(Color("greenMedium"))
@@ -163,33 +126,37 @@ struct SignUpView: View {
             }
           }
         }
-        .ignoresSafeArea(.keyboard)
         .background(Color("appWhite"))
         .preferredColorScheme(.light)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
     }
-  }
-}
-
-struct SignUp_Previews: PreviewProvider {
-  static var previews: some View {
-    NavigationView {
-      SignUpView(state: .constant(.start))
-        .environmentObject(AuthViewModel())
+    .alert(item: $viewModel.errorMessage) { errorMessage in
+      Alert(
+        title: Text("Unable to login"),
+        message: Text(errorMessage),
+        dismissButton: .default(Text("OK"))
+      )
+    }
+    .sheet(isPresented: $isPresented) {
+      ForgotPasswordView()
     }
   }
 }
 
-struct BackgroundSignUp: View {
+struct BackgroundLogIn: View {
   var body: some View {
-    VStack(spacing: 0) {
+    VStack {
         Image("LoginTop")
       
       Spacer()
-
+      
         Image("LoginBot")
     }
     .ignoresSafeArea()
   }
+}
+
+extension String: Identifiable {
+  public var id: String { self }
 }

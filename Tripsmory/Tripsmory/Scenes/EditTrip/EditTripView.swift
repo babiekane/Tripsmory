@@ -12,17 +12,12 @@ struct EditTripView: View {
   
   @ObservedObject var viewModel: EditTripViewModel
   
-  @State var isShowingCalendarView: Bool
-  
-  let onDelete: () -> Void
+  @State var isShowingCalendarView = false
   
   var body: some View {
     NavigationStack {
       GeometryReader { geo in
-        TextFieldEditView(viewModel: viewModel,
-                          isShowingCalendarView: $isShowingCalendarView,
-                          onDelete: onDelete
-        )
+        TextFieldEditView(viewModel: viewModel, isShowingCalendarView: $isShowingCalendarView)
         
         BottomSheetCalendarView(isShowingCalendarView: $isShowingCalendarView, date: $viewModel.date)
       }
@@ -42,13 +37,14 @@ struct EditTripView: View {
   }
 }
 
-struct EditTripView_Previews: PreviewProvider {
-  static var previews: some View {
-    EditTripView(viewModel: EditTripViewModel(), isShowingCalendarView: false, onDelete: {})
-  }
-}
+//struct EditTripView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    EditTripView(viewModel: EditTripViewModel(), isShowingCalendarView: false)
+//  }
+//}
 
 struct TextFieldEditView: View {
+  
   @ObservedObject var viewModel: EditTripViewModel
   
   @State var selectedItems = [PhotosPickerItem]()
@@ -60,10 +56,6 @@ struct TextFieldEditView: View {
   
   @Binding var isShowingCalendarView: Bool
   @State private var isDatePickerShown = false
-  
-  let onDelete: () -> Void
-  
-  @Environment(\.dismiss) var dismiss
   
   var body: some View {
     GeometryReader { geo in
@@ -261,7 +253,7 @@ struct TextFieldEditView: View {
           VStack {
             HStack(spacing: 16) {
               Button {
-                dismiss()
+                viewModel.cancel()
               } label: {
                 Text("Cancel")
                   .font(.custom("Jost", size: 16))
@@ -286,7 +278,6 @@ struct TextFieldEditView: View {
               } else {
                 Button {
                   viewModel.updateTrip()
-                  dismiss()
                 } label: {
                   Text("Update")
                     .font(.custom("Jost", size: 16))
@@ -314,8 +305,6 @@ struct TextFieldEditView: View {
               Button("Cancel", role: .cancel) { }
               Button("Delete", role: .destructive) {
                 viewModel.deleteTrip()
-                dismiss()
-                onDelete()
               }
             }
           }

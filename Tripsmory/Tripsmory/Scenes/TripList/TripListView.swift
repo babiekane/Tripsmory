@@ -11,6 +11,7 @@ struct TripListView: View {
   
   @ObservedObject var viewModel: TripListViewModel
   @EnvironmentObject var authViewModel: AuthViewModel
+  @StateObject var addTripViewModel = AddTripViewModel()
   
   @State var showingAlert = false
   
@@ -106,7 +107,7 @@ struct TripListView: View {
       viewModel.fetchTrips()
     }
     .fullScreenCover(isPresented: $viewModel.isPresented) {
-      AddTripView(viewModel: AddTripViewModel(), isShowingCalendarView: false)
+      AddTripView(viewModel: addTripViewModel, isShowingCalendarView: false)
     }
   }
 }
