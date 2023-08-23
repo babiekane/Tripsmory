@@ -17,6 +17,7 @@ extension CompositionRoot: MainCoordinatorViewFactory {
   func makeMainTripDetail(for item: TripListItem, onEdit: @escaping (TripDetail) -> Void) -> AnyView {
     let viewModel = TripDetailViewModel(tripID: item.id)
     let view = TripDetailView(viewModel: viewModel)
+      .navigationBarHidden(true)
     return AnyView(view)
   }
   
@@ -29,6 +30,7 @@ extension CompositionRoot: MainCoordinatorViewFactory {
   func makeMainSettings(onSignoutSuccess: @escaping () -> Void) -> AnyView {
     let viewModel = SettingsViewModel(onSignoutSuccess: onSignoutSuccess)
     let view = SettingsView(viewModel: viewModel)
+      .navigationBarHidden(true)
     return AnyView(view)
   }
 }

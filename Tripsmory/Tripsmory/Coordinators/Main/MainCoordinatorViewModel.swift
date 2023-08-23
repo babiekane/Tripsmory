@@ -17,23 +17,30 @@ final class MainCoordinatorViewModel: ObservableObject {
   let factory: MainCoordinatorViewFactory
   let signoutCompletion: () -> Void
   
-  @Published var destinations: [MainDestination] = []
-  @Published var editingDetail: TripDetail?
+  @Published var destinations: [ViewItem] = []
+  @Published var editItem: ViewItem?
   
   lazy var rootView: AnyView = {
     factory.makeMainRoot(onTripSelected: onTripSelected, onSettingsSelected: onSettingsSelected)
   }()
   
   func onTripSelected(_ item: TripListItem) {
-    destinations.append(.tripDetail(item))
+    let view = factory.makeMainTripDetail(for: item, onEdit: onEdit)
+    destinations.append(.init(view: view))
   }
   
   func onSettingsSelected() {
-    destinations.append(.settings)
+    let view = factory.makeMainSettings(onSignoutSuccess: onSignoutSuccess)
+    destinations.append(.init(view: view))
   }
   
   func onEdit(_ detail: TripDetail) {
-    editingDetail = detail
+    let view = factory.makeMainEditTrip(
+      for: detail,
+      onUpdated: onTripUpdated,
+      onDeleted: onTripDeleted,
+      onCancel: onTripEditingCancel)
+    editItem = .init(view: view)
   }
   
   func onTripUpdated() {
@@ -51,31 +58,19 @@ final class MainCoordinatorViewModel: ObservableObject {
   func onSignoutSuccess() {
     signoutCompletion()
   }
+  
 }
 
-enum MainDestination: Hashable {
-  case tripDetail(TripListItem)
-  case settings
+struct ViewItem: Hashable, Identifiable {
   
-  static func == (lhs: MainDestination, rhs: MainDestination) -> Bool {
-    switch (lhs, rhs) {
-    case (.tripDetail(let leftValue), .tripDetail(let rightValue)):
-      return leftValue == rightValue
-      
-    case (.settings, .settings):
-      return true
-      
-    default:
-      return false
-    }
+  let id: UUID = UUID()
+  let view: AnyView
+  
+  static func == (lhs: ViewItem, rhs: ViewItem) -> Bool {
+    lhs.id == rhs.id
   }
   
   func hash(into hasher: inout Hasher) {
-    switch self {
-    case .tripDetail(let item):
-      hasher.combine(item)
-    default:
-      break
-    }
+    hasher.combine(id)
   }
 }

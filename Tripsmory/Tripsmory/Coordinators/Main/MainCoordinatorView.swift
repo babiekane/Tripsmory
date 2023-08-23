@@ -12,25 +12,14 @@ struct MainCoordinatorView: View {
   @ObservedObject var viewModel: MainCoordinatorViewModel
   
   var body: some View {
-    let factory = viewModel.factory
-    
     NavigationStack(path: $viewModel.destinations) {
       viewModel.rootView
-        .navigationDestination(for: MainDestination.self) { destination in
-          switch destination {
-          case .tripDetail(let trip):
-            factory.makeMainTripDetail(for: trip, onEdit: viewModel.onEdit)
-          case .settings:
-            factory.makeMainSettings(onSignoutSuccess: viewModel.onSignoutSuccess)
-          }
+        .navigationDestination(for: ViewItem.self) { item in
+          item.view
         }
     }
-    .fullScreenCover(item: $viewModel.editingDetail) { detail in
-      factory.makeMainEditTrip(
-        for: detail,
-        onUpdated: viewModel.onTripUpdated,
-        onDeleted: viewModel.onTripDeleted,
-        onCancel: viewModel.onTripEditingCancel)
+    .fullScreenCover(item: $viewModel.editItem) { item in
+      item.view
     }
   }
 }
