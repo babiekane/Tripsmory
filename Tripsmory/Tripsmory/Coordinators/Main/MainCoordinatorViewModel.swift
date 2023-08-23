@@ -5,7 +5,7 @@
 //  Created by yossa on 21/8/2566 BE.
 //
 
-import Foundation
+import SwiftUI
 
 final class MainCoordinatorViewModel: ObservableObject {
   
@@ -19,6 +19,10 @@ final class MainCoordinatorViewModel: ObservableObject {
   
   @Published var destinations: [MainDestination] = []
   @Published var editingDetail: TripDetail?
+  
+  lazy var rootView: AnyView = {
+    factory.makeMainRoot(onTripSelected: onTripSelected, onSettingsSelected: onSettingsSelected)
+  }()
   
   func onTripSelected(_ item: TripListItem) {
     destinations.append(.tripDetail(item))

@@ -15,7 +15,7 @@ struct MainCoordinatorView: View {
     let factory = viewModel.factory
     
     NavigationStack(path: $viewModel.destinations) {
-      factory.makeMainRoot(onTripSelected: viewModel.onTripSelected, onSettingsSelected: viewModel.onSettingsSelected)
+      viewModel.rootView
         .navigationDestination(for: MainDestination.self) { destination in
           switch destination {
           case .tripDetail(let trip):
