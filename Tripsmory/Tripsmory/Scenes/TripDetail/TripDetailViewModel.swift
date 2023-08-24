@@ -29,16 +29,17 @@ struct TripDetail: Identifiable {
 }
 
 class TripDetailViewModel: ObservableObject {
+  
+  init(tripID: String, onEdit: @escaping (TripDetail) -> Void) {
+    self.tripID = tripID
+    self.onEdit = onEdit
+  }
 
-  var tripID: String?
+  let tripID: String
+  let onEdit: (TripDetail) -> Void
   @Published var detail: TripDetail?
-  var editTripViewModel: EditTripViewModel?
   
   func showTripDetails() {
-    guard let tripID = tripID else {
-      return
-    }
-    
     let db = Firestore.firestore()
     db.collection("trips").document(tripID).getDocument { document, error in
       guard let document = document, let data = document.data() else {
@@ -67,8 +68,12 @@ class TripDetailViewModel: ObservableObject {
       
       let detail = TripDetail(id: document.documentID, coverImageURL: coverImageURL, name: name, location: location, numberOfPhotos: numberOfPhotos, rating: rating, cost: cost, date: date, story: story, photoURLs: photoURLs)
       self.detail = detail
-      self.editTripViewModel = EditTripViewModel(detail: detail)
     }
+  }
+  
+  func editTrip() {
+    guard let detail = detail else { return }
+    onEdit(detail)
   }
   
   @Published var showImageViewer = false

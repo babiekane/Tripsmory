@@ -29,7 +29,6 @@ class AuthViewModel: NSObject, ObservableObject {
   let loginManager = LoginManager()
   
   func start() {
-    
     if auth.currentUser == nil {
       loggedIn = false
     } else {
@@ -42,7 +41,6 @@ class AuthViewModel: NSObject, ObservableObject {
     if email.isEmpty || password.isEmpty {
       errorMessage = "Please fill email and password."
     } else {
-      
       loading = true
       
       auth.signIn(withEmail: email, password: password) { [weak self] result, error in

@@ -14,11 +14,7 @@ import CoreLocation
 
 class EditTripViewModel: ObservableObject {
   
-  init(detail: TripDetail? = nil) {
-    guard let detail = detail else {
-      return
-    }
-    
+  init(detail: TripDetail, onUpdated: @escaping () -> Void, onDeleted: @escaping () -> Void, onCancel: @escaping () -> Void) {
     id = detail.id
     textName = detail.name
     textLocation = detail.location
@@ -28,7 +24,14 @@ class EditTripViewModel: ObservableObject {
     textStory = detail.story
     uploadedImageURLs = detail.photoURLs
     
+    self.onUpdated = onUpdated
+    self.onDeleted = onDeleted
+    self.onCancel = onCancel
   }
+  
+  let onUpdated: () -> Void
+  let onDeleted: () -> Void
+  let onCancel: () -> Void
   
   @Published var textName = ""
   @Published var textLocation = ""
@@ -50,6 +53,10 @@ class EditTripViewModel: ObservableObject {
   @Published var isSearchingLocation = false
   
   var id: String?
+  
+  func cancel() {
+    onCancel()
+  }
   
   func updateTrip() {
     guard let id = id else {
@@ -80,11 +87,12 @@ class EditTripViewModel: ObservableObject {
     
     // update trip
     let db = Firestore.firestore()
-    db.collection("trips").document(id).updateData(tripDictionary) { err in
+    db.collection("trips").document(id).updateData(tripDictionary) { [weak self] err in
       if let err = err {
         print("Error updating document: \(err)")
       } else {
         print("Document successfully updated")
+        self?.onUpdated()
       }
     }
   }
@@ -139,15 +147,15 @@ class EditTripViewModel: ObservableObject {
     }
     
     let db = Firestore.firestore()
-    db.collection("trips").document(id).delete() { err in
+    db.collection("trips").document(id).delete() { [weak self] err in
       if let err = err {
         print("Error removing document: \(err)")
       } else {
         print("Document successfully removed!")
+        self?.onDeleted()
       }
     }
   }
-  
 }
 
 

@@ -44,12 +44,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct TripsmoryApp: App {
   
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-  @StateObject var authViewModel: AuthViewModel = AuthViewModel()
+  
+  let compositionRoot = CompositionRoot()
   
   var body: some Scene {
     WindowGroup {
-      RootView()
-        .environmentObject(authViewModel)
+      compositionRoot.makeRootView()
         .onOpenURL { url in
           GIDSignIn.sharedInstance.handle(url)
         }

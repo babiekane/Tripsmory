@@ -1,5 +1,5 @@
 //
-//  ManageAccView.swift
+//  ManageAccountView.swift
 //  Tripsmory
 //
 //  Created by CatMeox on 23/6/2566 BE.
@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-struct ManageAccView: View {
+struct ManageAccountView: View {
+  
+  @ObservedObject var viewModel: ManageAccountViewModel
+  
   @Environment(\.dismiss) var dismiss
-  
-  @EnvironmentObject var authViewModel: AuthViewModel
-  
-  let onDelete: () -> Void
   
   @State var showingAlert = false
   
@@ -92,11 +91,10 @@ struct ManageAccView: View {
       .alert("Are you sure to delete your account?", isPresented: $showingAlert) {
         Button("Cancel", role: .cancel) { }
         Button("Delete", role: .destructive) {
-          authViewModel.deleteUser()
-          onDelete()
+          viewModel.deleteUser()
         }
       }
-      .alert(item: $authViewModel.errorMessage) { errorMessage in
+      .alert(item: $viewModel.errorMessage) { errorMessage in
         Alert(
           title: Text("Unable to delete"),
           message: Text(errorMessage),
@@ -105,11 +103,4 @@ struct ManageAccView: View {
       }
     
   }
-}
-
-struct ManageAccView_Previews: PreviewProvider {
-    static var previews: some View {
-      ManageAccView(onDelete: {})
-        .environmentObject(AuthViewModel())
-    }
 }
