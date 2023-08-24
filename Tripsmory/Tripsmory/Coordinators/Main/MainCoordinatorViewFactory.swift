@@ -15,7 +15,7 @@ protocol MainCoordinatorViewFactory {
   func makeMainTripDetail(
     for item: TripListItem,
     onEdit: @escaping (TripDetail) -> Void)
-    -> AnyView
+    -> (view: AnyView, updatable: TripDetailUpdatable)
   func makeMainEditTrip(
     for detail: TripDetail,
     onUpdated: @escaping () -> Void,

@@ -24,8 +24,11 @@ final class MainCoordinatorViewModel: ObservableObject {
     factory.makeMainRoot(onTripSelected: onTripSelected, onSettingsSelected: onSettingsSelected)
   }()
   
+  lazy var tripDetailUpdater = TripDetailUpdater()
+  
   func onTripSelected(_ item: TripListItem) {
-    let view = factory.makeMainTripDetail(for: item, onEdit: onEdit)
+    let (view, updatable) = factory.makeMainTripDetail(for: item, onEdit: onEdit)
+    tripDetailUpdater.updatable = updatable
     destinations.append(.init(view: view))
   }
   
@@ -50,6 +53,7 @@ final class MainCoordinatorViewModel: ObservableObject {
   
   func onTripUpdated() {
     editItem = nil
+    tripDetailUpdater.beginUpdate()
   }
   
   func onTripDeleted() {

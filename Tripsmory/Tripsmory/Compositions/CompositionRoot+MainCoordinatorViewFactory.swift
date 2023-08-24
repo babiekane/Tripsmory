@@ -14,14 +14,20 @@ extension CompositionRoot: MainCoordinatorViewFactory {
     return AnyView(view)
   }
   
-  func makeMainTripDetail(for item: TripListItem, onEdit: @escaping (TripDetail) -> Void) -> AnyView {
+  func makeMainTripDetail(for item: TripListItem, onEdit: @escaping (TripDetail) -> Void) -> (view: AnyView, updatable: TripDetailUpdatable) {
     let viewModel = TripDetailViewModel(tripID: item.id, onEdit: onEdit)
     let view = TripDetailView(viewModel: viewModel)
       .navigationBarHidden(true)
-    return AnyView(view)
+    return (AnyView(view), viewModel)
   }
   
-  func makeMainEditTrip(for detail: TripDetail, onUpdated: @escaping () -> Void, onDeleted: @escaping () -> Void, onCancel: @escaping () -> Void) -> AnyView {
+  func makeMainEditTrip(
+    for detail: TripDetail,
+    onUpdated: @escaping () -> Void,
+    onDeleted: @escaping () -> Void,
+    onCancel: @escaping () -> Void)
+    -> AnyView
+  {
     let viewModel = EditTripViewModel(detail: detail, onUpdated: onUpdated, onDeleted: onDeleted, onCancel: onCancel)
     let view = EditTripView(viewModel: viewModel)
     return AnyView(view)
