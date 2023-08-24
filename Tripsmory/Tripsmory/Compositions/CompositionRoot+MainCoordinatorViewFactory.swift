@@ -27,10 +27,48 @@ extension CompositionRoot: MainCoordinatorViewFactory {
     return AnyView(view)
   }
   
-  func makeMainSettings(onSignoutSuccess: @escaping () -> Void) -> AnyView {
-    let viewModel = SettingsViewModel(onSignoutSuccess: onSignoutSuccess)
+  func makeMainSettings(
+    onResetPasswordSelected: @escaping () -> Void,
+    onManageAccountSelected: @escaping () -> Void,
+    onPrivacyPolicySelected: @escaping () -> Void,
+    onSupportAndFeedbackSelected: @escaping () -> Void,
+    onSignoutSuccess: @escaping () -> Void)
+  -> AnyView
+  {
+    let viewModel = SettingsViewModel(
+      onResetPasswordSelected: onResetPasswordSelected,
+      onManageAccountSelected: onManageAccountSelected,
+      onPrivacyPolicySelected: onPrivacyPolicySelected,
+      onSupportAndFeedbackSelected: onSupportAndFeedbackSelected,
+      onSignoutSuccess: onSignoutSuccess)
     let view = SettingsView(viewModel: viewModel)
       .navigationBarHidden(true)
+    return AnyView(view)
+  }
+  
+  func makeMainResetPassword(onResetPasswordSuccess: @escaping () -> Void) -> AnyView {
+    let viewModel = ResetPasswordViewModel(onResetPasswordSuccess: onResetPasswordSuccess)
+    let view = ResetPasswordView(viewModel: viewModel)
+      .navigationBarBackButtonHidden(true)
+    return AnyView(view)
+  }
+  
+  func makeMainManageAccount(onUserDeleted: @escaping () -> Void) -> AnyView {
+    let viewModel = ManageAccountViewModel(onDelete: onUserDeleted)
+    let view = ManageAccountView(viewModel: viewModel)
+      .navigationBarBackButtonHidden(true)
+    return AnyView(view)
+  }
+  
+  func makeMainPrivacyPolicy() -> AnyView {
+    let view = PrivacyPolicyView()
+      .navigationBarBackButtonHidden(true)
+    return AnyView(view)
+  }
+  
+  func makeMainSupportAndFeedback() -> AnyView {
+    let view = SupportAndFeedbackView()
+      .navigationBarBackButtonHidden(true)
     return AnyView(view)
   }
 }

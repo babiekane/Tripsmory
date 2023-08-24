@@ -69,9 +69,8 @@ struct SettingsView: View {
           //          }
           //          .padding(.bottom, 24)
           
-          NavigationLink {
-            ResetPasswordView()
-              .navigationBarBackButtonHidden(true)
+          Button {
+            viewModel.selectResetPassword()
           } label: {
             HStack(spacing: 16) {
               Image(systemName: "lock")
@@ -85,9 +84,8 @@ struct SettingsView: View {
           }
           .padding(.bottom, 24)
           
-          NavigationLink {
-            ManageAccView(onDelete: {})
-              .navigationBarBackButtonHidden(true)
+          Button {
+            viewModel.selectManageAccount()
           } label: {
             HStack(spacing: 16) {
               Image(systemName: "pencil.line")
@@ -110,9 +108,8 @@ struct SettingsView: View {
           .padding(.bottom, 12)
         
         Group {
-          NavigationLink {
-            PrivacyPolicyView()
-              .navigationBarBackButtonHidden(true)
+          Button {
+            viewModel.selectPrivacyPolicy()
           } label: {
             HStack(spacing: 16) {
               Image(systemName: "checkmark.shield")
@@ -126,10 +123,9 @@ struct SettingsView: View {
           }
           .padding(.bottom, 24)
           
-          NavigationLink {
-            Support_FeedbackView()
-              .navigationBarBackButtonHidden(true)
-          }label: {
+          Button {
+            viewModel.selectSupportAndFeedback()
+          } label: {
             HStack(spacing: 16) {
               Image(systemName: "ellipsis.bubble")
                 .resizable()

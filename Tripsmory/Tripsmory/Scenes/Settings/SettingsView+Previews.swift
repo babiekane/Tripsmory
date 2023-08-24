@@ -9,6 +9,6 @@ import SwiftUI
 
 struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
-    SettingsView(viewModel: SettingsViewModel(onSignoutSuccess: {}))
+    SettingsView(viewModel: SettingsViewModel(onResetPasswordSelected: {}, onManageAccountSelected: {}, onPrivacyPolicySelected: {}, onSupportAndFeedbackSelected: {}, onSignoutSuccess: {}))
   }
 }

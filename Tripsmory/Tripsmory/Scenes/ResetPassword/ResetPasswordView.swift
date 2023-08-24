@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ResetPasswordView: View {
+  
+  @ObservedObject var viewModel: ResetPasswordViewModel
+  
   @State var email = ""
-  @EnvironmentObject var viewModel: AuthViewModel
+//  @EnvironmentObject var viewModel: AuthViewModel
   @Environment(\.dismiss) var dismiss
   
   var body: some View {
@@ -74,13 +77,13 @@ struct ResetPasswordView: View {
           TextField("", text: $email)
             .textFieldStyle(OvalTextFieldStyle())
             .disableAutocorrection(true)
+            .textInputAutocapitalization(.never)
             .keyboardType(.emailAddress)
         }
         .padding(.bottom, 24)
         
         Button {
           viewModel.forgotPassword(email: email)
-          dismiss()
         } label: {
           Text("Send")
             .font(.custom("Jost", size: 24))
@@ -98,11 +101,5 @@ struct ResetPasswordView: View {
     .background(Color("appWhite"))
     .preferredColorScheme(.light)
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-  }
-}
-
-struct ResetPasswordView_Previews: PreviewProvider {
-  static var previews: some View {
-    ResetPasswordView()
   }
 }

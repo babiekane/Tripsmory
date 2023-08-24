@@ -30,7 +30,12 @@ final class MainCoordinatorViewModel: ObservableObject {
   }
   
   func onSettingsSelected() {
-    let view = factory.makeMainSettings(onSignoutSuccess: onSignoutSuccess)
+    let view = factory.makeMainSettings(
+      onResetPasswordSelected: onResetPasswordSelected,
+      onManageAccountSelected: onManageAccountSelected,
+      onPrivacyPolicySelected: onPrivacyPolicySelected,
+      onSupportAndFeedbackSelected: onSupportAndFeedbackSelected,
+      onSignoutSuccess: onSignoutSuccess)
     destinations.append(.init(view: view))
   }
   
@@ -49,15 +54,39 @@ final class MainCoordinatorViewModel: ObservableObject {
   
   func onTripDeleted() {
     editItem = nil
-    _ = destinations.popLast()
+    pop()
   }
   
   func onTripEditingCancel() {
     editItem = nil
   }
   
+  func onResetPasswordSelected() {
+    let view = factory.makeMainResetPassword(onResetPasswordSuccess: pop)
+    destinations.append(.init(view: view))
+  }
+  
+  func onManageAccountSelected() {
+    let view = factory.makeMainManageAccount(onUserDeleted: onSignoutSuccess)
+    destinations.append(.init(view: view))
+  }
+  
+  func onPrivacyPolicySelected() {
+    let view = factory.makeMainPrivacyPolicy()
+    destinations.append(.init(view: view))
+  }
+  
+  func onSupportAndFeedbackSelected() {
+    let view = factory.makeMainSupportAndFeedback()
+    destinations.append(.init(view: view))
+  }
+  
   func onSignoutSuccess() {
     signoutCompletion()
+  }
+  
+  private func pop() {
+    _ = destinations.popLast()
   }
 }
 
